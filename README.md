@@ -8,9 +8,9 @@
 
  * TRAORE MOUSSA [MoussaTraor](https://github.com/MoussaTraor)
 
- * KOUASSI EMMANUEL [@manudev]
+ * KOUASSI EMMANUEL [@manudev](https://github.com/manudev/)
 
- * KOUADIO SERI ANGE 
+ * KOUADIO SERI ANGE [faveurdivine](https://github.com/faveurdivine/)
 
  ## DESCRIPTION
 
