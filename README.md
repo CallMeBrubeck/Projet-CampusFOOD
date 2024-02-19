@@ -6,11 +6,11 @@
 
  * SOGOBA EMMANUEL [@nazaga-tech](https://github.com/nazaga-tech/)
 
- * TRAORE MOUSSA [MoussaTraor](https://github.com/MoussaTraor)
+ * TRAORE MOUSSA [@MoussaTraor](https://github.com/MoussaTraor)
 
  * KOUASSI EMMANUEL [@manudev](https://github.com/manudev/)
 
- * KOUADIO SERI ANGE [faveurdivine](https://github.com/faveurdivine/)
+ * KOUADIO SERI ANGE [@faveurdivine](https://github.com/faveurdivine/)
 
  ## DESCRIPTION
 
