@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock  %}</title>
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="head-one">
+                <a href="connexion.html" class="bouton-connexion">Se connecter</a>
+            </div>
+              
+            <div class="head-two">
+                <div class="logo">
+                    {% comment %} <img src="{%static 'images/logo.png'%}" alt="Logo"> {% endcomment %}
+                </div>
+                    <ul class="liens">
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">Menu</a></li>
+                        <li><a href="#">categorie</a></li>
+                        <li><a href="#">Commande</a></li>
+                    </ul>
+                <div class="recherche">
+                    <form action="#">
+                    <input type="text" placeholder="Rechercher">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="panier">
+                    <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                </div>
+            </div>
+        </nav>
+      </header>
+
+    {% block content %}
+
+    {% endblock  %}
+</body>
+</html>

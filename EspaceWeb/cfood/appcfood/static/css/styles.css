@@ -1,0 +1,137 @@
+/* h1{
+  border: 3px solid red;
+} */
+
+/* Style général */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* En-tête */
+
+header {
+  background-color: #333;
+  height: 150px;
+}
+
+/* Barre de navigation */
+
+nav div{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto ;
+}
+
+.head-one{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  margin-right: 70%;
+}
+
+.bouton-connexion {
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 10px 0px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.bouton-connexion:hover {
+  background-color: #333;
+}
+
+.head-two{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Logo */
+
+.logo {
+  margin-right: 20px;
+  width: 100px;
+  height: 80px;
+  background-color: red;
+  
+  
+}
+
+.logo img {
+  height: 150px;
+}
+
+/* Liens de navigation */
+
+.liens {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.liens li {
+  margin-right: 20px;
+}
+
+.liens li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.liens li a:hover {
+  color: #ddd;
+}
+
+/* Formulaire de recherche */
+
+.recherche {
+  margin-right: 20px;
+}
+
+.recherche form {
+  display: flex;
+  align-items: center;
+}
+
+.recherche input {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.recherche button {
+  margin-left: 5px;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.recherche button i {
+  color: #333;
+  font-size: 18px;
+}
+
+/* Panier */
+
+.panier {
+  margin-top: 10px;
+}
