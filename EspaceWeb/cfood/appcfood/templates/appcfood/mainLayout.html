@@ -12,36 +12,42 @@
 </head>
 <body>
     <header>
-        <nav>
-            <div class="head-one">
-                <a href="connexion.html" class="bouton-connexion">Se connecter</a>
-            </div>
-              
-            <div class="head-two">
-                <div class="logo">
-                    {% comment %} <img src="{%static 'images/logo.png'%}" alt="Logo"> {% endcomment %}
-                </div>
-                    <ul class="liens">
-                        <li><a href="#">Accueil</a></li>
-                        <li><a href="#">Menu</a></li>
-                        <li><a href="#">categorie</a></li>
-                        <li><a href="#">Commande</a></li>
-                    </ul>
+        <div class="nav-part-one">
+            <div class="about-restau">about restaurant</div>
+            <div class="logo"> Cfood Logo</div>
+        </div>
+        <div class="nav-part-two">
+            <div class="search-login"><!-- search barre and login button -->
                 <div class="recherche">
                     <form action="#">
                     <input type="text" placeholder="Rechercher">
                     <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
-                <div class="panier">
-                    <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                <div class="head-one">
+                    <a href="connexion.html" class="bouton-connexion">Se connecter</a>
                 </div>
             </div>
-        </nav>
-      </header>
+            <div class="navigation">
+                <div class="panier">Panier icone</div>
+                <div class="nav-item">
+                    <!-- Navigation items -->
+                    <li><a href="#">Acceuil</a></li>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">Categorie</a></li>
+                    <li><a href="#">Commande</a></li>
+                </div>
+
+            </div>
+        </div>
+    </header>
 
     {% block content %}
 
     {% endblock  %}
+
+    <footer>
+        <span>copyright@Cfood- Tout droit reserver</span>
+    </footer>
 </body>
 </html>

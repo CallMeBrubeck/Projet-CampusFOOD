@@ -13,95 +13,63 @@ body {
 /* En-tête */
 
 header {
-  background-color: #333;
-  height: 150px;
-}
-
-/* Barre de navigation */
-
-nav div{
+  border: 3px solid #333;
+  height: 200px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+}
+/* ======================*/
+
+/* Pied de la page */
+footer{
+  background-color: #000000;
+  justify-content: center;
   align-items: center;
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto ;
+  text-align: center;
+  color: white;
+}
+/* ======================*/
+
+.nav-part-one{
+  background-color: blue;
+  width: 30%;
+  height: 190px;
+
+  
 }
 
-.head-one{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
-  margin-right: 70%;
+.about-restau{
+  height: 60px;
+  width: 98%;
+  border: solid 2px goldenrod;
+
 }
 
-.bouton-connexion {
-  background-color: #000;
-  color: #fff;
-  padding: 10px 20px;
-  margin: 10px 0px 10px;
-  border-radius: 5px;
-  text-decoration: none;
+.logo{
+  height: 120px;
+  width: 98%;
+  border: solid 2px green;
+
+
 }
 
-.bouton-connexion:hover {
-  background-color: #333;
-}
-
-.head-two{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
-}
-
-/* Logo */
-
-.logo {
-  margin-right: 20px;
-  width: 100px;
-  height: 80px;
+.nav-part-two{
   background-color: red;
-  
-  
+  width: 100%;
+  height: 190px;
 }
 
-.logo img {
-  height: 150px;
-}
-
-/* Liens de navigation */
-
-.liens {
-  list-style: none;
+.search-login{
+  height: 60px;
+  width: 98%;
+  border: solid 2px goldenrod;
+  margin-left: 10px;
   display: flex;
-  margin: 0;
-  padding: 0;
-}
-
-.liens li {
-  margin-right: 20px;
-}
-
-.liens li a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 16px;
-}
-
-.liens li a:hover {
-  color: #ddd;
+  flex-direction: column-reverse;
+  justify-content: space-between;
 }
 
 /* Formulaire de recherche */
-
+  
 .recherche {
   margin-right: 20px;
 }
@@ -130,8 +98,57 @@ nav div{
   font-size: 18px;
 }
 
-/* Panier */
-
-.panier {
-  margin-top: 10px;
+.head-two{
+/*   display: flex;
+  flex-direction: row;
+  justify-content: space-between; */
+  align-items: center;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
 }
+
+.navigation{
+  height: 120px;
+  width: 98%;
+  border: solid 2px green;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+
+.panier{
+  background-color: coral;
+  height: 50px;
+  width: 50%;
+
+}
+.nav-item{
+  background-color: rgba(92, 205, 197, 0.557);
+  width: 100%;
+  height: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  
+}
+
+/* les liens */
+li{
+  height: 30px;
+  width: 100px;
+  background-color: #ffffff;
+  align-items: center;
+  text-align: center;
+  padding-top: 10px;
+  list-style: none;
+
+}
+a{
+  text-decoration: none;
+  text-align: center;
+  align-items: center;
+}
+/* ============================ */
