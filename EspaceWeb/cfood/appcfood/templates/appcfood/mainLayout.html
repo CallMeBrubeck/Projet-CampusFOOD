@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock  %}</title>
     <link rel="stylesheet" href="{% static "css/styles.css" %}">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 
@@ -24,19 +25,23 @@
                     <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
-                <div class="head-one">
+                {% comment %} <div class="head-one">
                     <a href="connexion.html" class="bouton-connexion">Se connecter</a>
-                </div>
+                </div> {% endcomment %}
             </div>
             <div class="navigation">
-                <div class="panier">Panier icone</div>
+                <!-- <div class="panier">Panier icone</div> -->
                 <div class="nav-item">
                     <!-- Navigation items -->
                     <li><a href="#">Acceuil</a></li>
                     <li><a href="#">Menu</a></li>
                     <li><a href="#">Categorie</a></li>
                     <li><a href="#">Commande</a></li>
+                    <li id="login"><a href="connexion.html" class="bouton-connexion">Se connecter</a></li>
                 </div>
+                <!-- <div class="login">
+                    <a href="connexion.html" class="bouton-connexion">Se connecter</a>
+                </div> -->
 
             </div>
         </div>
