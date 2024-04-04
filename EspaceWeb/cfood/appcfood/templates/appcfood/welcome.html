@@ -5,7 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CampusFOOD</title>
-  <link rel="stylesheet" href="{% static "css/styles.css" %}">
+  <link rel="stylesheet" href="{% static "css/welcome.css" %}">
+  <link rel="stylesheet" href="{% static "css/acceuil/sections.css" %}">
+
 <!--   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
@@ -13,72 +15,210 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="stylesheet" href="{% static "css/bootstrap.min.css"%}">
+  <script type="text/javascript" src="{% static "js/mdb.umd.min.js" %}"></script>
+  <script type="text/javascript"></script>
+  <script src="{% static "js/bootstrap.min.js" %}"></script>
   <script src="{% static "js/jquery.slim.min.js" %}"></script>
-  <script src="js/popper.min.js"></script>
+  <script src="{% static "js/popper.min.js" %}"></script>
   <script src="{% static "js/bootstrap.min.js" %}"></script>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="row d-flex align-items-center">
-        <div class="col-6 col-md-3">
-          <a href="#">
-            <i class="fas fa-utensils"></i>
-            <span>Nom du restaurant</span>
-          </a>
+    <!-- header -->
+    <header>
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+          <!-- Toggle button -->
+          <button
+            data-mdb-collapse-init
+            class="navbar-toggler"
+            type="button"
+            data-mdb-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <!-- Collapsible wrapper -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Navbar brand -->
+            <a class="navbar-brand mt-2 mt-lg-0" href="#">
+              <img
+                src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+                height="15"
+                alt="MDB Logo"
+                loading="lazy"
+              />
+              <small style="color: chocolate; font-weight: bolder; font-size: 50px;">CampusFOOD</small>
+            </a>
+            <!-- Left links -->
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Accueil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Menu</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Catégories
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Plat consistant</a>
+                  <a class="dropdown-item" href="#">Boisson</a>
+                  <a class="dropdown-item" href="#">Amuse Gueulle</a>
+                  <a class="dropdown-item" href="#">Divers</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Commandes</a>
+              </li>
+            </ul>
+            <!-- Left links -->
+          </div>
+          <!-- Collapsible wrapper -->
+
+          <!-- Right elements -->
+          <div class="d-flex align-items-center">
+            <!-- Icon -->
+            <a class="text-reset me-3" href="#">
+              <i class="fas fa-shopping-cart"></i>
+            </a>
+
+            <!-- Notifications -->
+            <div class="dropdown">
+              <a
+                data-mdb-dropdown-init
+                class="text-reset me-3 dropdown-toggle hidden-arrow"
+                href="#"
+                id="navbarDropdownMenuLink"
+                role="button"
+                aria-expanded="false"
+              >
+                <i class="fas fa-bell"></i>
+                <span class="badge rounded-pill badge-notification bg-danger">1</span>
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                <li>
+                  <a class="dropdown-item" href="#">Some news</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">Another news</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </div>
+            <!-- Avatar -->
+            <div class="dropdown">
+<!--               <a
+                data-mdb-dropdown-init
+                class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                href="#"
+                id="navbarDropdownMenuAvatar"
+                role="button"
+                aria-expanded="false"
+              >
+                <img
+                  src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                  class="rounded-circle"
+                  height="25"
+                  alt="Black and White Portrait of a Man"
+                  loading="lazy"
+                />
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="navbarDropdownMenuAvatar"
+              >
+                <li>
+                  <a class="dropdown-item" href="#">My profile</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">Settings</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">Logout</a>
+                </li>
+              </ul>
+            </div> -->
+
+            <!-- Tres importante, faire que le profile s affiche si la personne est conneter -->
+            <a class="btn btn-primary" href="#">Connexion</a>
+          </div>
+          <!-- Right elements -->
         </div>
-        <div class="col-6 col-md-3 text-right">
-          <a href="#">
-            <i class="fas fa-shopping-cart"></i> Panier
-          </a>
+        <!-- Container wrapper -->
+      </nav>
+      <!-- Navbar -->
+    
+      <!-- Background image -->
+      <div
+        class="p-5 text-center bg-image"
+        style="
+          background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+          height: 400px;
+          margin-top: 58px;">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+          <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="text-white">
+              <h1 class="mb-3">Heading</h1>
+              <h4 class="mb-3">Subheading</h4>
+              <a data-mdb-ripple-init class="btn btn-outline-light btn-lg" href="#!" role="button"
+              >Call to action</a
+              >
+            </div>
+          </div>
         </div>
       </div>
+      <!-- Background image -->
+    </header>
+    <!-- endHeader -->
 
-      <nav class="navbar navbar-expand-md navbar-light bg-light mt-3">
-        <a class="navbar-brand" href="#">
-          <img src="images/Logo.png" alt="Logo de l'application">
-          <span>CampusFOOD</span>
-        </a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Basculer la navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Accueil</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Menu</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Catégories
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Plat consistant</a>
-                <a class="dropdown-item" href="#">Boisson</a>
-                <a class="dropdown-item" href="#">Amuse Gueulle</a>
-                <a class="dropdown-item" href="#">Divers</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Commandes</a>
-            </li>
-          </ul>
-
-          <a class="btn btn-primary" href="#">Connexion</a>
-        </div>
-      </nav>
+  <section class="section1-acceuil" style="background-image: url('{% static "images/Logo.png" %}')>
+    <div class="section1-acceuil-bg"></div>
+    <div class="section1-acceuil-content">
+      <h1>Titre de la section</h1>
+      <p>Description de la section</p>
+      <a href="#" class="button">En savoir plus</a>
     </div>
-  </header>
+  </section>
 
-  <main>
-    </main>
 
+<!-- Footer -->
   <footer>
-    </footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 text-center>
+        <a href="#">
+          <img src="{% static "images/Logo.jpg" %}" alt="Logo de l'application" width="130" height="100">
+        </a>
+        <p class="mt-3">CampusFOOD, le plaisir de manger sain et équilibré.</p>
+      </div>
+      <div class="col-md-4">
+        <h4>Liens utiles</h4>
+        <ul class="list-inline text-center">
+          <li><a href="#">Accueil</a></li>
+          <li><a href="#">Menu</a></li>
+          <li><a href="#">Commandes</a></li>
+          <li><a href="#">Connexion</a></li>
+          <li><a href="#">Mentions légales</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-4 text-right">
+      <p class="mb-0">&copy; <?= date('Y') ?> TeamCfood</p>
+    </div>
+  </div>
+</footer>
+
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
