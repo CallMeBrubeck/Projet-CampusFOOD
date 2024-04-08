@@ -1,0 +1,31 @@
+{% load static %}
+{% for categorie in list_categories %}
+<section class="category mb-4 mt-8">
+  <h2>{{ categorie.nom }}</h2>
+  <hr>
+
+  <div class="row g-4">  {% for plat in list_plats %}
+      <article class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100">  {% if plat.image == "http://default" %}
+            <a href="{% url 'home' plat.id %}">
+              <img src="https://via.placeholder.com/220x150" class="card-img-top" alt="Image d'espace réservé">
+            </a>
+          {% else %}
+            <a href="{% url 'home' plat.id %}">
+              <img src="{{ plat.image.url }}" class="card-img-top" alt="{{ plat.title }}">
+            </a>
+          {% endif %}
+
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="{% url 'home' plat.id %}">{{ plat.title }}</a>
+            </h5>
+            <p class="card-text">{{ plat.desc|truncatewords:8 }}</p>
+            <p class="card-text"><span class="text-muted">{{ plat.created_at|timesince }}</span></p> <a href="{% url 'home' plat.id %}" class="btn btn-primary">En savoir plus</a>
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}

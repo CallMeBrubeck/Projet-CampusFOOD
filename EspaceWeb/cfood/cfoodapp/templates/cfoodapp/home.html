@@ -1,0 +1,56 @@
+{% extends "cfoodapp/base.html" %}
+{% block content %}
+
+<div
+class="p-5 text-center bg-image mb-5"
+style="
+background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+height: 400px;
+margin-top: 58px;">
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+        <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="text-white">
+                <h1 class="mb-3">Heading</h1>
+                <h4 class="mb-3">Subheading</h4>
+                <a data-mdb-ripple-init class="btn btn-outline-light btn-lg" href="#!" role="button"
+                >Call to action</a>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="menu p-3"><h1>MENU</h1></div>
+
+{% for categorie in list_categorie %}
+  <div class="container">
+    <div class="row">
+        <h3 style="font-weight: bold;">{{categorie.nom}}</h3>
+        {% for plat in list_plat%} 
+        {% if categorie == plat.categorie %}
+        <div class="col-12 col-md-6 col-lg-3 col-lg-3 col-xl-3">
+            <div class="card mb-6">
+                {% if plat.image == "http://default"%}
+                <a href="#"><img src="https://via.placeholder.com/220x150" alt="" srcset=""></a>
+                {% else %}
+                <a href="#">
+                  <img src="{{plat.image.url}}" class="card-img-top" alt="Fissure in Sandstone"/>
+                </a>
+                {% endif %}
+                
+                <div class="card-body" style="height: 250px;">
+                    <h5 class="card-title"><a href="#">{{plat.nom}}</a></h5>
+                    <p class="card-text">{{plat.description|truncatewords:8}}</p>
+                    <!-- plat.desc|truncatewords:8 permet de reduire si le text est trol long -->
+                    <p class="card-text">{{plat.date_ajout|timesince}}</p>
+                      <!--|timesince de  {{plat.created_at|timesince}} permet de definir un format de la date-->
+                    <a href="#" class="btn btn-primary" data-mdb-ripple-init>Savoir plus</a>
+                </div>
+              </div>
+        </div>
+        {% endif %}
+        {% endfor %}   
+    </div>
+  </div><hr>
+{% endfor %}
+
+{% endblock  %}
