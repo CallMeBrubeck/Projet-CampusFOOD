@@ -22,9 +22,9 @@ margin-top: 58px;">
 <div class="menu p-3"><h1>MENU</h1></div>
 
 {% for categorie in list_categorie %}
-  <div class="container">
+  <div class="container" style="background-color: #ff8c0081;">
     <div class="row">
-        <h3 style="font-weight: bold;">{{categorie.nom}}</h3>
+        <h3 style="font-weight: bold; color: #ffffffce;"><u><i>{{categorie.nom}}</i></u></h3>
         {% for plat in list_plat%} 
         {% if categorie == plat.categorie %}
         <div class="col-12 col-md-6 col-lg-3 col-lg-3 col-xl-3">
@@ -50,7 +50,8 @@ margin-top: 58px;">
         {% endif %}
         {% endfor %}   
     </div>
-  </div><hr>
+  </div>
+  <br><hr><br>
 {% endfor %}
 
 {% endblock  %}

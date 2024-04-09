@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class Categorie(models.Model):
@@ -25,7 +26,8 @@ class Plat(models.Model):
 
 
 
-class Utilisateur(models.Model):
+class Utilisateur(AbstractUser):
+    username = models.CharField(max_length=150, unique=True, default='')
     nom = models.CharField(max_length=255)
     prenoms = models.CharField(max_length=255)
     email = models.EmailField(unique=True)  # Assure l'unicité du compte par email
@@ -36,6 +38,19 @@ class Utilisateur(models.Model):
         ('Enseignant', 'Enseignant'),
     )
     type_utilisateur = models.CharField(max_length=255, choices=TYPE_UTILISATEUR_CHOICES)
+
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='utilisateurs',  # Ajoutez cette ligne
+        blank=True,
+        help_text='Les groupes auxquels cet utilisateur appartient. Un utilisateur peut appartenir à plusieurs groupes.'
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='utilisateurs',  # Ajoutez cette ligne
+        blank=True,
+        help_text='Permissions spécifiques pour cet utilisateur.'
+    )
 
     def __str__(self):
         return f"{self.nom} {self.prenoms}"

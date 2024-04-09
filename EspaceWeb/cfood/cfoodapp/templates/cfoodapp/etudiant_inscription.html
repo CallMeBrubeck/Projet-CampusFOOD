@@ -1,0 +1,20 @@
+{% extends 'cfoodapp/base.html' %}
+
+{% block content %}
+
+
+<br><br><br><br><br>
+<div class="container mb-6" style="border: solid 1px black; text-align: center; justify-content: center; justify-items: center;">
+<h1>INSCRIPTION EN TANT QU'ETUDIANT</h1><br>
+{% for message in messages %}
+<strong style="color: chocolate">{{message}}<strong/>
+{% endfor %}
+<form action="{% url "etudiant_inscription" %}" method="POST" >
+    {% csrf_token %}
+    {{ formulaire.as_p }}
+    <button type="submit">Valider</button>
+</form>
+</div>
+<br><br><br><br><br>
+
+{% endblock %}
