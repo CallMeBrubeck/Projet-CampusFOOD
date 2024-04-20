@@ -1,57 +1,892 @@
 {% extends "cfoodapp/base.html" %}
-{% block content %}
-
-<div
-class="p-5 text-center bg-image mb-5"
-style="
-background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
-height: 400px;
-margin-top: 58px;">
-    <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
-        <div class="d-flex justify-content-center align-items-center h-100">
-            <div class="text-white">
-                <h1 class="mb-3">Heading</h1>
-                <h4 class="mb-3">Subheading</h4>
-                <a data-mdb-ripple-init class="btn btn-outline-light btn-lg" href="#!" role="button"
-                >Call to action</a>
+{% load static %}
+{% block welcome %}
+  <div id="carouselExampleControls" class="carousel slide panda-slide mt-5 mb-5" data-bs-ride="carousel" style="height: 100vh;">
+    <div class="carousel-inner">
+        <div class="carousel-item active " id="carousel_item1">
+            <div class="row d-flex align-items-center p-5">
+                <div class="col-md-7">
+                    <h1 style="font-size: 70px;">Bienvenue sur CampusFOOD</h1>
+                    <p>Votre plateforme de restauration Universitaire</p>
+                    <h3 class="price-color">$1200</h3>
+                    <button class="btn btn-buy">En Savoir Plus</button>
+                </div>
+                <div class="col-md-5">
+                    <img src="{% static "image/f6.png" %}" class="d-block w-50" alt="Tv Image">
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item" id="carousel_item2">
+            <div class="row d-flex align-items-center p-5">
+                <div class="col-md-7">
+                    <h1>Mon restau du campus en mains</h1>
+                    <p>Avec CFood, plus besoins de se rendre obligatoirement dans ton refectoire universitaire pour tes achats de repas.</p>
+                    <h3 class="price-color">$420</h3>
+                    <button class="btn btn-buy">En Savoir Plus</button>
+                </div>
+                <div class="col-md-5">
+                  <img src="{% static "images/banner-images/headphone.png" %}" class="d-block w-50" alt="Headphone Image">
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item" id="carousel_item3">
+            <div class="row d-flex align-items-center p-5">
+                <div class="col-md-7">
+                    <h1>CampusFood, mon gereur de temps entre mes cours</h1>
+                    <p>Plus besoins de s'engoisser de ne pas etre a temps au refectoire pour sa commande.</p>
+                    <h3 class="price-color">$600</h3>
+                    <button class="btn btn-buy">En Savoir Plus</button>
+                </div>
+                <div class="col-md-5">
+                    <img src="{% static "images/banner-images/xbox.png" %}" class="d-block w-50" alt="Xbox Image">
+                </div>
             </div>
         </div>
     </div>
-</div>
-<br>
-<div class="menu p-3"><h1>MENU</h1></div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+{% endblock  %}
 
-{% for categorie in list_categorie %}
-  <div class="container" style="background-color: #ff8c0081;">
-    <div class="row">
-        <h3 style="font-weight: bold; color: #ffffffce;"><u><i>{{categorie.nom}}</i></u></h3>
-        {% for plat in list_plat%} 
-        {% if categorie == plat.categorie %}
-        <div class="col-12 col-md-6 col-lg-3 col-lg-3 col-xl-3">
-            <div class="card mb-6">
-                {% if plat.image == "http://default"%}
-                <a href="#"><img src="https://via.placeholder.com/220x150" alt="" srcset=""></a>
-                {% else %}
-                <a href="#">
-                  <img src="{{plat.image.url}}" class="card-img-top" alt="Fissure in Sandstone"/>
-                </a>
-                {% endif %}
-                
-                <div class="card-body" style="height: 250px;">
-                    <h5 class="card-title"><a href="#">{{plat.nom}}</a></h5>
-                    <p class="card-text">{{plat.description|truncatewords:8}}</p>
-                    <!-- plat.desc|truncatewords:8 permet de reduire si le text est trol long -->
-                    <p class="card-text">{{plat.date_ajout|timesince}}</p>
-                      <!--|timesince de  {{plat.created_at|timesince}} permet de definir un format de la date-->
-                    <a href="#" class="btn btn-primary" data-mdb-ripple-init>Savoir plus</a>
-                </div>
-              </div>
+{% block content %}
+<section class="container overflow-hidden mt-5 categories">
+  <div class="row g-5 mb-7">
+      <div class="col">
+          <div class="p-3 rounded category-bg-watch d-flex align-items-center justify-content-around" style>
+              <h1 class="text-white">Se restaurer rapidement</h1>
+              <img src="{% static "images/categories/watch.png" %}" alt="watch image"/>
+          </div>
+      </div>
+      <div class="col">
+          <div class="p-3 rounded category-bg-bag d-flex align-items-center justify-content-around">
+              <h1 class="text-white">Reduire le temps d'une commande</h1>
+              <img src="{% static "images/categories/bag.png" %}" alt="bag image"/>
+          </div>
+      </div>
+      <div class="col">
+          <div class="p-3 rounded category-bg-shoe d-flex align-items-center justify-content-around">
+              <h1 class="text-white">Reservation</h1>
+              <img src="{% static "images/categories/shoes.png" %}" alt="shoe image"/>
+          </div>
+      </div>
+      <div class="col">
+        <div class="p-3 rounded category-bg-shoe d-flex align-items-center justify-content-around">
+            <h1 class="text-white">cafe Delice</h1>
+            <img src="{% static "images/categories/shoes.png" %}" alt="shoe image"/>
         </div>
-        {% endif %}
-        {% endfor %}   
+    </div>
+    <div class="col">
+      <div class="p-3 rounded category-bg-shoe d-flex align-items-center justify-content-around">
+          <h1 class="text-white">Livraison pour les particulier</h1>
+          <img src="{% static "images/categories/shoes.png" %}" alt="shoe image"/>
+      </div>
+  </div>
+  </div>
+</section>
+<h1 class="text mb-7 mt-5" style="color: #222831; text-align: center; align-items: center; font-weight: 800;">Qui sommes nous?</h1>
+<!-- section presentation -->
+<section class="about_section layout_padding mb-6">
+  <div class="container  ">
+
+    <div class="row">
+      <div class="col-md-6 ">
+        <div class="img-box">
+          <img src="{% static "image/about-img.png" %}" alt="">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="detail-box">
+          <div class="heading_container">
+            <h2>
+              Nous sommes CampusFOOD
+            </h2>
+          </div>
+          <p>
+            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
+            in some form, by injected humour, or randomised words which don't look even slightly believable. If you
+            are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in
+            the middle of text. All
+          </p>
+          <a href="">
+            Read More
+          </a>
+        </div>
+      </div>
     </div>
   </div>
-  <br><hr><br>
-{% endfor %}
+</section>
+<!-- end section presentation -->
 
+
+<!-- some food proposer -->
+<section class="food_section layout_padding-bottom">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>
+        Mangez a l'ivoirienne
+      </h2>
+    </div>
+    <div class="filters-content">
+      <div class="row grid">
+        <!-- Plat -->
+        <div class="col-sm-6 col-lg-4 all pizza">
+          <div class="box">
+            <div>
+              <div class="img-box">
+                <img src="{% static "image/f1.png" %}" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Delicieux Plat de Garba
+                </h5>
+                <p>
+                  Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                </p>
+                <div class="options">
+                  <h6>
+                    700
+                  </h6>
+                  <a href="">
+                    <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
+                      <i class="fas fa-shopping-cart"></i>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Plat -->
+        <div class="col-sm-6 col-lg-4 all pizza">
+          <div class="box">
+            <div>
+              <div class="img-box">
+                <img src="{% static "image/f1.png" %}" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Tchep au poisson Thon
+                </h5>
+                <p>
+                  Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                </p>
+                <div class="options">
+                  <h6>
+                    $20
+                  </h6>
+                  <a href="">
+                    <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
+                      <i class="fas fa-shopping-cart"></i>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Plat -->
+        <div class="col-sm-6 col-lg-4 all pizza">
+          <div class="box">
+            <div>
+              <div class="img-box">
+                <img src="{% static "image/f1.png" %}" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Alloco-Poisson frit
+                </h5>
+                <p>
+                  Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                </p>
+                <div class="options">
+                  <h6>
+                    $20
+                  </h6>
+                  <a href="">
+                    <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
+                      <i class="fas fa-shopping-cart"></i>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Plat -->
+        <div class="col-sm-6 col-lg-4 all pizza">
+          <div class="box">
+            <div>
+              <div class="img-box">
+                <img src="{% static "image/f1.png" %}" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Panini
+                </h5>
+                <p>
+                  Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                </p>
+                <div class="options">
+                  <h6>
+                    $20
+                  </h6>
+                  <a href="">
+                    <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
+                      <i class="fas fa-shopping-cart"></i>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Plat -->
+        <div class="col-sm-6 col-lg-4 all pizza">
+          <div class="box">
+            <div>
+              <div class="img-box">
+                <img src="{% static "image/f1.png" %}" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Poulet-Alloco
+                </h5>
+                <p>
+                  Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                </p>
+                <div class="options">
+                  <h6>
+                    $20
+                  </h6>
+                  <a href="">
+                    <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
+                      <i class="fas fa-shopping-cart"></i>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Plat -->
+        <div class="col-sm-6 col-lg-4 all pizza">
+          <div class="box">
+            <div>
+              <div class="img-box">
+                <img src="{% static "image/f1.png" %}" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Plat de Spaghetti
+                </h5>
+                <p>
+                  Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                </p>
+                <div class="options">
+                  <h6>
+                    $20
+                  </h6>
+                  <a href="">
+                    <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
+                      <i class="fas fa-shopping-cart"></i>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Plat -->
+        <div class="col-sm-6 col-lg-4 all pizza">
+          <div class="box">
+            <div>
+              <div class="img-box">
+                <img src="{% static "image/f1.png" %}" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Riz Sauce claire
+                </h5>
+                <p>
+                  Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                </p>
+                <div class="options">
+                  <h6>
+                    $20
+                  </h6>
+                  <a href="">
+                    <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
+                      <i class="fas fa-shopping-cart"></i>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Plat -->
+        <div class="col-sm-6 col-lg-4 all pizza">
+          <div class="box">
+            <div>
+              <div class="img-box">
+                <img src="{% static "image/f1.png" %}" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Orangina
+                </h5>
+                <p>
+                  Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                </p>
+                <div class="options">
+                  <h6>
+                    $20
+                  </h6>
+                  <a href="">
+                    <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
+                      <i class="fas fa-shopping-cart"></i>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Plat -->
+        <div class="col-sm-6 col-lg-4 all pizza">
+          <div class="box">
+            <div>
+              <div class="img-box">
+                <img src="{% static "image/f1.png" %}" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Planete Kessie
+                </h5>
+                <p>
+                  Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                </p>
+                <div class="options">
+                  <h6>
+                    $20
+                  </h6>
+                  <a href="">
+                    <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
+                      <i class="fas fa-shopping-cart"></i>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 
+<!-- end some food proposer  -->
+<h1 class="text mb-7 mt-5" style="color: #d2691e; text-align: center; align-items: center; font-weight: 800;">Que dit-on a propos de nous ?</h1>
+<!-- Testimonial Start -->
+<section class="offer_section layout_padding-bottom">
+  <div class="offer_container">
+    <div class="container ">
+      <div class="row grid">
+        <div class="col-sm-6 col-lg-4 all ">
+          <div class="box border rounded">
+            <div class="img-box">
+              <img src="images/o2.jpg" alt="">
+            </div>
+            <div class="detail-box">
+              <i class="fa fa-quote-left fa-2x mb-3" style="color: #d2691e;"></i>
+              <div class="message">Je crois fermement au faite que cette application va revolutionner le mon de la gastronnomie universitaire en cote d'ivoire d'ici peu.</div>
+              <h6><span>Kambire Koko Innocent</span></h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-4 all ">
+          <div class="box border rounded">
+            <div class="img-box">
+              <img src="images/o2.jpg" alt="">
+            </div>
+            <div class="detail-box">
+              <i class="fa fa-quote-left fa-2x mb-3" style="color: #d2691e;"></i>
+              <div class="message">Je crois fermement au faite que cette application va revolutionner le mon de la gastronnomie universitaire en cote d'ivoir d'ici peu.</div>
+              <h6><span>Kambire Koko Innocent</span></h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-4 all ">
+          <div class="box border rounded">
+            <div class="img-box">
+              <img src="images/o2.jpg" alt="">
+            </div>
+            <div class="detail-box">
+              <i class="fa fa-quote-left fa-2x mb-3" style="color: #d2691e;"></i>
+              <div class="message">Je crois fermement au faite que cette application va revolutionner le mon de la gastronnomie universitaire en cote d'ivoir d'ici peu.</div>
+              <h6><span>Kambire Koko Innocent</span></h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-4 all ">
+          <div class="box border rounded">
+            <div class="img-box">
+              <img src="images/o2.jpg" alt="">
+            </div>
+            <div class="detail-box">
+              <i class="fa fa-quote-left fa-2x mb-3" style="color: #d2691e;"></i>
+              <div class="message">Je crois fermement au faite que cette application va revolutionner le mon de la gastronnomie universitaire en cote d'ivoir d'ici peu.</div>
+              <h6><span>Kambire Koko Innocent</span></h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Testimonial End -->
+
+
+
+
+<!-- CSS Custom -->
+<style>
+  a{
+    text-decoration: none;
+  }
+  .menu {
+    width: 100%;
+    height: 300px;
+    color: #d2691e;
+    font-weight: bold;
+    font-size: 100px;
+    background-color: #fff;
+    /* background: linear-gradient(to right, #f7e7d6, #e8c3a5); */
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .categorie-section {
+    margin-bottom: 30px;
+  }
+  
+  .categorie-section h3 {
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 10px 20px;
+    font-weight: bold;
+  }
+  
+  .card {
+    border: none; /* Remove default card border if desired */
+    background: #f5f5f5;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  .panda-card {
+    border: 0;
+  }
+
+.panda-card-footer {
+    background-color: white;
+    border: 0;
+}
+
+.col:hover {
+    transform: scale(1.12);
+    cursor: pointer; /* Add subtle hover effect */
+  }
+.category-bg-watch {
+    background-color: rgb(255, 165, 0);
+}
+.category-bg-bag {
+    background-color: rgb(218, 112, 214);
+}
+.category-bg-shoe {
+    background-color: rgb(0, 0, 255);
+}
+.categories img {
+    width: 100px;
+}
+.panda-slide .carousel-item {
+
+    /* background-color: rgb(252, 234, 232); */
+    /* background-color: rgba(252, 234, 232, 0.447); */
+    /* background-image: url('{% static "images/banner-images/hero-bg.jpg" %}'); */
+    border-radius: 1em;
+    color: #fff;
+}
+
+/* header{
+  height: 100vh;
+  background-image: url('{% static "images/banner-images/hero-bg.jpg" %}');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #e7eeea;
+} */
+
+
+.btn-buy {
+    background-color: chocolate;
+    color: white;
+}
+.btn-buy:hover{
+  cursor: pointer;
+  background-color:  white;
+  color: chocolate;
+  transform: scale(1.02);
+}
+.price-color {
+    /* color: #FF3585; */
+    color: chocolate;
+    font-size: 40px;
+}
+.special-offer-text {
+    font-size: large;
+    color: gray;
+}
+.lets-touch-bg {
+    background-color: rgb(252, 234, 232);
+}
+  
+  .plat-card:hover {
+    transform: scale(1.02); /* Add subtle hover effect */
+  }
+  
+
+  .menu {
+    background-image: url("path/to/restaurant-background.jpg");
+    background-repeat: no-repeat; /* Prevent image tiling */
+    background-size: cover; /* Stretch image to fill container */
+    background-position: center;
+  }
+  #presentation{
+    margin-bottom: 10px;
+    width: 40%; 
+    height: 110px; 
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 30px;
+    /* background: rgb(39,39,39); */
+    background: linear-gradient(336deg, rgba(39, 39, 39, 0.801) 0%,rgba(55, 47, 37, 0.636) 50%, rgba(35, 15, 1, 0.748) 100%) ;
+    border-radius: 10px 40px 10px 100px;
+  }
+
+
+
+
+  /* about */
+  .layout_padding {
+  padding: 90px 0;
+}
+
+.layout_padding2 {
+  padding: 75px 0;
+}
+
+.layout_padding2-top {
+  padding-top: 75px;
+}
+
+.layout_padding2-bottom {
+  padding-bottom: 75px;
+}
+
+.layout_padding-top {
+  padding-top: 90px;
+}
+
+.layout_padding-bottom {
+  padding-bottom: 90px;
+}
+
+/* h1, */
+h2 {
+  font-family: 'Dancing Script', cursive;
+}
+
+
+.about_section {
+  background: #222831;
+  color: #ffffff;
+}
+
+.about_section .row {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.about_section .img-box {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.about_section .img-box img {
+  width: 100%;
+  max-width: 445px;
+  position: relative;
+  z-index: 2;
+}
+
+.about_section .detail-box p {
+  margin-top: 15px;
+}
+
+.about_section .detail-box a {
+  display: inline-block;
+  padding: 10px 45px;
+  background-color: #ffbe33;
+  color: #ffffff;
+  border-radius: 45px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  border: none;
+  margin-top: 15px;
+}
+
+.about_section .detail-box a:hover {
+  background-color: #e69c00;
+}
+/* end about us */
+
+
+/*** Temoignage ***/
+
+.offer_section {
+  position: relative;
+  padding-top: 45px;
+}
+
+.offer_section .box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 45px;
+  border-radius: 5px;
+  padding: 20px 15px;
+  max-width: 90%;
+  min-height: auto;
+  /* background-color: #222831; */
+  color: #222831;
+}
+.offer_section .box:hover{
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+
+}
+
+.offer_section .box .img-box {
+  width: 50px;
+  min-width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  position: relative;
+  -webkit-transition: all 0.1 0.5s;
+  transition: all 0.1 0.5s;
+  border-radius: 100%;
+  border: 3px solid #ffbe33;
+  overflow: hidden;
+}
+
+.offer_section .box .img-box img {
+  width: 100%;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+
+.offer_section .box .detail-box h5 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 24px;
+  margin: 0;
+}
+
+.offer_section .box .detail-box h6 {
+  font-family: 'Dancing Script', cursive;
+  margin: 10px 0;
+}
+
+.offer_section .box .detail-box h6 span {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.offer_section .box .detail-box a {
+  display: inline-block;
+  padding: 10px 30px;
+  background-color: #ffbe33;
+  color: #ffffff;
+  border-radius: 45px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  border: none;
+}
+
+.offer_section .box .detail-box a:hover {
+  background-color: #e69c00;
+}
+
+.offer_section .box .detail-box a svg {
+  width: 20px;
+  height: auto;
+  margin-left: 5px;
+  fill: #ffffff;
+}
+
+.offer_section .box:hover .img-box img {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+/*** end Temoignage ***/
+
+/* some food section */
+
+.food_section .filters_menu li {
+  padding: 7px 25px;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+.food_section .filters_menu li.active {
+  background-color: #222831;
+  color: #ffffff;
+}
+
+.food_section .box {
+  position: relative;
+  margin-top: 25px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  color: #ffffff;
+  border-radius: 15px;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #f1f2f3 25px, #222831 25px);
+}
+
+.food_section .box .img-box {
+  background: #f1f2f3;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 215px;
+  border-radius: 0 0 0 45px;
+  margin: -1px;
+  padding: 25px;
+}
+
+.food_section .box .img-box img {
+  max-width: 100%;
+  max-height: 145px;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+
+.food_section .box .detail-box {
+  padding: 25px;
+}
+
+.food_section .box .detail-box h5 {
+  font-weight: 600;
+}
+
+.food_section .box .detail-box p {
+  font-size: 15px;
+}
+
+.food_section .box .detail-box h6 {
+  margin-top: 10px;
+}
+
+.food_section .box .options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.food_section .box .options a {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background: #ffbe33;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.food_section .box .options a svg {
+  width: 18px;
+  height: auto;
+  fill: #ffffff;
+}
+
+.food_section .box:hover .img-box img {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.food_section .btn-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 45px;
+}
+
+.food_section .btn-box a {
+  display: inline-block;
+  padding: 10px 55px;
+  background-color: #ffbe33;
+  color: #ffffff;
+  border-radius: 45px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  border: none;
+}
+
+.food_section .btn-box a:hover {
+  background-color: #e69c00;
+}
+
+.food_section .heading_container {
+  color: #222831;
+  margin-top: 25px;
+  margin-bottom: 5px;
+  align-items: center;
+  text-align: center;
+}
+/* end of somefood section */
+</style>
 {% endblock  %}

@@ -1,0 +1,34 @@
+{% extends "cfoodapp/base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Liste de recherche</h2>
+    <div class="row">
+        {% for article in liste_article %}
+        <div class="col-12 col-md-6 col-lg-3 col-lg-3 col-xl-3">
+            <div class="card mb-6 p-2">
+              {% if article.image == "http://default"%}
+              <a href="{%url 'detail' article.id%}"><img src="https://via.placeholder.com/220x150" alt="" srcset=""></a>
+              <a href="{%url 'detail' article.id%}">
+                  {% else %}
+                <img src="{{article.image.url}}" class="card-img-top" alt="Fissure in Sandstone"/>
+              </a>
+              {% endif %}
+              
+              <div class="card-body" style="height: 250px;">
+                  <h5 class="card-title"><a href="{%url 'detail' article.id%}">{{article.nom}}</a></h5>
+                  <p class="card-text">{{article.description|truncatewords:8}}</p>
+                  <!-- article.desc|truncatewords:8 permet de reduire si le text est trol long -->
+                  <p class="card-text">{{article.date_creation|timesince}}</p>
+                    <!--|timesince de  {{article.created_at|timesince}} permet de definir un format de la date-->
+                  <a href="{%url 'detail' article.id%}" class="btn btn-primary" data-mdb-ripple-init>Savoir plus</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock  %}

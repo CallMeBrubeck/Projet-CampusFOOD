@@ -1,0 +1,99 @@
+{% extends "cfoodapp/home.html" %}
+{% block avis %}
+
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Laissez un commentaire ou un avis</h3>
+          </div>
+          <div class="card-body">
+            <form action="{% url 'laissez_un_commentaire' %}" method="post">
+              {% csrf_token %}
+  
+              <div class="form-group">
+                <label for="nom">Nom:</label>
+                <input type="text" class="form-control" id="nom" name="nom" placeholder="Entrez votre nom">
+              </div>
+  
+              <div class="form-group">
+                <label for="email">Adresse email:</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Entrez votre adresse email">
+              </div>
+  
+              <div class="form-group">
+                <label for="commentaire">Commentaire:</label>
+                <textarea class="form-control" id="commentaire" name="commentaire" rows="5" placeholder="Ecrivez votre commentaire"></textarea>
+              </div>
+  
+              <div class="form-group">
+                <label for="note">Note:</label>
+                <select class="form-control" id="note" name="note">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+  
+              <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<style>
+    .card {
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #e7e7e7;
+  padding: 15px;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  border: 1px solid #e7e7e7;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.form-control:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+</style>
+{% endblock  %}

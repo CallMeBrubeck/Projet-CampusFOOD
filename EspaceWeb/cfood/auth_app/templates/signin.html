@@ -1,0 +1,25 @@
+{% extends "cfoodapp/base.html" %}
+{% block content %}
+<div class="container">
+    <div class="col-md-12 mt-5 mb-7">
+        {% for message in messages %}
+        <div class="alert alert-danger text-center">
+            <strong>{{message}}<strong/><br>
+        </div>
+        {% endfor %}
+        <form action="{% url "signin" %}" method="POST">
+            {% csrf_token %}
+            <div class="card">
+                <div class="card-header text-center"><i class="fas fa-user">Inscription a CampusFOOD</i></div>
+                <div class="card-body">
+                    <input type="text" class="text text-center" name="type_utilisateur" id="type_utilisateur" placeholder="Etudiant / Enseignant / Personnel d'administration" required style="width: 100%;">
+                </div>
+                <div class="card-footer">
+                    <button class="btn-primary btn-block">Suivant</button>
+            </div>
+            </div>
+        </form>
+    </div>   
+</div>
+{% endblock %}
+

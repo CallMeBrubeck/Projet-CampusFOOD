@@ -1,70 +1,66 @@
-{% extends "cfoodapp/base.htmll" %}
-{% block nav_barre %}
-<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+{% extends "cfoodapp/base.html" %}
+{% block nav %}
+<header style="background-color: #e7eeea;">
+  <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
     <!-- Container wrapper -->
     <div class="container-fluid">
       <!-- Toggle button -->
-      <button
-        data-mdb-collapse-init
-        class="navbar-toggler"
-        type="button"
-        data-mdb-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>
-
+  
       <!-- Collapsible wrapper -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!-- Navbar brand -->
-        <a class="navbar-brand mt-2 mt-lg-0" href="{% url "welcome" %}">
-          <small style="color: chocolate; font-weight: bolder; font-size: 50px;">CampusFOOD</small>
-        </a>
-        <!-- Left links -->
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url "welcome" %}">Accueil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Menu</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Catégories
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Plat consistant</a>
-              <a class="dropdown-item" href="#">Boisson</a>
-              <a class="dropdown-item" href="#">Amuse Gueulle</a>
-              <a class="dropdown-item" href="#">Divers</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Commandes</a>
-          </li>
-        </ul>
+      <div class="row">
+        <!-- bar de recherche -->
+        <div class="container" style="justify-items: center;justify-content: center;">
+          <form class="d-flex" role="search" action="{% url "search" %}" method="GET">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="article">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Navbar brand -->
+          <a class="navbar-brand mt-2 mt-lg-0" href="{% url "home" %}">
+            <small style="color: chocolate; font-weight: bolder; font-size: 50px;">CampusFOOD</small>
+          </a>
+          <!-- Left links -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "home" %}">Accueil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "menu" %}">Menu</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Catégories
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for categorie in list_categorie %}
+                <a class="dropdown-item category-link" href="#">{{categorie.nom}}</a><hr>
+                {% endfor %}
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Commandes</a>
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="d-flex align-items-center">
-        <a class="text-reset me-3" href="#">
+        <a class="text-reset me-3" href="{% url "panier" %}">
           <i class="fas fa-shopping-cart"></i>
         </a>
         <div class="dropdown">
-          <a
-            data-mdb-dropdown-init
-            class="text-reset me-3 dropdown-toggle hidden-arrow"
-            href="#"
-            id="navbarDropdownMenuLink"
-            role="button"
-            aria-expanded="false"
-          >
+          <a data-mdb-dropdown-init class="text-reset me-3 dropdown-toggle hidden-arrow" href="#"
+            id="navbarDropdownMenuLink" role="button" aria-expanded="false">
             <i class="fas fa-bell"></i>
             <span class="badge rounded-pill badge-notification bg-danger">1</span>
           </a>
-          <ul
-            class="dropdown-menu dropdown-menu-end"
-            aria-labelledby="navbarDropdownMenuLink">
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
             <li>
               <a class="dropdown-item" href="#">Some news</a>
             </li>
@@ -78,13 +74,10 @@
         </div>
         <!-- Avatar -->
         <div class="dropdown">
-        <!-- Tres importante, faire que le profile s affiche si la personne est conneter -->
-        <a class="btn btn-primary" href="{% url "signin" %}">Connexion</a>
+          <!-- Tres importante, faire que le profile s affiche si la personne est conneter -->
+          <a class="btn btn-primary" href="{% url "login" %}">Connexion</a>
+        </div>
       </div>
-      <!-- Right elements -->
-    </div>
-    <!-- Container wrapper -->
-</nav>
-
+  </nav>
+</header>
 {% endblock  %}
-

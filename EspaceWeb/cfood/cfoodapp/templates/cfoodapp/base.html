@@ -5,97 +5,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{name}}</title>
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{% static "css/mdb.min.css"%}" />
-    <link rel="stylesheet" href="{% static "css/bootstrap.min.css"%}">
-    <!-- <link rel="stylesheet" href="{% static "css/style.css"%}" /> -->
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css"%}" />
+    <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static "css/formulaire.css"%}" />
 </head>
-<body style="">
-    <header style="background-color: #e7eeea;">
-        <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
-          <!-- Container wrapper -->
-          <div class="container-fluid">
-            <!-- Toggle button -->
-            <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <i class="fas fa-bars"></i>
-            </button>
-        
-            <!-- Collapsible wrapper -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <!-- Navbar brand -->
-              <a class="navbar-brand mt-2 mt-lg-0" href="{% url "home" %}">
-                <small style="color: chocolate; font-weight: bolder; font-size: 50px;">CampusFOOD</small>
-              </a>
-              <!-- Left links -->
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url "home" %}">Accueil</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Menu</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Catégories
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    {% for categorie in list_categorie %}
-                    <a class="dropdown-item category-link" href="#">{{categorie.nom}}</a><hr>
-                    {% endfor %}
-                  </div>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Commandes</a>
-                </li>
-              </ul>
-            </div>
-            <div class="d-flex align-items-center">
-              <a class="text-reset me-3" href="#">
-                <i class="fas fa-shopping-cart"></i>
-              </a>
-              <div class="dropdown">
-                <a data-mdb-dropdown-init class="text-reset me-3 dropdown-toggle hidden-arrow" href="#"
-                  id="navbarDropdownMenuLink" role="button" aria-expanded="false">
-                  <i class="fas fa-bell"></i>
-                  <span class="badge rounded-pill badge-notification bg-danger">1</span>
+<body>
+  <header>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Toggle button -->
+        <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+    
+        <!-- Collapsible wrapper -->
+        <div class="row">
+          <!-- bar de recherche -->
+          <div class="container" style="justify-items: center;justify-content: center;">
+            <form class="d-flex" role="search" action="{% url "search" %}" method="GET">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="article">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+          <!-- Collapsible wrapper -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Navbar brand -->
+            <a class="navbar-brand mt-2 mt-lg-0" href="{% url "home" %}">
+              <small style="color: chocolate; font-weight: bolder; font-size: 50px;">CampusFOOD</small>
+            </a>
+            <!-- Left links -->
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "home" %}">Accueil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "menu" %}">Menu</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  Catégories
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                  <li>
-                    <a class="dropdown-item" href="#">Some news</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">Another news</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </li>
-                </ul>
-              </div>
-              <!-- Avatar -->
-              <div class="dropdown">
-                <!-- Tres importante, faire que le profile s affiche si la personne est conneter -->
-                <a class="btn btn-primary" href="{% url "signin" %}">Connexion</a>
-              </div>
-            </div>
-        </nav>
-    </header>
-    <div>
-      {% block content %}{% endblock  %}
-    </div>
-     
-    <!-- {% include "cfoodapp/menu.html" %} -->
-    <footer style="background-color: #383b39b4; color: #e7eeea;">
-    <!-- <div class="container mt-5 mb-4" style="background-color: rgb(41, 40, 40);color: chocolate;"> -->
-    <div class="row p-5">
-        <div class="col-md-4 text-center>
-        <a href="#">
-            <img src="{% static "images/Logo.jpg" %}" alt="Logo de l'application" width="130" height="100">
-        </a>
-        <p class="mt-3">CampusFOOD, le plaisir de manger sain et équilibré.</p>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  {% for categorie in list_categorie %}
+                  <a class="dropdown-item category-link" href="#">{{categorie.nom}}</a><hr>
+                  {% endfor %}
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Commandes</a>
+              </li>
+            </ul>
+          </div>
         </div>
+        <div class="d-flex align-items-center">
+          <a class="text-reset me-3" href="{% url "panier" %}">
+            <i class="fas fa-shopping-cart"></i>
+          </a>
+          <div class="dropdown">
+            <a data-mdb-dropdown-init class="text-reset me-3 dropdown-toggle hidden-arrow" href="#"
+              id="navbarDropdownMenuLink" role="button" aria-expanded="false">
+              <i class="fas fa-bell"></i>
+              <span class="badge rounded-pill badge-notification bg-danger"></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <a class="dropdown-item" href="#">Some news</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Another news</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </li>
+            </ul>
+          </div>
+          <!-- Avatar -->
+          <div class="dropdown">
+            <!-- Tres importante, faire que le profile s affiche si la personne est conneter -->
+            <a class="btn btn-primary" href="{% url "login" %}">Connexion</a>
+          </div>
+        </div>
+    </nav>
+    {% block welcome %}{% endblock  %}
+  </header>
+  <div class="container"></div>
+  <!-- Corps de la page -->
+  <main>
+    {% block content %}{% endblock  %}
+  </main> 
+     
+
+  <footer>
+    <div class="row p-5">
+    <div class="col-md-4 text-center">
+      <a href="#">
+          <img src="{% static "image/Logo.jpg" %}" alt="Logo de l'application" width="130" height="100">
+      </a>
+      <p class="mt-3">CampusFOOD, le plaisir de manger sain et équilibré.</p>
+    </div>
         <div class="col-md-8">
         <h4 class="text text-center">Liens utiles</h4>
         <ul class="list-inline text-center ">
@@ -106,12 +121,12 @@
             <li><a href="#">Mentions légales</a></li>
         </ul>
         </div>
-    </div>
-    <div class="col-md-4 text-right p-5">
-        <p class="mb-0">&copy; <?= date('Y') ?> TeamCfood</p>
-    </div>
-<!--         </div> -->
-    </footer>
+      </div>
+      <div class="col-md-4 text-right p-5">
+          <p class="mb-0">&copy; <?= date('Y') ?> TeamCfood</p>
+      </div>
+  </footer>
+  
 </body>
     <script type="text/javascript" src="{% static "js/mdb.umd.min.js" %}"></script>
     <script type="text/javascript" src="{% static "js/scripts.js" %}"></script>
@@ -126,4 +141,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></script>
+    
+    
+    
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap");
+
+      body {
+        font-family: "Open Sans", sans-serif;
+        color: #ffffff;
+        overflow-x: hidden;
+      }
+      header{
+        height: 100%;
+        width: 100%;
+        background-image: url('{% static "images/banner-images/hero-bg.jpg" %}');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-color: #e7eeea;
+      }
+      footer{
+        background-color: #222831;
+        color: #ffffff;
+        padding: 75px 0 40px 0;
+        text-align: center;
+      }
+    </style>
 </html>

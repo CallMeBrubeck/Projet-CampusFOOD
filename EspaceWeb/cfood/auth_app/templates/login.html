@@ -1,0 +1,54 @@
+{% extends "cfoodapp/base.html" %}
+{% load static %}
+{% block title %}Connexion au blog{% endblock title %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="{% static "css/bootstrap.min.css"%}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+/>
+<!-- Google Fonts Roboto -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+/>
+
+  <!-- MDB -->
+<link rel="stylesheet" href="{% static "css/mdb.min.css"%}" />
+<link rel="stylesheet" href="{% static "css/style.css"%}" />
+<div class="condainer mt-10">
+    <div class="col-md-12 mt-5">
+        {% for message in messages %}
+        <div class="alert alert-danger text-center">
+            <strong>{{message}}<strong/><br>
+        </div>
+        {% endfor %}
+        <form action="{% url "login" %}" method="POST" >
+            {% csrf_token %}
+            <div class="card">
+                <div class="card-header text-center"><i class="fas fa-user">Connexion a CampusFOOD</i></div>
+                <div class="card-body">
+                    <input type="text" name="username" id="" placeholder="Nom utilisateur" class="form-control mb-2" required>
+                    <input type="password" name="pwd" id="" placeholder="Mot de passe" class="form-control" required>
+                </div>
+                <div class="card-footer">
+                    <button class="btn-primary btn-block">Se connecter</button>
+            </div>
+            </div>
+        </form>
+        <br>
+        <div class="text text-center">
+            <p>Vous n'avez pas de compte? <a href="{% url "signin" %}">Creer un compte</a></p>
+        </div>
+    </div>
+    
+</div>
+
+<style>
+    .form-control{
+        max-width: 99.5%;
+
+    }
+    form{
+        width: 50%;
+        margin-left: 20%;
+    }
+</style>
+{% endblock content %}

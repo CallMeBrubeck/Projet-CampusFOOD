@@ -1,97 +1,46 @@
-header {
-  background-color: #e3d9d96e;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  height: 170px;
-  padding-top: 10px;
+.container{
+  max-height: 100%;
+  min-height: 90%;
 }
 
-.navbar {
-  border-radius: 0;
+.panda-card {
+  border: 0;
 }
 
-.navbar-brand {
-  padding: 0;
-  margin-right: 10px;
+.panda-card-footer {
+  background-color: white;
+  border: 0;
+}
+.category-bg-watch {
+  background-color: rgb(255, 165, 0);
+}
+.category-bg-bag {
+  background-color: rgb(218, 112, 214);
+}
+.category-bg-shoe {
+  background-color: rgb(0, 0, 255);
+}
+.categories img {
+  width: 100px;
 }
 
-/* Icone */
-.fa-utensils,
-.fa-shopping-cart {
+.panda-slide .carousel-item {
+
+  background-color: rgb(252, 234, 232);
+  border-radius: 1em;
+}
+.btn-buy {
+  background-color: #FF3585;
+  color: white;
+}
+.price-color {
+  color: #FF3585;
   font-size: 40px;
 }
-/* ====fin icon==== */
-
-.navbar-brand img {
-  max-height: 45px;
+.special-offer-text {
+  font-size: large;
+  color: gray;
 }
-
-.row {
-  justify-content: space-between;
-}
-
-.navbar-nav {
-  margin-left: auto;
-}
-
-.nav-item {
-  padding: 0 10px;
-}
-
-.nav-link {
-  color: #333;
-  font-size: 16px;
-  font-weight: 500;
-  text-transform: uppercase;
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    color: #3498db;
-  }
-}
-
-.dropdown-menu {
-  background-color: #fff;
-  border-radius: 0;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  min-width: 160px;
-
-  .dropdown-item {
-    color: #333;
-    font-size: 14px;
-    font-weight: 400;
-    padding: 8px 16px;
-
-    &:hover {
-      background-color: #3498db;
-      color: #fff;
-    }
-  }
-}
-
-.btn-primary {
-  background-color: #3498db;
-  border-color: #3498db;
-  color: #fff;
-  font-weight: 500;
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    background-color: #333;
-    border-color: #333;
-  }
-}
-
-/* ----- Main ----- */
-
-main {
-  padding: 30px;
-}
-
-/* ----- Footer ----- */
-
-footer {
-  background-color: #777;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
+.lets-touch-bg {
+  background-color: rgb(252, 234, 232);
 }

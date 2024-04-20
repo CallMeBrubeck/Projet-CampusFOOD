@@ -6,7 +6,7 @@ from django.contrib import messages
 
 
 # Create your views here.
-def home(request):
+""" def home(request):
     list_categorie = Categorie.objects.all()
     list_plat = Plat.objects.all()
     context = {
@@ -14,7 +14,49 @@ def home(request):
         "list_categorie": list_categorie,
         "list_plat": list_plat
         }
-    return render(request, 'cfoodapp/home.html', context)
+    return render(request, 'cfoodapp/home.html', context) """
+
+
+def home(request):
+    return render(request, 'cfoodapp/home.html', {
+        "name": "Acceuil"})
+
+def menu(request):
+    list_categorie = Categorie.objects.all()
+    list_plat = Plat.objects.all()
+    context = {
+        "name": "Menu",
+        "list_categorie": list_categorie,
+        "list_plat": list_plat
+        }
+    return render(request, 'cfoodapp/menu.html', context)
+
+def detail(request, nom_plat):
+    plat = Plat.objects.get(nom=nom_plat)
+    categorie = plat.categorie
+    plat_en_relation = Plat.objects.filter(categorie=categorie)[:5]
+    #context = {"article": article}
+    return render(request, 'cfoodapp/detail.html',
+                  {
+                      "plat": plat,
+                      "per": plat_en_relation,
+                      "name":"Details"
+                    }
+                    )
+
+
+def panier(request):
+    return render(request, 'cfoodapp/panier.html', {"name":"Panier"})
+
+
+
+#fonction de recherche
+def search(request):
+    query = request.GET["article"]
+    liste_article = Plat.objects.filter(nom__icontains=query)
+    return render(request, 'cfoodapp/search.html', {
+        "liste_article":liste_article
+        })
 
 #formulaire d inscription d un etudiant
 def etudiant(request):
@@ -120,7 +162,7 @@ def personnel(request):
 
 #creons un formulaire de creation d un Utilisateur:
 
-def signin(request):
+""" def signin(request):
     if request.method == 'POST':
         type_utilisateur = request.POST.get('type_utilisateur')
         if type_utilisateur == 'Etudiant':
@@ -130,9 +172,11 @@ def signin(request):
         elif type_utilisateur == "Personnel d'administration":
             return redirect('personnel_inscription')
     # ...autres types d'utilisateurs...
+        else:
+            messages.error(request, 'Entrez le champs correct!!!.')
 
     return render(request, 'cfoodapp/signin.html', {
-        'name': 'Signin'})
+        'name': 'Signin'}) """
 
 
 

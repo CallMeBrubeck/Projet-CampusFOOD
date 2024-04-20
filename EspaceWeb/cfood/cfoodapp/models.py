@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group, Permission
 
 # Create your models here.
 class Categorie(models.Model):
@@ -15,7 +15,7 @@ class Categorie(models.Model):
 class Plat(models.Model):
     #idPlat = models.AutoField(primary_key=True)
     nom = models.CharField(max_length=50)
-    description = models.TextField(max_length=250)
+    description = models.TextField()
     prix = models.FloatField(max_length=8)
     image = models.ImageField()
     date_ajout = models.DateTimeField(auto_now_add=True)
@@ -26,34 +26,19 @@ class Plat(models.Model):
 
 
 
-class Utilisateur(AbstractUser):
-    username = models.CharField(max_length=150, unique=True, default='')
-    nom = models.CharField(max_length=255)
-    prenoms = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)  # Assure l'unicité du compte par email
-    password = models.CharField(max_length=255)
-    TYPE_UTILISATEUR_CHOICES = (
-        ('Etudiant', 'Etudiant'),
-        ('PersonnelAdministratif', 'Personnel Administratif'),
-        ('Enseignant', 'Enseignant'),
-    )
-    type_utilisateur = models.CharField(max_length=255, choices=TYPE_UTILISATEUR_CHOICES)
-
-    groups = models.ManyToManyField(
-        'auth.Group',
-        related_name='utilisateurs',  # Ajoutez cette ligne
-        blank=True,
-        help_text='Les groupes auxquels cet utilisateur appartient. Un utilisateur peut appartenir à plusieurs groupes.'
-    )
-    user_permissions = models.ManyToManyField(
-        'auth.Permission',
-        related_name='utilisateurs',  # Ajoutez cette ligne
-        blank=True,
-        help_text='Permissions spécifiques pour cet utilisateur.'
-    )
+class CustomUser(AbstractUser):
+    is_etudiant = models.BooleanField(default=False)
+    is_adminpersonnel = models.BooleanField(default=False)
+    is_professeur = models.BooleanField(default=False)
+    numero = models.CharField(max_length=15)
+    groups = models.ManyToManyField(Group, related_name='custom_user_groups')
+    user_permissions = models.ManyToManyField(Permission, related_name='custom_user_permissions')
 
     def __str__(self):
-        return f"{self.nom} {self.prenoms}"
+        return f"{self.username}"
+    
+
+        
 
 
 
@@ -113,47 +98,40 @@ class Employe(models.Model):
 
 
 
-class Compte(models.Model):
-    utilisateur = models.OneToOneField(Utilisateur, on_delete=models.CASCADE)
-    employee = models.OneToOneField(Employe, on_delete=models.CASCADE)
-    # Champs spécifiques au compte (solde, transactions, etc.)
 
-    def __str__(self):
-        return f"Compte de {self.utilisateur}"
-
-
-
-class Etudiant(Utilisateur):
+class Etudiant(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     niveau = models.CharField(max_length=255)
     filiere = models.CharField(max_length=255)
     annee_etude = models.IntegerField()
     universite = models.ForeignKey(Universite, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{super().__str__()} - Niveau {self.niveau} - Filière {self.filiere} - Année d'étude {self.annee_etude}"
+        return f"Nom utilisateur {self.user.username} - Nom {self.user.first_name} - Niveau {self.niveau}"
 
 
 
-class PersonnelAdministration(Utilisateur):
+class PersonnelAdministration(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     poste = models.CharField(max_length=255)
     universite = models.ForeignKey(Universite, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{super().__str__()} - Poste {self.poste}"
+        return f"Nom utilisateur {self.user.username} - Nom {self.user.first_name} - Poste {self.poste}"
     
 
 
-class Enseignant(Utilisateur):
+class Enseignant(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     matiere = models.CharField(max_length=255)
     universites = models.ManyToManyField(Universite)#car peut enseigner dans plusieurs universites
-
     def __str__(self):
-        return f"{super().__str__()} - Matière {self.matiere}"
+        return f"Nom utilisateur {self.user.username} - Nom {self.user.first_name} - Matière {self.matiere}"
 
 
 
 class Commande(models.Model):
-    etudiant = models.ForeignKey(Etudiant, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     date = models.DateField()
     heure = models.TimeField()
@@ -182,7 +160,7 @@ class Facture(models.Model):
 
 
 class Avis(models.Model):
-    auteur = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     plat = models.ForeignKey(Plat, on_delete=models.CASCADE, null=True, blank=True)
     note = models.IntegerField(choices=[
         (1, "1 étoile"),
@@ -195,7 +173,7 @@ class Avis(models.Model):
     date_publication = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.auteur.nom} - {self.note} - {self.commentaire}"
+        return f"{self.user.first_name} - {self.note} - {self.commentaire}"
 
 
 
@@ -221,7 +199,7 @@ class Paiement(models.Model):
         ('Wave', 'Wave'),
     ])
     date_paiement = models.DateTimeField(auto_now_add=True)
-    utilisateur = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.montant} - {self.methode} - {self.date_paiement}"

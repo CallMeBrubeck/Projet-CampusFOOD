@@ -21,7 +21,7 @@ TYPE_UTILISATEUR_CHOICES = (
 class InscriptionUtilisateur(UserCreationForm):
     type_utilisateur = forms.ChoiceField(choices=TYPE_UTILISATEUR_CHOICES, required=True)
     class Meta:
-        model = Utilisateur  # Assuming Utilisateur is your user model
+        model = CustomUser  # Assuming Utilisateur is your user model
         fields = ['type_utilisateur']
         widget={
             #'type_utilisateur': forms.ChoiceField(attrs={'class': 'form-control'})
@@ -32,79 +32,47 @@ class InscriptionUtilisateur(UserCreationForm):
 
 
 class EtudiantForm(UserCreationForm):
-    type_utilisateur = forms.CharField(required=False, initial="Etudiant")  # Valeur par défaut "etudiant"
-    username = forms.CharField(required=True)
-    nom = forms.CharField( required=True)
-    prenoms = forms.CharField(required=True)
-    email = forms.EmailField(required=True)
-    niveau = forms.CharField(required=True)
-    filiere = forms.CharField(required=True)
-    universite = forms.ChoiceField(choices=choix_universite, required=True)
-    password = forms.PasswordInput()
+    type_utilisateur = forms.CharField(required=False, initial="Etudiant", widget=forms.TextInput(attrs={'class': 'form-control'}))  # Valeur par défaut "etudiant"
+    username = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    nom = forms.CharField( required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    prenoms = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    niveau = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    filiere = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    universite = forms.ChoiceField(choices=choix_universite, required=True, widget=forms.Select(attrs={'class': 'form-control'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Etudiant
         fields = ['type_utilisateur','username','nom', 'prenoms', 'email', 'niveau', 'filiere', 'universite', 'password']
-        widgets = {
-            'type_utilisateur': forms.TextInput(attrs={'class': 'form-control'}),
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-            'nom': forms.TextInput(attrs={'class': 'form-control'}),
-            'prenoms': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'niveau': forms.TextInput(attrs={'class': 'form-control'}),
-            'filiere': forms.TextInput(attrs={'class': 'form-control'}),
-            'universite': forms.Select(attrs={'class': 'form-control'}),
-            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
-        }
+
 
 class PersonnelAdministrationForm(UserCreationForm):
-    type_utilisateur = forms.CharField(required=False, initial="Personnel d'administration")  # Valeur par défaut "etudiant"
-    username = forms.CharField(required=True)
-    nom = forms.CharField(required=True)
-    prenoms = forms.CharField(required=True)
-    email = forms.EmailField(required=True)
-    poste = forms.CharField(required=True)
-    universite = forms.ChoiceField(choices=choix_universite, required=True)
-    password = forms.PasswordInput()
-
+    type_utilisateur = forms.CharField(required=False, initial="Personnel d'administration", widget=forms.TextInput(attrs={'class': 'form-control'}))  # Valeur par défaut "etudiant"
+    username = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    nom = forms.CharField( required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    prenoms = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    poste = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     class Meta:
         model = PersonnelAdministration
         fields = ['type_utilisateur','username','nom', 'prenoms', 'email', 'poste', 'universite', 'password']
-        widgets = {
-            'type_utilisateur': forms.TextInput(attrs={'class': 'form-control'}),
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-            'nom': forms.TextInput(attrs={'class': 'form-control'}),
-            'prenoms': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'poste': forms.TextInput(attrs={'class': 'form-control'}),
-            'universite': forms.Select(attrs={'class': 'form-control'}),
-            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
-        }
+
 
 
 class EnseignantForm(UserCreationForm):
-    type_utilisateur = forms.CharField(required=False, initial="Enseignant")  # Valeur par défaut "etudiant"
-    username = forms.CharField(required=True)
-    nom = forms.CharField(required=True)
-    prenoms = forms.CharField(required=True)
-    email = forms.EmailField(required=True)
-    matiere = forms.CharField(required=True)
-    universite = forms.MultipleChoiceField(choices=choix_universite, required=True)  # Changed to MultipleChoiceField
-    password = forms.PasswordInput()
+    type_utilisateur = forms.CharField(required=False, initial="Enseignant", widget=forms.TextInput(attrs={'class': 'form-control'})) 
+    username = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    nom = forms.CharField( required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    prenoms = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    matiere = forms.CharField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    universite = forms.ChoiceField(choices=choix_universite, required=True, widget=forms.SelectMultiple(choices=choix_universite,attrs={'class': 'form-control'}))
+  # Changed to MultipleChoiceField
+    password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Enseignant
         fields = ['type_utilisateur', 'username', 'nom', 'prenoms', 'email', 'matiere', 'universite', 'password',]
-        widgets = {
-            'type_utilisateur': forms.TextInput(attrs={'class': 'form-control'}),
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-            'nom': forms.TextInput(attrs={'class': 'form-control'}),
-            'prenoms': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'matiere': forms.TextInput(attrs={'class': 'form-control'}),
-            'universite': forms.SelectMultiple(attrs={'class': 'form-control'}),
-            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
-
-        }
-
     

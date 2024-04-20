@@ -20,7 +20,7 @@ main {
     padding: 30px;
     justify-content: center;
     justify-items: center;
-    border: orange solid 1px;
+    /* border: orange solid 1px; */
     min-height: 100px;
     text-align: center;
   }

@@ -1,31 +1,134 @@
-{% load static %}
-{% for categorie in list_categories %}
-<section class="category mb-4 mt-8 " style="background-color: #b78709;">
-  <h2>{{ categorie.nom }}</h2>
-  <hr>
 
-  <div class="row g-4">  {% for plat in list_plats %}
-      <article class="col-12 col-md-6 col-lg-4">
-        <div class="card h-100">  {% if plat.image == "http://default" %}
-            <a href="{% url 'home' plat.id %}">
-              <img src="https://via.placeholder.com/220x150" class="card-img-top" alt="Image d'espace réservé">
-            </a>
-          {% else %}
-            <a href="{% url 'home' plat.id %}">
-              <img src="{{ plat.image.url }}" class="card-img-top" alt="{{ plat.title }}">
-            </a>
-          {% endif %}
+{% extends "cfoodapp/base.html" %}
+{% block content %} 
 
-          <div class="card-body">
-            <h5 class="card-title">
-              <a href="{% url 'home' plat.id %}">{{ plat.title }}</a>
-            </h5>
-            <p class="card-text">{{ plat.desc|truncatewords:8 }}</p>
-            <p class="card-text"><span class="text-muted">{{ plat.created_at|timesince }}</span></p> <a href="{% url 'home' plat.id %}" class="btn btn-primary">En savoir plus</a>
-          </div>
+<div class="menu mb-8"><h1>Votre Menu</h1></div>
+{% for categorie in list_categorie %}
+<div class="container">
+  <div class="row">
+    <h3>{{categorie.nom}}</h3>
+    {% for plat in list_plat%} 
+    {% if categorie == plat.categorie %}
+      <div class="col-12 col-md-6 col-lg-3 col-lg-3 col-xl-3">
+        <div class="card panda-card h-100 shadow mb-3">
+          <!-- image -->
+                {% if plat.image == "http://default"%}
+                <a href="{%url 'detail' plat.nom%}"><img src="https://via.placeholder.com/220x150" alt="" srcset=""></a>
+                {% else %}
+                <a href="{%url 'detail' plat.nom%}">
+                  <img src="{{plat.image.url}}" class="card-img-top" alt="Fissure in Sandstone"/>
+                </a>
+                {% endif %}
+            <img src="images/shoes/shoe-1.png" class="card-img-top" alt="Nike Shoe">
+            <div class="card-body">
+              <h5 class="card-title"><a href="{%url 'detail' plat.nom%}">{{plat.nom}}</a></h5>
+              <p class="card-text">{{plat.description|truncatewords:5}}</p>
+              <!-- <p class="card-text">{{plat.date_ajout|timesince}}</p> -->
+              <p class="card-text">Prix: {{ plat.prix }} Francs</p>
+            </div>
+            <div class="card-footer panda-card-footer">
+              <div class="d-flex justify-content-between" style="margin: 4px;">  
+                <span class="btn btn-primary add-to-cart-btn" data-mdb-ripple-init data-id="{{ plat.id }}" style="margin-right: 10px;">
+                  <i class="fas fa-shopping-cart"></i>
+                </span>
+                <a href="{%url 'detail' plat.nom%}" class="btn btn-primary" style="margin-left: 10px;">Details</a>
+              </div>
+            </div>
         </div>
-      </article>
-    {% endfor %}
+      </div>
   </div>
-</section>
+    {% endif %}
+  {% endfor %} 
+</div>
+
 {% endfor %}
+
+
+
+<style>
+  .menu{
+    color: white;
+    width: 100%;
+    height: 150px;
+    background-color: #000000ad;
+    text-align: center;
+  }
+  h1{
+    padding-top: 40px;
+  }
+  .spacebetween{
+    width: 100%; 
+    height: 180px; 
+    background: rgb(39,39,39);
+    background: linear-gradient(336deg, rgba(39, 39, 39, 0.801) 0%,rgba(55, 47, 37, 0.636) 50%, rgba(35, 15, 1, 0.748) 100%) ;
+    border-radius: 10px 40px 10px 100px;
+  }
+  .panda-card {
+    border: 0;
+}
+
+.panda-card-footer {
+    background-color: white;
+    border: 0;
+}
+</style>
+{% endblock  %}
+
+{% for categorie in list_categorie %}
+<div class="container">
+  <div class="row">
+      <!-- <h3 style="font-weight: bold; color: #ffffffce;"><u><i>{{categorie.nom}}</i></u></h3> -->
+      <div class="spacebetween mb-3 text-center">
+      <h3 style="font-weight: bold; color: #ffffffce; margin-top: 50px;
+      position: absolute;
+      "><u><i>{{categorie.nom}}</i></u></h3>
+      </div>
+      {% for plat in list_plat%} 
+      {% if categorie == plat.categorie %}
+      <div class="col-12 col-md-6 col-lg-3 col-lg-3 col-xl-3" style="position: relative; margin-top: -70px;">
+          <div class="card mb-6">
+              {% if plat.image == "http://default"%}
+              <a href="{%url 'detail' plat.nom%}"><img src="https://via.placeholder.com/220x150" alt="" srcset=""></a>
+              {% else %}
+              <a href="{%url 'detail' plat.nom%}">
+                <img src="{{plat.image.url}}" class="card-img-top" alt="Fissure in Sandstone"/>
+              </a>
+              {% endif %}
+              
+              <div class="card-body" style="height: 250px;">
+                <h5 class="card-title"><a href="{%url 'detail' plat.nom%}">{{plat.nom}}</a></h5>
+                <p class="card-text">{{plat.description|truncatewords:5}}</p>
+                <!-- <p class="card-text">{{plat.date_ajout|timesince}}</p> -->
+                <p class="card-text">Prix: {{ plat.prix }} Francs</p>
+                <div class="d-flex justify-content-between" style="margin: 4px;">  
+                  <span class="btn btn-primary add-to-cart-btn" data-mdb-ripple-init data-id="{{ plat.id }}" style="margin-right: 10px;">
+                    <i class="fas fa-shopping-cart"></i>
+                  </span>
+                  <a href="{%url 'detail' plat.nom%}" class="btn btn-primary" style="margin-left: 10px;">Details</a>
+                </div>
+            </div>              
+            </div>
+      </div>
+      {% endif %}
+      {% endfor %}   
+  </div>
+</div>
+{% endfor %}
+
+
+<h3>Shoes</h3>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+        <div class="card panda-card h-100 shadow">
+            <img src="images/shoes/shoe-1.png" class="card-img-top" alt="Nike Shoe">
+            <div class="card-body">
+                <h5 class="card-title">Supply 350</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                    additional content. This content is a little bit longer.</p>
+            </div>
+            <div class="card-footer panda-card-footer">
+                <button class="btn btn-buy">Buy Now ></button>
+            </div>
+        </div>
+    </div>
+</div>
