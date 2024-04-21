@@ -5,41 +5,37 @@
     <div class="carousel-inner">
         <div class="carousel-item active " id="carousel_item1">
             <div class="row d-flex align-items-center p-5">
-                <div class="col-md-7">
-                    <h1 style="font-size: 70px;">Bienvenue sur CampusFOOD</h1>
-                    <p>Votre plateforme de restauration Universitaire</p>
-                    <h3 class="price-color">$1200</h3>
+                <div class="col-md-12">
+                    <h1 style="font-size: 70px; color: #ffffff;">Bienvenue sur CampusFOOD</h1>
+                    <p>Votre plateforme de restauration Universitaire.Rejoignez-nous pour découvrir une <br> nouvelle façon de vivre la restauration universitaire, où la technologie et le plaisir de <br> bien manger se rencontrent pour offrir une expérience unique à tous les membres de la communauté universitaire.</p>
                     <button class="btn btn-buy">En Savoir Plus</button>
                 </div>
-                <div class="col-md-5">
+<!--                 <div class="col-md-5">
                     <img src="{% static "image/f6.png" %}" class="d-block w-50" alt="Tv Image">
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="carousel-item" id="carousel_item2">
             <div class="row d-flex align-items-center p-5">
                 <div class="col-md-7">
-                    <h1>Mon restau du campus en mains</h1>
-                    <p>Avec CFood, plus besoins de se rendre obligatoirement dans ton refectoire universitaire pour tes achats de repas.</p>
-                    <h3 class="price-color">$420</h3>
-                    <button class="btn btn-buy">En Savoir Plus</button>
+                    <h1 style="font-size: 70px; color: #ffffff;">Mon restau du campus en mains</h1>
+                    <p>Plus besoin de sortir votre portefeuille ou de faire la queue pour payer votre repas. Avec campusCfood, vous pouvez commander et payer votre repas en ligne en quelques clics seulement.</p>                    <button class="btn btn-buy">En Savoir Plus</button>
                 </div>
                 <div class="col-md-5">
-                  <img src="{% static "images/banner-images/headphone.png" %}" class="d-block w-50" alt="Headphone Image">
+                  <img src="{% static "image/hero.png" %}" class="d-block w-50" alt="Headphone Image">
                 </div>
             </div>
         </div>
         <div class="carousel-item" id="carousel_item3">
             <div class="row d-flex align-items-center p-5">
-                <div class="col-md-7">
-                    <h1>CampusFood, mon gereur de temps entre mes cours</h1>
-                    <p>Plus besoins de s'engoisser de ne pas etre a temps au refectoire pour sa commande.</p>
-                    <h3 class="price-color">$600</h3>
+                <div class="col-md-12">
+                    <h1 style="font-size: 70px; color: #ffffff;">CampusFood, mon gereur de temps entre mes cours</h1>
+                    <p>Dites adieu aux longues files d'attente et aux menus indéchiffrables ! Avec campusCfood, vous pouvez consulter les menus en ligne, comparer les prix et trouver facilement le restaurant qui correspond à vos envies..</p>
                     <button class="btn btn-buy">En Savoir Plus</button>
                 </div>
-                <div class="col-md-5">
+<!--                 <div class="col-md-5">
                     <img src="{% static "images/banner-images/xbox.png" %}" class="d-block w-50" alt="Xbox Image">
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -57,43 +53,50 @@
 {% endblock  %}
 
 {% block content %}
-<section class="container overflow-hidden mt-5 categories">
+<h1 class="text mb-7 mt-5" style="color: #222831; text-align: center; align-items: center; font-weight: lighter; font-size: 40px;"><u>Service rapide</u></h1>
+
+<section class="container overflow-hidden mt-10 categories">
   <div class="row g-5 mb-7">
       <div class="col">
-          <div class="p-3 rounded category-bg-watch d-flex align-items-center justify-content-around" style>
-              <h1 class="text-white">Se restaurer rapidement</h1>
+          <div class="p-3 rounded category-bg-watch d-flex align-items-center justify-content-around">
+              <h3 class="text-white">Se rapprocher beaucoup plus de son refectoire universitaire</h3>
               <img src="{% static "images/categories/watch.png" %}" alt="watch image"/>
           </div>
       </div>
       <div class="col">
           <div class="p-3 rounded category-bg-bag d-flex align-items-center justify-content-around">
-              <h1 class="text-white">Reduire le temps d'une commande</h1>
+              <h3 class="text-white">Un accès facile aux menus et aux informations des restaurants universitaires. </h3>
               <img src="{% static "images/categories/bag.png" %}" alt="bag image"/>
           </div>
       </div>
       <div class="col">
-          <div class="p-3 rounded category-bg-shoe d-flex align-items-center justify-content-around">
-              <h1 class="text-white">Reservation</h1>
+          <div class="p-3 rounded category-bg-watch d-flex align-items-center justify-content-around">
+              <h3 class="text-white">Un système de commande et de paiement en ligne.</h3>
               <img src="{% static "images/categories/shoes.png" %}" alt="shoe image"/>
           </div>
       </div>
-      <div class="col">
+<!--       <div class="col">
         <div class="p-3 rounded category-bg-shoe d-flex align-items-center justify-content-around">
-            <h1 class="text-white">cafe Delice</h1>
+            <h3 class="text-white">Livraison pour les particulier</h3>
             <img src="{% static "images/categories/shoes.png" %}" alt="shoe image"/>
         </div>
-    </div>
+    </div> -->
     <div class="col">
-      <div class="p-3 rounded category-bg-shoe d-flex align-items-center justify-content-around">
-          <h1 class="text-white">Livraison pour les particulier</h1>
+      <div class="p-3 rounded category-bg-bag d-flex align-items-center justify-content-around border rounder">
+          <h3 class="text-white">Une communication directe avec les restaurants universitaires: Envoyez vos commentaires et suggestions directement aux restaurants universitaires via l'application campusCfood.</h3>
           <img src="{% static "images/categories/shoes.png" %}" alt="shoe image"/>
       </div>
   </div>
   </div>
 </section>
-<h1 class="text mb-7 mt-5" style="color: #222831; text-align: center; align-items: center; font-weight: 800;">Qui sommes nous?</h1>
+<div class="container mb-3">
+  <img src="{% static "image/goldcrown-1.png" %}" class="img align-items-center justify-content-around " style="margin-left: 38%;" alt="Headphone Image" >
+  <h1 class="text mb-7 mt-5" style="color: #222831; text-align: center; align-items: center; font-weight: lighter; font-size: 40px;">Qui sommes nous?</h1>
+  <img src="{% static "image/goldcrown-1.png" %}" class="img align-items-center justify-content-around" style="margin-left: 38%;" alt="Headphone Image" >
+</div>
+
 <!-- section presentation -->
-<section class="about_section layout_padding mb-6">
+<section class="about_section layout_padding mb-14">
   <div class="container  ">
 
     <div class="row">
@@ -104,19 +107,19 @@
       </div>
       <div class="col-md-6">
         <div class="detail-box">
-          <div class="heading_container">
-            <h2>
-              Nous sommes CampusFOOD
+          <div class="heading_container" style="text-align: center; align-items: center; ">
+            <h2 style="color: #ffffff;">
+              Nous sommes <span style="color: #d2691e;font-weight: 800;">CampusFOOD</span>
             </h2>
           </div>
           <p>
-            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
-            in some form, by injected humour, or randomised words which don't look even slightly believable. If you
-            are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in
-            the middle of text. All
+            CampusCfood est une plateforme ivoirienne innovante dédiée à la restauration universitaire. Notre projet a émergé à la suite d'une étude approfondie sur les services de restauration offerts aux étudiants, révélant un besoin crucial d'amélioration.
+            Notre objectif est d'améliorer la qualité de vie sur les campus en facilitant l'accès à des repas sains, équilibrés et variés.
           </p>
-          <a href="">
-            Read More
+          <p><strong><u>Notre Mission</u></strong></p>
+          <p>nous avons pour mission de rapprocher la communauté universitaire de ses services de restauration, tout en offrant une expérience plus conviviale et moderne. Grâce à notre application, les étudiants, le corps enseignant et le personnel des universités peuvent rester informés des dernières tendances culinaires, des variations de menus, et des délicieux plats proposés par leurs cantines.</p>
+          <a href="" style="background-color: #d2691e;">
+            En savoir plus
           </a>
         </div>
       </div>
@@ -127,32 +130,34 @@
 
 
 <!-- some food proposer -->
-<section class="food_section layout_padding-bottom">
+<section class="food_section layout_padding-bottom ">
   <div class="container">
-    <div class="heading_container heading_center">
+    <div class="heading_container heading_center mb-5" style="align-items: center; justify-content: center;">
+      <img src="{% static "image/goldcrown-2.png" %}" class="" alt="Headphone Image" >
       <h2>
         Mangez a l'ivoirienne
       </h2>
+      <img src="{% static "image/goldcrown-1.png" %}" class="" alt="Headphone Image" >
     </div>
     <div class="filters-content">
       <div class="row grid">
         <!-- Plat -->
         <div class="col-sm-6 col-lg-4 all pizza">
           <div class="box">
-            <div>
+            <div style="background-color: #d2691e;">
               <div class="img-box">
-                <img src="{% static "image/f1.png" %}" alt="">
+                <img src="{% static "image/menu/garba1.jpg" %}" alt="">
               </div>
               <div class="detail-box">
                 <h5>
                   Delicieux Plat de Garba
                 </h5>
                 <p>
-                  Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                  Ingredient: Pour confectionner ce mets, nous avons utiliser les ingred....
                 </p>
                 <div class="options">
                   <h6>
-                    700
+                    700.00 FR
                   </h6>
                   <a href="">
                     <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
@@ -167,20 +172,20 @@
         <!-- Plat -->
         <div class="col-sm-6 col-lg-4 all pizza">
           <div class="box">
-            <div>
+            <div style="background-color: #d2691e;">
               <div class="img-box">
-                <img src="{% static "image/f1.png" %}" alt="">
+                <img src="{% static "image/menu/Tchep_PouletPoisson.jpg" %}" alt="">
               </div>
               <div class="detail-box">
                 <h5>
                   Tchep au poisson Thon
                 </h5>
                 <p>
-                  Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                  Ingredient: Pour confectionner ce mets, nous avons utiliser les ingred....
                 </p>
                 <div class="options">
                   <h6>
-                    $20
+                    1000.00 FR
                   </h6>
                   <a href="">
                     <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
@@ -195,20 +200,20 @@
         <!-- Plat -->
         <div class="col-sm-6 col-lg-4 all pizza">
           <div class="box">
-            <div>
+            <div style="background-color: #d2691e;">
               <div class="img-box">
-                <img src="{% static "image/f1.png" %}" alt="">
+                <img src="{% static "image/menu/Alloco+Poisson.jpg" %}" alt="">
               </div>
               <div class="detail-box">
                 <h5>
                   Alloco-Poisson frit
                 </h5>
                 <p>
-                  Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                  Ingredient: Pour confectionner ce mets, nous avons utiliser les ingred....
                 </p>
                 <div class="options">
                   <h6>
-                    $20
+                    1000.00 FR
                   </h6>
                   <a href="">
                     <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
@@ -223,20 +228,20 @@
         <!-- Plat -->
         <div class="col-sm-6 col-lg-4 all pizza">
           <div class="box">
-            <div>
+            <div style="background-color: #d2691e;">
               <div class="img-box">
-                <img src="{% static "image/f1.png" %}" alt="">
+                <img src="{% static "image/menu/panini.jpg" %}" alt="">
               </div>
               <div class="detail-box">
                 <h5>
                   Panini
                 </h5>
                 <p>
-                  Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                  Ingredient: Pour confectionner ce mets, nous avons utiliser les ingred....                
                 </p>
                 <div class="options">
                   <h6>
-                    $20
+                    700.00 FR
                   </h6>
                   <a href="">
                     <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
@@ -251,20 +256,20 @@
         <!-- Plat -->
         <div class="col-sm-6 col-lg-4 all pizza">
           <div class="box">
-            <div>
+            <div style="background-color: #d2691e;">
               <div class="img-box">
-                <img src="{% static "image/f1.png" %}" alt="">
+                <img src="{% static "image/menu/pouletfrit.jpg" %}" alt="">
               </div>
               <div class="detail-box">
                 <h5>
-                  Poulet-Alloco
+                  Fritte au Poulet
                 </h5>
                 <p>
-                  Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                  Ingredient: Pour confectionner ce mets, nous avons utiliser les ingred....
                 </p>
                 <div class="options">
                   <h6>
-                    $20
+                    1000.00 FR
                   </h6>
                   <a href="">
                     <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
@@ -279,20 +284,20 @@
         <!-- Plat -->
         <div class="col-sm-6 col-lg-4 all pizza">
           <div class="box">
-            <div>
+            <div style="background-color: #d2691e;">
               <div class="img-box">
-                <img src="{% static "image/f1.png" %}" alt="">
+                <img src="{% static "image/menu/Spaghetti1.jpg" %}" alt="">
               </div>
               <div class="detail-box">
                 <h5>
                   Plat de Spaghetti
                 </h5>
                 <p>
-                  Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                  Description du plat de spaghetti
                 </p>
                 <div class="options">
                   <h6>
-                    $20
+                    1000.00 FR
                   </h6>
                   <a href="">
                     <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
@@ -307,20 +312,20 @@
         <!-- Plat -->
         <div class="col-sm-6 col-lg-4 all pizza">
           <div class="box">
-            <div>
+            <div style="background-color: #d2691e;">
               <div class="img-box">
-                <img src="{% static "image/f1.png" %}" alt="">
+                <img src="{% static "image/menu/garba1.jpg" %}" alt="">
               </div>
               <div class="detail-box">
                 <h5>
-                  Riz Sauce claire
+                  Riz a la Sauce claire
                 </h5>
                 <p>
-                  Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                  Description du riz a la sauce claire
                 </p>
                 <div class="options">
                   <h6>
-                    $20
+                    1000.00 FR
                   </h6>
                   <a href="">
                     <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
@@ -335,20 +340,20 @@
         <!-- Plat -->
         <div class="col-sm-6 col-lg-4 all pizza">
           <div class="box">
-            <div>
+            <div style="background-color: #d2691e;">
               <div class="img-box">
-                <img src="{% static "image/f1.png" %}" alt="">
+                <img src="{% static "image/menu/orangina.jpg" %}" alt="">
               </div>
               <div class="detail-box">
                 <h5>
                   Orangina
                 </h5>
                 <p>
-                  Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                  Votre boisson raffraichissante faite a base d'orange bio
                 </p>
                 <div class="options">
                   <h6>
-                    $20
+                    500.00 FR
                   </h6>
                   <a href="">
                     <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
@@ -363,20 +368,20 @@
         <!-- Plat -->
         <div class="col-sm-6 col-lg-4 all pizza">
           <div class="box">
-            <div>
+            <div style="background-color: #d2691e;">
               <div class="img-box">
-                <img src="{% static "image/f1.png" %}" alt="">
+                <img src="{% static "image/menu/fanta.jpg" %}" alt="">
               </div>
               <div class="detail-box">
                 <h5>
-                  Planete Kessie
+                  Fanta
                 </h5>
                 <p>
-                  Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                  Boisson gazeuse et raffraichissante Fanta
                 </p>
                 <div class="options">
                   <h6>
-                    $20
+                    500.00 FR
                   </h6>
                   <a href="">
                     <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
@@ -500,7 +505,7 @@
 }
 
 .col:hover {
-    transform: scale(1.12);
+    transform: scale(1.0);
     cursor: pointer; /* Add subtle hover effect */
   }
 .category-bg-watch {
@@ -510,7 +515,9 @@
     background-color: rgb(218, 112, 214);
 }
 .category-bg-shoe {
-    background-color: rgb(0, 0, 255);
+    /* background-color: rgba(0, 0, 255, 0.458); */
+    background-color: rgba(195, 195, 196, 0.458);
+    color: #222831;
 }
 .categories img {
     width: 100px;
@@ -609,9 +616,9 @@
 }
 
 /* h1, */
-h2 {
+/* h2 {
   font-family: 'Dancing Script', cursive;
-}
+} */
 
 
 .about_section {
@@ -882,6 +889,7 @@ h2 {
 
 .food_section .heading_container {
   color: #222831;
+  /* color: #d2691e; */
   margin-top: 25px;
   margin-bottom: 5px;
   align-items: center;
