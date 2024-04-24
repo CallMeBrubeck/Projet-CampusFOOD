@@ -94,9 +94,20 @@ def etudiant(request):
         formulaire = EtudiantForm(request.POST)
         if formulaire.is_valid():
             # Vérifier s'il y a déjà un utilisateur avec le même nom d'utilisateur
-            
-            username = formulaire.cleaned_data.get('username', None)
-            if username and CustomUser.objects.filter(username=username).exists():
+            type_utilisateur = formulaire.cleaned_data['type_utilisateur']
+            username = formulaire.cleaned_data['username']
+            first_name = formulaire.cleaned_data['first_name']
+            last_name = formulaire.cleaned_data['last_name']
+            email = formulaire.cleaned_data['email']
+            numero = formulaire.cleaned_data['numero']
+            universite = formulaire.cleaned_data['universite']
+            #niveau = formulaire.cleaned_data['niveau']
+            #filiere = formulaire.cleaned_data['filiere']
+            #annee_etude = formulaire.cleaned_data['annee_etude']
+            mdp1 = formulaire.cleaned_data['password1']
+            #users = CustomUser(username=username, first_name=first_name, last_name=last_name, email=email, numero=numero, universite=universite, password=mdp1)
+            #username = formulaire.cleaned_data.get('username', None)
+            if CustomUser.objects.filter(username=username).exists():
                 messages.error(request, "Ce nom d'utilisateur est déjà pris. Veuillez en choisir un autre.")
                 return render(request, 'etudiant_inscription.html', {'formulaire': formulaire})
 
@@ -107,7 +118,8 @@ def etudiant(request):
             etudiant = Etudiant(
                 user=utilisateur,
                 niveau=formulaire.cleaned_data['niveau'],
-                filiere=formulaire.cleaned_data['filiere']
+                filiere=formulaire.cleaned_data['filiere'],
+                annee_etude=formulaire.cleaned_data['annee_etude']
             )
             etudiant.save()
 
