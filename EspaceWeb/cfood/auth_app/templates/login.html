@@ -1,7 +1,106 @@
 {% extends "cfoodapp/base.html" %}
 {% load static %}
 {% block title %}Connexion au blog{% endblock title %}
-{% block loginForm %}
+
+{% block welcomeForm %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Toggle button -->
+        <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+    
+        <!-- Collapsible wrapper -->
+        <div class="row">
+          <!-- bar de recherche -->
+          <div class="container" style="justify-items: center;justify-content: center;">
+          </div>
+          <!-- Collapsible wrapper -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Navbar brand -->
+            <a class="navbar-brand mt-2 mt-lg-0" href="{% url "home" %}">
+              <small style="color: chocolate; font-weight: bolder; font-size: 50px;">CampusFOOD</small>
+            </a>
+          </div>
+        </div>
+    </nav>
+    <div class="condainer mt-10">
+        <div class="col-md-12 mt-5">
+            {% for message in messages %}
+            <div class="alert alert-danger text-center">
+                <strong>{{message}}<strong/><br>
+            </div>
+            {% endfor %}
+            <form action="{% url "login" %}" method="POST" >
+                {% csrf_token %}
+                <div class="card">
+                    <div class="card-header text-center"><i class="fas fa-user">Connexion a CampusFOOD</i></div>
+                    <div class="card-body">
+                        <input type="text" name="universite" id="" placeholder="UPB | UIA | UFHB " class="form-control mb-2" required>
+                        <input type="text" name="username" id="" placeholder="Nom utilisateur" class="form-control mb-2" required>
+                        <input type="password" name="pwd" id="" placeholder="Mot de passe" class="form-control" required>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-primary btn-block">Se connecter</button>
+                </div>
+                </div>
+            </form>
+            <br>
+            <div class="text text-center">
+                <p>Vous n'avez pas de compte? <a href="{% url "signin" %}" id="count">Creer un compte</a></p>
+            </div>
+        </div>
+        
+    </div>
+</header>
+
+<footer>
+    
+</footer>
+<style>
+    header{
+        background-color: chocolate;
+    }
+    .card{
+        background-color: rgba(240, 248, 255, 0.171);
+        border: round;
+    }
+    .card-header{
+        color: white;
+    }
+    .btn-primary{
+        /* background-color: chocolate; */
+        border: 0px;
+        color: white;
+    }
+    .text{
+        color: #ffffff;
+    }
+    #count{
+        color: #222831;
+        font-weight: bold;
+    }
+    .form-control{
+        max-width: 99.5%;
+
+    }
+    form{
+        width: 50%;
+        margin-left: 20%;
+    }
+    footer{
+        background-color: #222831;
+        color: #ffffff;
+        padding: 75px 0 40px 0;
+        text-align: center;
+      }
+</style>
+{% endblock%}
+
+{% block loginFor %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="{% static "css/bootstrap.min.css"%}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -24,13 +123,9 @@
             {% csrf_token %}
             <div class="card">
                 <div class="card-header text-center"><i class="fas fa-user">Connexion a CampusFOOD</i></div>
-                <div class="card-body">
-                    <input type="text" name="username" id="" placeholder="Nom utilisateur" class="form-control mb-2" required>
-                    <input type="password" name="pwd" id="" placeholder="Mot de passe" class="form-control" required>
-                </div>
                 <div class="card-footer">
                     <button class="btn-primary btn-block">Se connecter</button>
-            </div>
+                </div>
             </div>
         </form>
         <br>
@@ -63,3 +158,5 @@
     }
 </style>
 {% endblock %}
+
+

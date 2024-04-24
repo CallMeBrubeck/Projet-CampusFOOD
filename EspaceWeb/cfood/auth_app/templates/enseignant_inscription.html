@@ -1,6 +1,80 @@
 {% extends 'cfoodapp/base.html' %}
 
+{% comment %} {% block welcomeForm %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Toggle button -->
+        <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+    
+        <!-- Collapsible wrapper -->
+        <div class="row">
+          <!-- bar de recherche -->
+          <div class="container" style="justify-items: center;justify-content: center;">
+          </div>
+          <!-- Collapsible wrapper -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Navbar brand -->
+            <a class="navbar-brand mt-2 mt-lg-0" href="{% url "home" %}">
+              <small style="color: chocolate; font-weight: bolder; font-size: 50px;">CampusFOOD</small>
+            </a>
+          </div>
+        </div>
+    </nav>
+</header>
+<style>
+    .card{
+        background-color: rgba(240, 248, 255, 0.171);
+        border: round;
+    }
+    .card-header{
+        color: chocolate;
+    }
+    .btn-primary{
+        background-color: chocolate;
+        border: 0px;
+    }
+    .form-control{
+        max-width: 99.5%;
+
+    }
+    form{
+        width: 50%;
+        margin-left: 20%;
+    }
+</style>
+{% endblock%} {% endcomment %}
+
 {% block content %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Toggle button -->
+        <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+    
+        <!-- Collapsible wrapper -->
+        <div class="row">
+          <!-- bar de recherche -->
+          <div class="container" style="justify-items: center;justify-content: center;">
+          </div>
+          <!-- Collapsible wrapper -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Navbar brand -->
+            <a class="navbar-brand mt-2 mt-lg-0" href="{% url "home" %}">
+              <small style="color: chocolate; font-weight: bolder; font-size: 50px;">CampusFOOD</small>
+            </a>
+          </div>
+        </div>
+    </nav>
+</header>
 <div class="container">
     <div class="col-md-12 mt-5 mb-7 p-6">
         {% for message in messages %}
@@ -21,11 +95,19 @@
     </div>   
 </div>
 
-
+<footer>
+    
+</footer>
 <style>
     .form-control{
         max-width: 99.5%;
 
     }
+    footer{
+        background-color: #222831;
+        color: #ffffff;
+        padding: 75px 0 40px 0;
+        text-align: center;
+      }
 </style>
 {% endblock %}

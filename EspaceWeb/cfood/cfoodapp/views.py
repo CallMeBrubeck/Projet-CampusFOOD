@@ -59,7 +59,107 @@ def search(request):
         })
 
 #formulaire d inscription d un etudiant
+""" from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import EtudiantForm
+from .models import Etudiant, CustomUser
+
 def etudiant(request):
+    if request.method == 'POST':
+        formulaire = EtudiantForm(request.POST)
+        if formulaire.is_valid():
+            # Vérifier s'il y a déjà un utilisateur avec le même nom d'utilisateur
+            username = formulaire.cleaned_data.get('username', None)
+            if username and CustomUser.objects.filter(username=username).exists():
+                messages.error(request, "Ce nom d'utilisateur est déjà pris. Veuillez en choisir un autre.")
+                return render(request, 'cfoodapp/etudiant_inscription.html', {'formulaire': formulaire})
+
+            utilisateur = formulaire.save(commit=False)
+            utilisateur.set_password(formulaire.cleaned_data['password1'])
+            utilisateur.save()
+
+            etudiant = Etudiant(
+                user=utilisateur,
+                niveau=formulaire.cleaned_data['niveau'],
+                filiere=formulaire.cleaned_data['filiere']
+            )
+            etudiant.save()
+
+            messages.success(request, 'Inscription réussie ! Veuillez vous connecter.')
+            return redirect('login')
+
+    else:
+        formulaire = EtudiantForm()
+
+    return render(request, 'cfoodapp/etudiant_inscription.html', {'formulaire': formulaire})
+
+#formulaire d inscription d un enseignat
+
+def enseignant(request):
+    if request.method == 'POST':
+        formulaire = EnseignantForm(request.POST)
+        if formulaire.is_valid():
+            # Vérifier si le nom d'utilisateur existe déjà
+            username = formulaire.cleaned_data.get('username', None)
+            if username and CustomUser.objects.filter(username=username).exists():
+                messages.error(request, "Ce nom d'utilisateur est déjà pris. Veuillez en choisir un autre.")
+                return render(request, 'cfoodapp/enseignant_inscription.html', {'formulaire': formulaire, 'name': 'Enseignant Inscription'})
+
+            utilisateur = formulaire.save(commit=False)
+            utilisateur.set_password(formulaire.cleaned_data['password1'])
+            utilisateur.save()
+
+            enseignant = Enseignant(
+                user=utilisateur,
+                matiere=formulaire.cleaned_data['matiere']
+            )
+            enseignant.save()
+
+            messages.success(request, 'Inscription réussie ! Veuillez vous connecter.')
+            return redirect('login')
+
+    else:
+        formulaire = EnseignantForm()
+
+    return render(request, 'cfoodapp/enseignant_inscription.html', {'formulaire': formulaire, 'name': 'Enseignant Inscription'})
+
+
+
+#formulaire d inscription d un Personnel d administration
+
+
+def personnel(request):
+    if request.method == 'POST':
+        formulaire = PersonnelAdminForm(request.POST)
+        if formulaire.is_valid():
+            # Vérifier s'il y a un nom d'utilisateur dupliqué
+            username = formulaire.cleaned_data.get('username', None)
+            if username and CustomUser.objects.filter(username=username).exists():
+                messages.error(request, "Ce nom d'utilisateur est déjà pris. Veuillez en choisir un autre.")
+                return render(request, 'cfoodapp/personnel_inscription.html', {'formulaire': formulaire, 'name': 'Personnel Inscription'})
+
+            utilisateur = formulaire.save(commit=False)
+            utilisateur.set_password(formulaire.cleaned_data['password1'])
+            utilisateur.save()
+
+            personnel = PersonnelAdministration(
+                user=utilisateur,
+                poste=formulaire.cleaned_data['poste']
+            )
+            personnel.save()
+
+            messages.success(request, 'Inscription réussie ! Veuillez vous connecter.')
+            return redirect('login')
+
+    else:
+        formulaire = PersonnelAdminForm()
+
+    return render(request, 'cfoodapp/personnel_inscription.html', {'formulaire': formulaire, 'name': 'Personnel Inscription'})
+ """
+
+
+""" def etudiant(request):
     formulaire = EtudiantForm()
     if request.method == 'POST':
         formulaire = EtudiantForm(request.POST)
@@ -86,9 +186,10 @@ def etudiant(request):
     return render(request, 'cfoodapp/etudiant_inscription.html', {
         'formulaire': formulaire,
         'name': 'Etudiant Inscription'})
+ """
 
-#formulaire d inscription d un enseignat
-def enseignant(request):
+
+""" def enseignant(request):
     formulaire = EnseignantForm()
     if request.method == 'POST':
         formulaire = EnseignantForm(request.POST)
@@ -121,11 +222,12 @@ def enseignant(request):
         return redirect('login')
     return render(request, 'cfoodapp/enseignant_inscription.html', {
         'formulaire': formulaire,
-        'name': 'Enseignant Inscription'})
+        'name': 'Enseignant Inscription'}) """
 
 
-#formulaire d inscription d un Personnel d administration
-def personnel(request):
+
+
+""" def personnel(request):
     formulaire = PersonnelAdministrationForm()
     if request.method == 'POST':
         formulaire = PersonnelAdministrationForm(request.POST)
@@ -158,7 +260,7 @@ def personnel(request):
         return redirect('login')
     return render(request, 'cfoodapp/personnel_inscription.html', 
                   {'formulaire': formulaire,
-                    'name': 'Personnel Inscription'})
+                    'name': 'Personnel Inscription'}) """
 
 #creons un formulaire de creation d un Utilisateur:
 

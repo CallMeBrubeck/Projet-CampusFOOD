@@ -1,6 +1,85 @@
 {% extends "cfoodapp/base.html" %}
 {% load static %}
 {% block welcome %}
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class="row">
+        <!-- bar de recherche -->
+        <div class="container" style="justify-items: center;justify-content: center;">
+          <form class="d-flex" role="search" action="{% url "search" %}" method="GET">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="article">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Navbar brand -->
+          <a class="navbar-brand mt-2 mt-lg-0" href="{% url "home" %}">
+            <small style="color: chocolate; font-weight: bolder; font-size: 50px;">CampusFOOD</small>
+          </a>
+          <!-- Left links -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "home" %}">Accueil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "menu" %}">Menu</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Catégories
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for categorie in list_categorie %}
+                <a class="dropdown-item category-link" href="#">{{categorie.nom}}</a><hr>
+                {% endfor %}
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Commandes</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="d-flex align-items-center">
+        <a class="text-reset me-3" href="{% url "panier" %}">
+          <i class="fas fa-shopping-cart"></i>
+        </a>
+        <div class="dropdown">
+          <a data-mdb-dropdown-init class="text-reset me-3 dropdown-toggle hidden-arrow" href="#"
+            id="navbarDropdownMenuLink" role="button" aria-expanded="false">
+            <i class="fas fa-bell"></i>
+            <span class="badge rounded-pill badge-notification bg-danger"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+            <li>
+              <a class="dropdown-item" href="#">Some news</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Another news</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </li>
+          </ul>
+        </div>
+        <!-- Avatar -->
+        <div class="dropdown">
+          <!-- Tres importante, faire que le profile s affiche si la personne est conneter -->
+          <a class="btn btn-primary" href="{% url "login" %}">Connexion</a>
+        </div>
+      </div>
+  </nav>
   <div id="carouselExampleControls" class="carousel slide panda-slide mt-5 mb-5" data-bs-ride="carousel" style="height: 100vh;">
     <div class="carousel-inner">
         <div class="carousel-item active " id="carousel_item1">
@@ -10,19 +89,15 @@
                     <p>Votre plateforme de restauration Universitaire.Rejoignez-nous pour découvrir une <br> nouvelle façon de vivre la restauration universitaire, où la technologie et le plaisir de <br> bien manger se rencontrent pour offrir une expérience unique à tous les membres de la communauté universitaire.</p>
                     <button class="btn btn-buy">En Savoir Plus</button>
                 </div>
-<!--                 <div class="col-md-5">
-                    <img src="{% static "image/f6.png" %}" class="d-block w-50" alt="Tv Image">
-                </div> -->
+
             </div>
         </div>
         <div class="carousel-item" id="carousel_item2">
             <div class="row d-flex align-items-center p-5">
                 <div class="col-md-7">
                     <h1 style="font-size: 70px; color: #ffffff;">Mon restau du campus en mains</h1>
-                    <p>Plus besoin de sortir votre portefeuille ou de faire la queue pour payer votre repas. Avec campusCfood, vous pouvez commander et payer votre repas en ligne en quelques clics seulement.</p>                    <button class="btn btn-buy">En Savoir Plus</button>
-                </div>
-                <div class="col-md-5">
-                  <img src="{% static "image/hero.png" %}" class="d-block w-50" alt="Headphone Image">
+                    <p>Plus besoin de sortir votre portefeuille ou de faire la queue pour payer votre repas. Avec campusCfood, vous pouvez commander et payer votre repas en ligne en quelques clics seulement.</p>                    
+                    <button class="btn btn-buy">En Savoir Plus</button>
                 </div>
             </div>
         </div>
@@ -33,9 +108,6 @@
                     <p>Dites adieu aux longues files d'attente et aux menus indéchiffrables ! Avec campusCfood, vous pouvez consulter les menus en ligne, comparer les prix et trouver facilement le restaurant qui correspond à vos envies..</p>
                     <button class="btn btn-buy">En Savoir Plus</button>
                 </div>
-<!--                 <div class="col-md-5">
-                    <img src="{% static "images/banner-images/xbox.png" %}" class="d-block w-50" alt="Xbox Image">
-                </div> -->
             </div>
         </div>
     </div>
@@ -50,6 +122,7 @@
         <span class="visually-hidden">Next</span>
     </button>
   </div>
+</header>
 {% endblock  %}
 
 {% block content %}
@@ -75,12 +148,7 @@
               <img src="{% static "images/categories/shoes.png" %}" alt="shoe image"/>
           </div>
       </div>
-<!--       <div class="col">
-        <div class="p-3 rounded category-bg-shoe d-flex align-items-center justify-content-around">
-            <h3 class="text-white">Livraison pour les particulier</h3>
-            <img src="{% static "images/categories/shoes.png" %}" alt="shoe image"/>
-        </div>
-    </div> -->
+
     <div class="col">
       <div class="p-3 rounded category-bg-bag d-flex align-items-center justify-content-around border rounder">
           <h3 class="text-white">Une communication directe avec les restaurants universitaires: Envoyez vos commentaires et suggestions directement aux restaurants universitaires via l'application campusCfood.</h3>
@@ -398,8 +466,10 @@
   </div>
 </section> 
 <!-- end some food proposer  -->
+
 <h1 class="text mb-7 mt-5" style="color: #d2691e; text-align: center; align-items: center; font-weight: 800;">Que dit-on a propos de nous ?</h1>
 <!-- Testimonial Start -->
+
 <section class="offer_section layout_padding-bottom">
   <div class="offer_container">
     <div class="container ">
@@ -463,6 +533,27 @@
 
 <!-- CSS Custom -->
 <style>
+  @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap");
+
+      body {
+        font-family: "Open Sans", sans-serif;
+        color: #ffffff;
+        overflow-x: hidden;
+      }
+      header{
+        height: 100vh;
+        width: 100%;
+        background-image: url('{% static "images/banner-images/hero-bg.jpg" %}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: #e7eeea;
+      }
+      footer{
+        background-color: #222831;
+        color: #ffffff;
+        padding: 75px 0 40px 0;
+        text-align: center;
+      }
   a{
     text-decoration: none;
   }
@@ -477,18 +568,18 @@
     padding: 20px;
     text-align: center;
   }
-  
+
   .categorie-section {
     margin-bottom: 30px;
   }
-  
+
   .categorie-section h3 {
     background: rgba(0, 0, 0, 0.7);
     color: #fff;
     padding: 10px 20px;
     font-weight: bold;
   }
-  
+
   .card {
     border: none; /* Remove default card border if desired */
     background: #f5f5f5;
@@ -499,74 +590,74 @@
     border: 0;
   }
 
-.panda-card-footer {
+  .panda-card-footer {
     background-color: white;
     border: 0;
-}
+  }
 
-.col:hover {
+  .col:hover {
     transform: scale(1.0);
     cursor: pointer; /* Add subtle hover effect */
   }
-.category-bg-watch {
+  .category-bg-watch {
     background-color: rgb(255, 165, 0);
-}
-.category-bg-bag {
+  }
+  .category-bg-bag {
     background-color: rgb(218, 112, 214);
-}
-.category-bg-shoe {
+  }
+  .category-bg-shoe {
     /* background-color: rgba(0, 0, 255, 0.458); */
     background-color: rgba(195, 195, 196, 0.458);
     color: #222831;
-}
-.categories img {
+  }
+  .categories img {
     width: 100px;
-}
-.panda-slide .carousel-item {
+  }
+  .panda-slide .carousel-item {
 
     /* background-color: rgb(252, 234, 232); */
     /* background-color: rgba(252, 234, 232, 0.447); */
     /* background-image: url('{% static "images/banner-images/hero-bg.jpg" %}'); */
     border-radius: 1em;
     color: #fff;
-}
+  }
 
-/* header{
+  /* header{
   height: 100vh;
   background-image: url('{% static "images/banner-images/hero-bg.jpg" %}');
   background-size: contain;
   background-repeat: no-repeat;
   background-color: #e7eeea;
-} */
+  } */
 
 
-.btn-buy {
+  .btn-buy {
     background-color: chocolate;
     color: white;
-}
-.btn-buy:hover{
+  }
+  .btn-buy:hover{
   cursor: pointer;
   background-color:  white;
   color: chocolate;
   transform: scale(1.02);
-}
-.price-color {
+  }
+  .price-color {
     /* color: #FF3585; */
     color: chocolate;
     font-size: 40px;
-}
-.special-offer-text {
+  }
+  .special-offer-text {
     font-size: large;
     color: gray;
-}
-.lets-touch-bg {
+  }
+  .lets-touch-bg {
     background-color: rgb(252, 234, 232);
-}
-  
+  }
+
   .plat-card:hover {
     transform: scale(1.02); /* Add subtle hover effect */
   }
-  
+
 
   .menu {
     background-image: url("path/to/restaurant-background.jpg");
@@ -593,46 +684,46 @@
   /* about */
   .layout_padding {
   padding: 90px 0;
-}
+  }
 
-.layout_padding2 {
+  .layout_padding2 {
   padding: 75px 0;
-}
+  }
 
-.layout_padding2-top {
+  .layout_padding2-top {
   padding-top: 75px;
-}
+  }
 
-.layout_padding2-bottom {
+  .layout_padding2-bottom {
   padding-bottom: 75px;
-}
+  }
 
-.layout_padding-top {
+  .layout_padding-top {
   padding-top: 90px;
-}
+  }
 
-.layout_padding-bottom {
+  .layout_padding-bottom {
   padding-bottom: 90px;
-}
+  }
 
-/* h1, */
-/* h2 {
+  /* h1, */
+  /* h2 {
   font-family: 'Dancing Script', cursive;
-} */
+  } */
 
 
-.about_section {
+  .about_section {
   background: #222831;
   color: #ffffff;
-}
+  }
 
-.about_section .row {
+  .about_section .row {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
+  }
 
-.about_section .img-box {
+  .about_section .img-box {
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -640,20 +731,20 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-}
+  }
 
-.about_section .img-box img {
+  .about_section .img-box img {
   width: 100%;
   max-width: 445px;
   position: relative;
   z-index: 2;
-}
+  }
 
-.about_section .detail-box p {
+  .about_section .detail-box p {
   margin-top: 15px;
-}
+  }
 
-.about_section .detail-box a {
+  .about_section .detail-box a {
   display: inline-block;
   padding: 10px 45px;
   background-color: #ffbe33;
@@ -663,22 +754,22 @@
   transition: all 0.3s;
   border: none;
   margin-top: 15px;
-}
+  }
 
-.about_section .detail-box a:hover {
+  .about_section .detail-box a:hover {
   background-color: #e69c00;
-}
-/* end about us */
+  }
+  /* end about us */
 
 
-/*** Temoignage ***/
+  /*** Temoignage ***/
 
-.offer_section {
+  .offer_section {
   position: relative;
   padding-top: 45px;
-}
+  }
 
-.offer_section .box {
+  .offer_section .box {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -692,14 +783,14 @@
   min-height: auto;
   /* background-color: #222831; */
   color: #222831;
-}
-.offer_section .box:hover{
+  }
+  .offer_section .box:hover{
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
 
-}
+  }
 
-.offer_section .box .img-box {
+  .offer_section .box .img-box {
   width: 50px;
   min-width: 50px;
   height: 50px;
@@ -710,31 +801,31 @@
   border-radius: 100%;
   border: 3px solid #ffbe33;
   overflow: hidden;
-}
+  }
 
-.offer_section .box .img-box img {
+  .offer_section .box .img-box img {
   width: 100%;
   -webkit-transition: all .2s;
   transition: all .2s;
-}
+  }
 
-.offer_section .box .detail-box h5 {
+  .offer_section .box .detail-box h5 {
   font-family: 'Dancing Script', cursive;
   font-size: 24px;
   margin: 0;
-}
+  }
 
-.offer_section .box .detail-box h6 {
+  .offer_section .box .detail-box h6 {
   font-family: 'Dancing Script', cursive;
   margin: 10px 0;
-}
+  }
 
-.offer_section .box .detail-box h6 span {
+  .offer_section .box .detail-box h6 span {
   font-size: 2.5rem;
   font-weight: bold;
-}
+  }
 
-.offer_section .box .detail-box a {
+  .offer_section .box .detail-box a {
   display: inline-block;
   padding: 10px 30px;
   background-color: #ffbe33;
@@ -743,39 +834,39 @@
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   border: none;
-}
+  }
 
-.offer_section .box .detail-box a:hover {
+  .offer_section .box .detail-box a:hover {
   background-color: #e69c00;
-}
+  }
 
-.offer_section .box .detail-box a svg {
+  .offer_section .box .detail-box a svg {
   width: 20px;
   height: auto;
   margin-left: 5px;
   fill: #ffffff;
-}
+  }
 
-.offer_section .box:hover .img-box img {
+  .offer_section .box:hover .img-box img {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
-}
-/*** end Temoignage ***/
+  }
+  /*** end Temoignage ***/
 
-/* some food section */
+  /* some food section */
 
-.food_section .filters_menu li {
+  .food_section .filters_menu li {
   padding: 7px 25px;
   cursor: pointer;
   border-radius: 25px;
-}
+  }
 
-.food_section .filters_menu li.active {
+  .food_section .filters_menu li.active {
   background-color: #222831;
   color: #ffffff;
-}
+  }
 
-.food_section .box {
+  .food_section .box {
   position: relative;
   margin-top: 25px;
   background-color: #ffffff;
@@ -784,9 +875,9 @@
   border-radius: 15px;
   overflow: hidden;
   background: linear-gradient(to bottom, #f1f2f3 25px, #222831 25px);
-}
+  }
 
-.food_section .box .img-box {
+  .food_section .box .img-box {
   background: #f1f2f3;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -801,41 +892,41 @@
   border-radius: 0 0 0 45px;
   margin: -1px;
   padding: 25px;
-}
+  }
 
-.food_section .box .img-box img {
+  .food_section .box .img-box img {
   max-width: 100%;
   max-height: 145px;
   -webkit-transition: all .2s;
   transition: all .2s;
-}
+  }
 
-.food_section .box .detail-box {
+  .food_section .box .detail-box {
   padding: 25px;
-}
+  }
 
-.food_section .box .detail-box h5 {
+  .food_section .box .detail-box h5 {
   font-weight: 600;
-}
+  }
 
-.food_section .box .detail-box p {
+  .food_section .box .detail-box p {
   font-size: 15px;
-}
+  }
 
-.food_section .box .detail-box h6 {
+  .food_section .box .detail-box h6 {
   margin-top: 10px;
-}
+  }
 
-.food_section .box .options {
+  .food_section .box .options {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-}
+  }
 
-.food_section .box .options a {
+  .food_section .box .options a {
   width: 40px;
   height: 40px;
   border-radius: 100%;
@@ -849,20 +940,20 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
+  }
 
-.food_section .box .options a svg {
+  .food_section .box .options a svg {
   width: 18px;
   height: auto;
   fill: #ffffff;
-}
+  }
 
-.food_section .box:hover .img-box img {
+  .food_section .box:hover .img-box img {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
-}
+  }
 
-.food_section .btn-box {
+  .food_section .btn-box {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -870,9 +961,9 @@
       -ms-flex-pack: center;
           justify-content: center;
   margin-top: 45px;
-}
+  }
 
-.food_section .btn-box a {
+  .food_section .btn-box a {
   display: inline-block;
   padding: 10px 55px;
   background-color: #ffbe33;
@@ -881,20 +972,46 @@
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   border: none;
-}
+  }
 
-.food_section .btn-box a:hover {
+  .food_section .btn-box a:hover {
   background-color: #e69c00;
-}
+  }
 
-.food_section .heading_container {
+  .food_section .heading_container {
   color: #222831;
   /* color: #d2691e; */
   margin-top: 25px;
   margin-bottom: 5px;
   align-items: center;
   text-align: center;
-}
-/* end of somefood section */
+  }
+  /* end of somefood section */
 </style>
+{% endblock  %}
+
+{% block footerMain %}
+<footer>
+  <div class="row p-5">
+    <div class="col-md-4 text-center">
+    <a href="#">
+        <img src="{% static "image/Logo.jpg" %}" alt="Logo de l'application" width="130" height="100">
+    </a>
+    <p class="mt-3">CampusFOOD, le plaisir de manger sain et équilibré.</p>
+    </div>
+      <div class="col-md-8">
+      <h4 class="text text-center">Liens utiles</h4>
+      <ul class="list-inline text-center ">
+          <li><a href="#">Accueil</a></li>
+          <li><a href="#">Menu</a></li>
+          <li><a href="#">Commandes</a></li>
+          <li><a href="#">Connexion</a></li>
+          <li><a href="#">Mentions légales</a></li>
+      </ul>
+      </div>
+    <div class="col-md-4 text-right p-5">
+        <p class="mb-0">&copy; <?= date('Y') ?> TeamCfood</p>
+    </div>
+  </div>
+</footer>
 {% endblock  %}

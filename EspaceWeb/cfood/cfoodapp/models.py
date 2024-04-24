@@ -25,23 +25,6 @@ class Plat(models.Model):
         return f"{self.nom} ({self.categorie.nom})"
 
 
-
-class CustomUser(AbstractUser):
-    is_etudiant = models.BooleanField(default=False)
-    is_adminpersonnel = models.BooleanField(default=False)
-    is_professeur = models.BooleanField(default=False)
-    numero = models.CharField(max_length=15)
-    groups = models.ManyToManyField(Group, related_name='custom_user_groups')
-    user_permissions = models.ManyToManyField(Permission, related_name='custom_user_permissions')
-
-    def __str__(self):
-        return f"{self.username}"
-    
-
-        
-
-
-
 class Universite(models.Model):
     choix_universite = (
         ('UPB', 'Université Polytechnique de Bingerville'),
@@ -57,6 +40,50 @@ class Universite(models.Model):
         return f"{self.nom}"
 
 
+""" class CustomUser(AbstractUser):
+    is_etudiant = models.BooleanField(default=False)
+    is_adminpersonnel = models.BooleanField(default=False)
+    is_professeur = models.BooleanField(default=False)
+    numero = models.CharField(max_length=15)
+    choix_universite = (
+        ('UPB', 'Université Polytechnique de Bingerville'),
+        ('UIA', 'Institut Universitaire dAbidjan'),
+        ('UNA', 'Université Nangui Abrogoua'),
+        ('UFHB', 'Université Felix Houphouet Boigny'),
+    )
+    universite = models.CharField(max_length=255, choices=choix_universite)
+
+    groups = models.ManyToManyField(Group, related_name='custom_user_groups')
+    user_permissions = models.ManyToManyField(Permission, related_name='custom_user_permissions')
+
+    def __str__(self):
+        return f"{self.username}" """
+    
+
+class CustomUser(AbstractUser):
+    TYPE_UTILISATEUR_CHOICES = [
+        ('etudiant', 'Étudiant'),
+        ('professeur', 'Professeur'),
+        ('adminpersonnel', 'Personnel administratif'),
+    ]
+
+    type_utilisateur = models.CharField(max_length=20, choices=TYPE_UTILISATEUR_CHOICES, default='etudiant')
+    numero = models.CharField(max_length=15, blank=True)
+    choix_universite = (
+        ('UPB', 'Université Polytechnique de Bingerville'),
+        ('UIA', 'Institut Universitaire dAbidjan'),
+        ('UNA', 'Université Nangui Abrogoua'),
+        ('UFHB', 'Université Felix Houphouet Boigny'),
+    )
+    universite = models.CharField(max_length=255, choices=choix_universite, blank=True)
+
+    groups = models.ManyToManyField(Group, related_name='custom_user_groups')
+    user_permissions = models.ManyToManyField(Permission, related_name='custom_user_permissions')
+
+    def __str__(self):
+        return f"{self.username}"  
+
+
 
 class Restaurant(models.Model):
     nom = models.CharField(max_length=255)
@@ -67,13 +94,14 @@ class Restaurant(models.Model):
     universite = models.ForeignKey(Universite, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Restaurant: {self.nom} de luniversite : ({self.universite})"
+        return f"Restaurant: {self.nom} de luniversite : ({self.universite.nom})"
 
 
 
 class Menu(models.Model):
     date = models.DateField()
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return f"Periode du Menu: {self.date} - du restaurant : {self.restaurant}"
@@ -104,7 +132,7 @@ class Etudiant(models.Model):
     niveau = models.CharField(max_length=255)
     filiere = models.CharField(max_length=255)
     annee_etude = models.IntegerField()
-    universite = models.ForeignKey(Universite, on_delete=models.CASCADE)
+    #universite = models.ForeignKey(Universite, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Nom utilisateur {self.user.username} - Nom {self.user.first_name} - Niveau {self.niveau}"
@@ -114,7 +142,7 @@ class Etudiant(models.Model):
 class PersonnelAdministration(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     poste = models.CharField(max_length=255)
-    universite = models.ForeignKey(Universite, on_delete=models.CASCADE)
+    #universite = models.ForeignKey(Universite, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Nom utilisateur {self.user.username} - Nom {self.user.first_name} - Poste {self.poste}"
@@ -124,7 +152,7 @@ class PersonnelAdministration(models.Model):
 class Enseignant(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     matiere = models.CharField(max_length=255)
-    universites = models.ManyToManyField(Universite)#car peut enseigner dans plusieurs universites
+    #universites = models.ManyToManyField(Universite)#car peut enseigner dans plusieurs universites
     def __str__(self):
         return f"Nom utilisateur {self.user.username} - Nom {self.user.first_name} - Matière {self.matiere}"
 

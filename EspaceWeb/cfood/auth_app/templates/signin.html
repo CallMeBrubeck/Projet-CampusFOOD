@@ -1,5 +1,73 @@
 {% extends "cfoodapp/base.html" %}
 {% block content %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Toggle button -->
+        <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+    
+        <!-- Collapsible wrapper -->
+        <div class="row">
+          <!-- bar de recherche -->
+          <div class="container" style="justify-items: center;justify-content: center;">
+          </div>
+          <!-- Collapsible wrapper -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Navbar brand -->
+            <a class="navbar-brand mt-2 mt-lg-0" href="{% url "home" %}">
+              <small style="color: chocolate; font-weight: bolder; font-size: 50px;">CampusFOOD</small>
+            </a>
+          </div>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="col-md-12 mt-5">
+        <div class="container">
+        {% for message in messages %}
+        <div class="alert alert-danger text-center">
+            <strong>{{message}}<strong/><br>
+        </div>
+        {% endfor %}
+        <form action="{% url "signin" %}" method="POST">
+            {% csrf_token %}
+            <div class="card">
+                <div class="card-header text-center"><i class="fas fa-user">Inscription a CampusFOOD</i></div>
+                <div class="card-body">
+                    <input type="text" class="text text-center" name="type_utilisateur" id="type_utilisateur" placeholder="Etudiant | Enseignant | Personnel d'administration" required style="width: 100%;">
+                </div>
+                <div class="card-footer">
+                    <button class="btn-primary btn-block">Suivant</button>
+            </div>
+            </div>
+        </form>
+    </div>   
+</div>
+</main>
+<footer></footer>
+
+
+<style>
+    footer{
+        background-color: #222831;
+        color: #ffffff;
+        padding: 75px 0 40px 0;
+        text-align: center;
+      }
+    .container{
+        text-align: center;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
+</style>
+{% endblock %}
+
+{{formulaire.as_p}}
 <div class="container">
     <div class="col-md-12 mt-5 mb-7">
         {% for message in messages %}
@@ -21,5 +89,3 @@
         </form>
     </div>   
 </div>
-{% endblock %}
-

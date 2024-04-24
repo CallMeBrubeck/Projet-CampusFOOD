@@ -1,17 +1,21 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from cfoodapp.forms import *
+from django.contrib.auth.models import User
+from .models import *
 # Create your views here.
 
 def login_cfood(request):
+    #universite = Universite.nom
     if request.method == "POST":
+        #universite = request.POST.get('universite')
         username = request.POST['username']
         pwd = request.POST['pwd']
         #authentifions l'utilisateur
         user = authenticate(username=username, password=pwd)
         #vefifions si l utilisateur est dans notre bd
-        #si l utilisateur existe:
+        #si l utilisateur existe et que sont univrrsite est UPB:
         if user is not None:
             #messages.success(request, "Vous etes bien authenfifier!")
             return redirect("home")
@@ -39,104 +43,142 @@ def signin(request):
 
 
 
-#formulaire d inscription d un etudiant
+
+""" def signin(request):
+    formulaire = InscriptionUtilisateur()
+    if request.method == 'POST':
+        form = InscriptionUtilisateur(request.POST)
+        if form.is_valid():
+            username = formulaire.cleaned_data['username']
+            first_name = formulaire.cleaned_data['first_name'] 
+            password = formulaire.cleaned_data['password']
+            last_name = formulaire.cleaned_data['last_name']
+            is_etudiant = formulaire.cleaned_data['is_etudiant']
+            is_professeur = formulaire.cleaned_data['is_professeur']
+            is_adminpersonnel = formulaire.cleaned_data['is_adminpersonnel']
+            numero = formulaire.cleaned_data['numero']
+            universite = formulaire.cleaned_data['universite']
+            
+            # Créer le nouvel utilisateur avec les données du formulaire
+            utilisateur = CustomUser(username=username, first_name=first_name, last_name=last_name, password=password, is_etudiant=is_etudiant, is_professeur=is_professeur, is_adminpersonnel=is_adminpersonnel)
+            #utilisateur = form.save()
+            utilisateur.save()
+            
+            # Connexion automatique après l'inscription (optionnel)
+            #login(request, utilisateur)
+            
+            # Redirection selon le type d'utilisateur
+            if utilisateur.is_etudiant:
+                return redirect('etudiant_inscription')  # Rediriger vers le tableau de bord étudiant
+            elif utilisateur.is_professeur:
+                return redirect('professeur_inscription')  # Rediriger vers le tableau de bord professeur
+            elif utilisateur.is_adminpersonnel:
+                return redirect('enseignant_inscription')  # Rediriger vers le tableau de bord administratif
+            else:
+                # Si aucun type n'est défini, redirigez vers une page générique
+                return redirect('signin')
+        else:
+            messages.error(request, 'Il y a des erreurs dans le formulaire. Veuillez corriger et réessayer.')
+    else:
+        form = InscriptionUtilisateur()
+
+    return render(request, 'signin.html',  {
+        'name': 'Signin',
+        'formulaire': formulaire})
+ """
+
+
+
 def etudiant(request):
-    formulaire = EtudiantForm()
     if request.method == 'POST':
         formulaire = EtudiantForm(request.POST)
         if formulaire.is_valid():
-        #recuperer les champs
-            type_utilisateur = formulaire.cleaned_data['type_utilisateur']
-            username = formulaire.cleaned_data['username']
-            nom = formulaire.cleaned_data['nom']
-            prenoms = formulaire.cleaned_data['prenoms']
-            email = formulaire.cleaned_data['email']
-            niveau = formulaire.cleaned_data['niveau']
-            filiere = formulaire.cleaned_data['filiere']
-            universite = formulaire.cleaned_data['universite']
-            password = formulaire.cleaned_data['password']
-      #verifier si l'utilisateur n existe pas
-        if Etudiant.objects.filter(username=username).exists():
-            messages.error(request, 'Ce nom d\'utilisateur est déjà pris. Veuillez en choisir un autre.')
-            return redirect('etudiant_inscription')
-      #sinon enregistre l'objet
-        etudiant = Etudiant(type_utilisateur = type_utilisateur,username = username, nom = nom, prenoms = prenoms, email = email, niveau = niveau, filiere = filiere, universite = universite, password = password)
-        etudiant.save()
-        messages.success(request, 'Inscription réussie ! Veuillez vous connecter.')
-        return redirect('login')
-    return render(request, 'etudiant_inscription.html', {
-        'formulaire': formulaire,
-        'name': 'Etudiant Inscription'})
+            # Vérifier s'il y a déjà un utilisateur avec le même nom d'utilisateur
+            
+            username = formulaire.cleaned_data.get('username', None)
+            if username and CustomUser.objects.filter(username=username).exists():
+                messages.error(request, "Ce nom d'utilisateur est déjà pris. Veuillez en choisir un autre.")
+                return render(request, 'etudiant_inscription.html', {'formulaire': formulaire})
+
+            utilisateur = formulaire.save(commit=False)
+            utilisateur.set_password(formulaire.cleaned_data['password1'])
+            utilisateur.save()
+
+            etudiant = Etudiant(
+                user=utilisateur,
+                niveau=formulaire.cleaned_data['niveau'],
+                filiere=formulaire.cleaned_data['filiere']
+            )
+            etudiant.save()
+
+            messages.success(request, 'Inscription réussie ! Veuillez vous connecter.')
+            return redirect('login')
+
+    else:
+        formulaire = EtudiantForm()
+
+    return render(request, 'etudiant_inscription.html', {'formulaire': formulaire})
 
 #formulaire d inscription d un enseignat
+
 def enseignant(request):
-    formulaire = EnseignantForm()
     if request.method == 'POST':
         formulaire = EnseignantForm(request.POST)
         if formulaire.is_valid():
-      #recuperer les champs
-            type_utilisateur = formulaire.cleaned_data['type_utilisateur']
-            username = formulaire.cleaned_data['username']
-            nom = formulaire.cleaned_data['nom']
-            prenoms = formulaire.cleaned_data['prenoms']
-            email = formulaire.cleaned_data['email']
-            matiere = formulaire.cleaned_data['matiere']
-            universite = formulaire.cleaned_data['universite']
-            password = formulaire.cleaned_data['password']
-            #verifier si l'utilisateur n existe pas
-        if Enseignant.objects.filter(username=username).exists():
-            messages.error(request, 'Ce nom d\'utilisateur est déjà pris. Veuillez en choisir un autre.')
-            return redirect('enseignant_inscription')
-            #sinon enregistre l'objet
-        enseignant = Enseignant(
-        type_utilisateur = type_utilisateur,
-        username = username, 
-        nom = nom, 
-        prenoms = prenoms, 
-        email = email, 
-        matiere = matiere, 
-        universite = universite, 
-        password = password)
-        enseignant.save()
-        messages.success(request, 'Inscription réussie ! Veuillez vous connecter.')
-        return redirect('login')
-    return render(request, 'enseignant_inscription.html', {
-        'formulaire': formulaire,
-        'name': 'Enseignant Inscription'})
+            # Vérifier si le nom d'utilisateur existe déjà
+            username = formulaire.cleaned_data.get('username', None)
+            if username and CustomUser.objects.filter(username=username).exists():
+                messages.error(request, "Ce nom d'utilisateur est déjà pris. Veuillez en choisir un autre.")
+                return render(request, 'enseignant_inscription.html', {'formulaire': formulaire, 'name': 'Enseignant Inscription'})
+
+            utilisateur = formulaire.save(commit=False)
+            utilisateur.set_password(formulaire.cleaned_data['password1'])
+            utilisateur.save()
+
+            enseignant = Enseignant(
+                user=utilisateur,
+                matiere=formulaire.cleaned_data['matiere']
+            )
+            enseignant.save()
+
+            messages.success(request, 'Inscription réussie ! Veuillez vous connecter.')
+            return redirect('login')
+
+    else:
+        formulaire = EnseignantForm()
+
+    return render(request, 'enseignant_inscription.html', {'formulaire': formulaire, 'name': 'Enseignant Inscription'})
+
 
 
 #formulaire d inscription d un Personnel d administration
+
+
 def personnel(request):
-    formulaire = PersonnelAdministrationForm()
     if request.method == 'POST':
-        formulaire = PersonnelAdministrationForm(request.POST)
+        formulaire = PersonnelAdminForm(request.POST)
         if formulaire.is_valid():
-        #recuperer les champs
-            type_utilisateur = formulaire.cleaned_data['type_utilisateur']
-            username = formulaire.cleaned_data['username']
-            nom = formulaire.cleaned_data['nom']
-            prenoms = formulaire.cleaned_data['prenoms']
-            email = formulaire.cleaned_data['email']
-            poste = formulaire.cleaned_data['poste']
-            universite = formulaire.cleaned_data['universite']
-            password = formulaire.cleaned_data['password']
-        #verifier si l'utilisateur n existe pas
-        if PersonnelAdministration.objects.filter(username=username).exists():
-            messages.error(request, 'Ce nom d\'utilisateur est déjà pris. Veuillez en choisir un autre.')
-            return redirect('personnel_inscription')
-        #sinon enregistre l'objet
-        personnel = PersonnelAdministration(
-            type_utilisateur = type_utilisateur,
-            username = username, 
-            nom = nom, 
-            prenoms = prenoms, 
-            email = email, 
-            poste = poste, 
-            universite = universite, 
-            password = password)
-        personnel.save()
-        messages.success(request, 'Inscription réussie ! Veuillez vous connecter.')
-        return redirect('login')
-    return render(request, 'personnel_inscription.html', 
-                  {'formulaire': formulaire,
-                    'name': 'Personnel Inscription'})
+            # Vérifier s'il y a un nom d'utilisateur dupliqué
+            username = formulaire.cleaned_data.get('username', None)
+            if username and CustomUser.objects.filter(username=username).exists():
+                messages.error(request, "Ce nom d'utilisateur est déjà pris. Veuillez en choisir un autre.")
+                return render(request, 'personnel_inscription.html', {'formulaire': formulaire, 'name': 'Personnel Inscription'})
+
+            utilisateur = formulaire.save(commit=False)
+            utilisateur.set_password(formulaire.cleaned_data['password1'])
+            utilisateur.save()
+
+            personnel = PersonnelAdministration(
+                user=utilisateur,
+                poste=formulaire.cleaned_data['poste']
+            )
+            personnel.save()
+
+            messages.success(request, 'Inscription réussie ! Veuillez vous connecter.')
+            return redirect('login')
+
+    else:
+        formulaire = PersonnelAdminForm()
+
+    return render(request, 'personnel_inscription.html', {'formulaire': formulaire, 'name': 'Personnel Inscription'})
+
