@@ -1,4 +1,5 @@
 {% extends 'cfoodapp/base.html' %}
+{% load static %}
 {% comment %} {% block welcomeForm %}
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
@@ -49,7 +50,7 @@
 {% endblock%} {% endcomment %}
 
 
-{% block content %}
+{% block welcomeForm %}
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
       <!-- Container wrapper -->
@@ -74,35 +75,54 @@
           </div>
         </div>
     </nav>
-</header>
-<div class="container">
-    <div class="col-md-12 mt-5 mb-7 p-6">
-        {% for message in messages %}
-        <div class="alert alert-danger text-center">
-            <strong>{{message}}<strong/><br>
-        </div>
-        {% endfor %}
-        <form action="{% url "personnel_inscription" %}" method="POST">
-            {% csrf_token %}
-            <div class="card">
-                <div class="card-header text-center"><i class="fas fa-user">Inscription en tant que Personnel de l'administration</i></div>
-                {{ formulaire.as_p }}
-                <div class="card-footer">
-                    <button class="btn-primary btn-block">Valider</button>
-                </div>
+    <div class="container">
+        <div class="col-md-12 mt-5 mb-7 p-6">
+            {% for message in messages %}
+            <div class="alert alert-danger text-center">
+                <strong>{{message}}<strong/><br>
             </div>
-        </form>
-    </div>   
-</div>
+            {% endfor %}
+            <form action="{% url "personnel_inscription" %}" method="POST">
+                {% csrf_token %}
+                <div class="card">
+                    <div class="card-header text-center"><i class="fas fa-user">Inscription en tant que Personnel de l'administration</i></div>
+                    {{ formulaire.as_p }}
+                    <div class="card-footer">
+                        <button class="btn-primary btn-block">Valider</button>
+                    </div>
+                </div>
+            </form>
+        </div>   
+    </div>
+</header>
 
 <footer>
     
 </footer>
 <style>
-    .form-control{
-        max-width: 99.5%;
+  header {
+    background-image: url('{% static "images/banner-images/hero-bg.jpg" %}');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 200vh;
+  }
+  .card{
+    background-color: rgba(240, 248, 255, 0.171);
+    color:#ffffff
+  }
+  .btn-primary{
+      /* background-color: chocolate; */
+      border: 0px;
+      color: white;
+  }
+  .form-control{
+      max-width: 99.5%;
+      padding-left: 5px;
 
-    }
+  }
+  .fas{
+    font-size: 35px;
+  }
     footer{
         background-color: #222831;
         color: #ffffff;

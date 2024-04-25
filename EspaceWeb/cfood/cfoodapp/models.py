@@ -39,25 +39,6 @@ class Universite(models.Model):
     def __str__(self):
         return f"{self.nom}"
 
-
-""" class CustomUser(AbstractUser):
-    is_etudiant = models.BooleanField(default=False)
-    is_adminpersonnel = models.BooleanField(default=False)
-    is_professeur = models.BooleanField(default=False)
-    numero = models.CharField(max_length=15)
-    choix_universite = (
-        ('UPB', 'Université Polytechnique de Bingerville'),
-        ('UIA', 'Institut Universitaire dAbidjan'),
-        ('UNA', 'Université Nangui Abrogoua'),
-        ('UFHB', 'Université Felix Houphouet Boigny'),
-    )
-    universite = models.CharField(max_length=255, choices=choix_universite)
-
-    groups = models.ManyToManyField(Group, related_name='custom_user_groups')
-    user_permissions = models.ManyToManyField(Permission, related_name='custom_user_permissions')
-
-    def __str__(self):
-        return f"{self.username}" """
     
 
 class CustomUser(AbstractUser):

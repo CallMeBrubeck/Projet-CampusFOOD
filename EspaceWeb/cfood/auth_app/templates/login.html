@@ -63,11 +63,15 @@
 <style>
     header{
         background-color: chocolate;
+        background-image: url('{% static "images/banner-images/hero-bg.jpg" %}');
+        height: 100vh;
+        background-size: cover;
     }
     .card{
         background-color: rgba(240, 248, 255, 0.171);
         border: round;
     }
+
     .card-header{
         color: white;
     }
@@ -76,11 +80,14 @@
         border: 0px;
         color: white;
     }
+    .fas{
+      font-size: 35px;
+    }
     .text{
         color: #ffffff;
     }
     #count{
-        color: #222831;
+        /* color: #296fd9; */
         font-weight: bold;
     }
     .form-control{

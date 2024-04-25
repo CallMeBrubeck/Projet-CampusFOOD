@@ -1,5 +1,6 @@
 {% extends "cfoodapp/base.html" %}
-{% block content %}
+{% load static %}
+{% block welcomeForm %}
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
       <!-- Container wrapper -->
@@ -24,8 +25,6 @@
           </div>
         </div>
     </nav>
-</header>
-<main>
     <div class="col-md-12 mt-5">
         <div class="container">
         {% for message in messages %}
@@ -42,16 +41,38 @@
                 </div>
                 <div class="card-footer">
                     <button class="btn-primary btn-block">Suivant</button>
-            </div>
+                </div>
             </div>
         </form>
     </div>   
-</div>
-</main>
+</header>
+
 <footer></footer>
 
 
 <style>
+    header {
+        background-image: url('{% static "images/banner-images/hero-bg.jpg" %}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100vh;
+      }
+      .card{
+        background-color: rgba(240, 248, 255, 0.171);
+        color:#ffffff
+      }
+      .btn-primary{
+          /* background-color: chocolate; */
+          border: 0px;
+          color: white;
+      }
+      .form-control{
+          max-width: 99.5%;
+      }
+      .fas{
+      font-size: 35px;
+    }
+    
     footer{
         background-color: #222831;
         color: #ffffff;

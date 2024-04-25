@@ -15,9 +15,9 @@
       <div class="row">
         <!-- bar de recherche -->
         <div class="container" style="justify-items: center;justify-content: center;">
-          <form class="d-flex" role="search" action="{% url "search" %}" method="GET">
+          <form class="d-flex" role="search" action="" method="GET">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="article">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <button class="btn btn-outline-success" type="submit">Recherche</button>
           </form>
         </div>
         <!-- Collapsible wrapper -->
@@ -32,9 +32,9 @@
               <a class="nav-link" href="{% url "home" %}">Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url "menu" %}">Menu</a>
+              <a class="nav-link" href="#menu">Menu</a>
             </li>
-            <li class="nav-item dropdown">
+<!--             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 Catégories
@@ -44,18 +44,18 @@
                 <a class="dropdown-item category-link" href="#">{{categorie.nom}}</a><hr>
                 {% endfor %}
               </div>
-            </li>
-            <li class="nav-item">
+            </li> -->
+<!--             <li class="nav-item">
               <a class="nav-link" href="#">Commandes</a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
       <div class="d-flex align-items-center">
-        <a class="text-reset me-3" href="{% url "panier" %}">
+<!--         <a class="text-reset me-3" href="{% url "panier" %}">
           <i class="fas fa-shopping-cart"></i>
-        </a>
-        <div class="dropdown">
+        </a> -->
+<!--         <div class="dropdown">
           <a data-mdb-dropdown-init class="text-reset me-3 dropdown-toggle hidden-arrow" href="#"
             id="navbarDropdownMenuLink" role="button" aria-expanded="false">
             <i class="fas fa-bell"></i>
@@ -72,7 +72,7 @@
               <a class="dropdown-item" href="#">Something else here</a>
             </li>
           </ul>
-        </div>
+        </div> -->
         <!-- Avatar -->
         <div class="dropdown">
           <!-- Tres importante, faire que le profile s affiche si la personne est conneter -->
@@ -198,7 +198,7 @@
 
 
 <!-- some food proposer -->
-<section class="food_section layout_padding-bottom ">
+<section class="food_section layout_padding-bottom " id="menu">
   <div class="container">
     <div class="heading_container heading_center mb-5" style="align-items: center; justify-content: center;">
       <img src="{% static "image/goldcrown-2.png" %}" class="" alt="Headphone Image" >

@@ -10,13 +10,29 @@ def login_cfood(request):
     #universite = Universite.nom
     if request.method == "POST":
         #universite = request.POST.get('universite')
+        universite = request.POST['universite']
         username = request.POST['username']
         pwd = request.POST['pwd']
         #authentifions l'utilisateur
-        user = authenticate(username=username, password=pwd)
+        user = authenticate(username=username, password=pwd, universite=universite)
         #vefifions si l utilisateur est dans notre bd
         #si l utilisateur existe et que sont univrrsite est UPB:
         if user is not None:
+            #obtenir les utilisateur
+            utilisateur=username
+            #verifier si universite == UPB
+            if universite == "UPB":
+                #redirect("upbHome", {'nomUser':nomUser})
+                return redirect("upbHome", nomUser=utilisateur)
+            #verifier si universite == UIA
+            elif universite=="UIA":
+                return redirect("uiaHome", nomUser=utilisateur)
+            #verifier si universite == UFHB
+            elif universite=="UFHB":
+                return redirect("ufhbHome", nomUser=utilisateur)
+            
+            else:
+                return redirect("")
             #messages.success(request, "Vous etes bien authenfifier!")
             return redirect("home")
         #sinon
@@ -24,6 +40,7 @@ def login_cfood(request):
             messages.error(request, "Erreur d'authentification!")
             return render(request, "login.html")
     return render(request, "login.html")
+
 
 
 def signin(request):
@@ -40,52 +57,6 @@ def signin(request):
             messages.error(request, 'Entrez le champs correct!!!.')
     return render(request, 'signin.html', {
         'name': 'Signin'})
-
-
-
-
-""" def signin(request):
-    formulaire = InscriptionUtilisateur()
-    if request.method == 'POST':
-        form = InscriptionUtilisateur(request.POST)
-        if form.is_valid():
-            username = formulaire.cleaned_data['username']
-            first_name = formulaire.cleaned_data['first_name'] 
-            password = formulaire.cleaned_data['password']
-            last_name = formulaire.cleaned_data['last_name']
-            is_etudiant = formulaire.cleaned_data['is_etudiant']
-            is_professeur = formulaire.cleaned_data['is_professeur']
-            is_adminpersonnel = formulaire.cleaned_data['is_adminpersonnel']
-            numero = formulaire.cleaned_data['numero']
-            universite = formulaire.cleaned_data['universite']
-            
-            # Créer le nouvel utilisateur avec les données du formulaire
-            utilisateur = CustomUser(username=username, first_name=first_name, last_name=last_name, password=password, is_etudiant=is_etudiant, is_professeur=is_professeur, is_adminpersonnel=is_adminpersonnel)
-            #utilisateur = form.save()
-            utilisateur.save()
-            
-            # Connexion automatique après l'inscription (optionnel)
-            #login(request, utilisateur)
-            
-            # Redirection selon le type d'utilisateur
-            if utilisateur.is_etudiant:
-                return redirect('etudiant_inscription')  # Rediriger vers le tableau de bord étudiant
-            elif utilisateur.is_professeur:
-                return redirect('professeur_inscription')  # Rediriger vers le tableau de bord professeur
-            elif utilisateur.is_adminpersonnel:
-                return redirect('enseignant_inscription')  # Rediriger vers le tableau de bord administratif
-            else:
-                # Si aucun type n'est défini, redirigez vers une page générique
-                return redirect('signin')
-        else:
-            messages.error(request, 'Il y a des erreurs dans le formulaire. Veuillez corriger et réessayer.')
-    else:
-        form = InscriptionUtilisateur()
-
-    return render(request, 'signin.html',  {
-        'name': 'Signin',
-        'formulaire': formulaire})
- """
 
 
 
@@ -193,4 +164,63 @@ def personnel(request):
         formulaire = PersonnelAdminForm()
 
     return render(request, 'personnel_inscription.html', {'formulaire': formulaire, 'name': 'Personnel Inscription'})
+
+
+
+#LSES PAGE APRES CONNEXION
+
+#
+#=============================UPB page=============================
+def upb_page(request):
+    return render(request, "upbapp/home.html")
+
+
+
+def menu(request):
+    list_categorie = Categorie.objects.all()
+    list_plat = Plat.objects.all()
+    context = {
+        "name": "Menu",
+        "list_categorie": list_categorie,
+        "list_plat": list_plat
+        }
+    return render(request, 'cfoodapp/menu.html', context)
+
+def detail(request, nom_plat):
+    plat = Plat.objects.get(nom=nom_plat)
+    categorie = plat.categorie
+    plat_en_relation = Plat.objects.filter(categorie=categorie)[:5]
+    #context = {"article": article}
+    return render(request, 'cfoodapp/detail.html',
+                  {
+                      "plat": plat,
+                      "per": plat_en_relation,
+                      "name":"Details"
+                    }
+                    )
+
+
+def panier(request):
+    return render(request, 'cfoodapp/panier.html', {"name":"Panier"})
+
+
+
+#fonction de recherche
+def search(request):
+    query = request.GET["article"]
+    liste_article = Plat.objects.filter(nom__icontains=query)
+    return render(request, 'cfoodapp/search.html', {
+        "liste_article":liste_article
+        })
+
+#=============================EndUPB page=============================
+
+
+#UIA page
+def uia_page(request):
+    user = CustomUser.objects.all()
+    user
+    return render(request, "uiaapp/home.html")
+
+
 
