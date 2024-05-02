@@ -2,28 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
 
 # Create your models here.
-class Categorie(models.Model):
-    nom = models.CharField(max_length=50)
-    description = models.TextField(max_length=250)
-
-
-    def __str__(self):
-        return f"{self.nom}"
-
-
-
-class Plat(models.Model):
-    #idPlat = models.AutoField(primary_key=True)
-    nom = models.CharField(max_length=50)
-    description = models.TextField()
-    prix = models.FloatField(max_length=8)
-    image = models.ImageField()
-    date_ajout = models.DateTimeField(auto_now_add=True)
-    categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return f"{self.nom} ({self.categorie.nom})"
-
 
 class Universite(models.Model):
     choix_universite = (
@@ -38,6 +16,50 @@ class Universite(models.Model):
 
     def __str__(self):
         return f"{self.nom}"
+
+
+class Restaurant(models.Model):
+    nom = models.CharField(max_length=255)
+    adresse = models.CharField(max_length=255)
+    capacite = models.IntegerField()
+    horaires_ouverture = models.TimeField()
+    horaires_fermeture = models.TimeField()
+    universite = models.ForeignKey(Universite, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Restaurant: {self.nom} de luniversite : ({self.universite.nom})"
+    
+
+class Menu(models.Model):
+    nom = models.CharField(max_length=50)
+    date = models.DateField()
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return f"Periode du Menu: {self.date} - du restaurant : {self.restaurant}"
+
+class Categorie(models.Model):
+    nom = models.CharField(max_length=50)
+    description = models.TextField(max_length=250)
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.nom}"
+
+
+
+class Plat(models.Model):
+    #idPlat = models.AutoField(primary_key=True)
+    nom = models.CharField(max_length=155)
+    description = models.TextField()
+    prix = models.FloatField(max_length=8)
+    image = models.ImageField()
+    date_ajout = models.DateTimeField(auto_now_add=True)
+    categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f"{self.nom} ({self.categorie.nom})"
 
     
 
@@ -66,29 +88,6 @@ class CustomUser(AbstractUser):
 
 
 
-class Restaurant(models.Model):
-    nom = models.CharField(max_length=255)
-    adresse = models.CharField(max_length=255)
-    capacite = models.IntegerField()
-    horaires_ouverture = models.TimeField()
-    horaires_fermeture = models.TimeField()
-    universite = models.ForeignKey(Universite, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"Restaurant: {self.nom} de luniversite : ({self.universite.nom})"
-
-
-
-class Menu(models.Model):
-    date = models.DateField()
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-
-
-    def __str__(self):
-        return f"Periode du Menu: {self.date} - du restaurant : {self.restaurant}"
-
-
-
 class Employe(models.Model):
     nom = models.CharField(max_length=255)
     prenoms = models.CharField(max_length=255)
@@ -113,7 +112,7 @@ class Etudiant(models.Model):
     niveau = models.CharField(max_length=255)
     filiere = models.CharField(max_length=255)
     annee_etude = models.IntegerField()
-    #universite = models.ForeignKey(Universite, on_delete=models.CASCADE)
+    
 
     def __str__(self):
         return f"Nom utilisateur {self.user.username} - Nom {self.user.first_name} - Niveau {self.niveau}"
@@ -123,7 +122,7 @@ class Etudiant(models.Model):
 class PersonnelAdministration(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     poste = models.CharField(max_length=255)
-    #universite = models.ForeignKey(Universite, on_delete=models.CASCADE)
+    
 
     def __str__(self):
         return f"Nom utilisateur {self.user.username} - Nom {self.user.first_name} - Poste {self.poste}"

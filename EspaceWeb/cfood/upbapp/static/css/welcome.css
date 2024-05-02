@@ -1,0 +1,46 @@
+.container{
+  max-height: 100%;
+  min-height: 90%;
+}
+
+.panda-card {
+  border: 0;
+}
+
+.panda-card-footer {
+  background-color: white;
+  border: 0;
+}
+.category-bg-watch {
+  background-color: rgb(255, 165, 0);
+}
+.category-bg-bag {
+  background-color: rgb(218, 112, 214);
+}
+.category-bg-shoe {
+  background-color: rgb(0, 0, 255);
+}
+.categories img {
+  width: 100px;
+}
+
+.panda-slide .carousel-item {
+
+  background-color: rgb(252, 234, 232);
+  border-radius: 1em;
+}
+.btn-buy {
+  background-color: #FF3585;
+  color: white;
+}
+.price-color {
+  color: #FF3585;
+  font-size: 40px;
+}
+.special-offer-text {
+  font-size: large;
+  color: gray;
+}
+.lets-touch-bg {
+  background-color: rgb(252, 234, 232);
+}

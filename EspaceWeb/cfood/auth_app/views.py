@@ -3,44 +3,54 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from cfoodapp.forms import *
 from django.contrib.auth.models import User
-from .models import *
+#from auth_app.models import *
+from cfoodapp.models import *
 # Create your views here.
 
 def login_cfood(request):
-    #universite = Universite.nom
     if request.method == "POST":
-        #universite = request.POST.get('universite')
-        universite = request.POST['universite']
-        username = request.POST['username']
-        pwd = request.POST['pwd']
-        #authentifions l'utilisateur
-        user = authenticate(username=username, password=pwd, universite=universite)
-        #vefifions si l utilisateur est dans notre bd
-        #si l utilisateur existe et que sont univrrsite est UPB:
-        if user is not None:
-            #obtenir les utilisateur
-            utilisateur=username
-            #verifier si universite == UPB
-            if universite == "UPB":
-                #redirect("upbHome", {'nomUser':nomUser})
-                return redirect("upbHome", nomUser=utilisateur)
-            #verifier si universite == UIA
-            elif universite=="UIA":
-                return redirect("uiaHome", nomUser=utilisateur)
-            #verifier si universite == UFHB
-            elif universite=="UFHB":
-                return redirect("ufhbHome", nomUser=utilisateur)
-            
-            else:
-                return redirect("")
-            #messages.success(request, "Vous etes bien authenfifier!")
-            return redirect("home")
-        #sinon
-        else:
-            messages.error(request, "Erreur d'authentification!")
-            return render(request, "login.html")
-    return render(request, "login.html")
+        formulaire = CustomAuthenticationForm(request, data=request.POST)
 
+        if formulaire.is_valid():
+            username = formulaire.cleaned_data["username"]
+            password = formulaire.cleaned_data["password"]
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                # Redirection en fonction de l'université de l'utilisateur
+                if hasattr(user, "universite"):  # Vérifie que le champ 'universite' existe
+                    universite = user.universite
+# Stocker les informations de l'utilisateur dans la session
+                    request.session['user_profile'] = {
+                        "username": user.username,
+                        "nom": user.last_name,
+                        "prenom": user.first_name,
+                        "universite": user.universite,
+                        "numero": user.numero,
+                        "email": user.email
+                    }
+                    
+                    if universite == "UPB":
+                        return redirect("upbHome")
+                    elif universite == "UIA":
+                        return redirect("uiaHome")
+                    else:
+                        # Si l'université n'est ni UPB ni UIA, redirigez vers une page par défaut
+                        return redirect("defaultHome")
+                else:
+                    # Si l'attribut 'universite' n'est pas défini, utilisez une redirection par défaut
+                    return redirect("defaultHome")
+
+            # Si l'utilisateur n'a pas pu être authentifié, afficher un message d'erreur
+            messages.error(request, "Nom d'utilisateur ou mot de passe incorrect")
+
+    else:
+        # Si la méthode n'est pas POST, créez un nouveau formulaire
+        formulaire = CustomAuthenticationForm()
+
+    return render(request, "login.html", {"formulaire": formulaire})
 
 
 def signin(request):
@@ -72,27 +82,29 @@ def etudiant(request):
             email = formulaire.cleaned_data['email']
             numero = formulaire.cleaned_data['numero']
             universite = formulaire.cleaned_data['universite']
-            #niveau = formulaire.cleaned_data['niveau']
-            #filiere = formulaire.cleaned_data['filiere']
-            #annee_etude = formulaire.cleaned_data['annee_etude']
+            niveau = formulaire.cleaned_data['niveau']
+            filiere = formulaire.cleaned_data['filiere']
+            annee_etude = formulaire.cleaned_data['annee_etude']
             mdp1 = formulaire.cleaned_data['password1']
-            #users = CustomUser(username=username, first_name=first_name, last_name=last_name, email=email, numero=numero, universite=universite, password=mdp1)
-            #username = formulaire.cleaned_data.get('username', None)
+    
             if CustomUser.objects.filter(username=username).exists():
                 messages.error(request, "Ce nom d'utilisateur est déjà pris. Veuillez en choisir un autre.")
                 return render(request, 'etudiant_inscription.html', {'formulaire': formulaire})
 
-            utilisateur = formulaire.save(commit=False)
-            utilisateur.set_password(formulaire.cleaned_data['password1'])
-            utilisateur.save()
+            else:
+                utilisateur = formulaire.save(commit=False)
+                #utilisateur.set_password(formulaire.cleaned_data['password1'])
+                utilisateur.save()
+                #util.save()
+                #utilisateur.set_password(formulaire.cleaned_data['password1'])
 
-            etudiant = Etudiant(
-                user=utilisateur,
-                niveau=formulaire.cleaned_data['niveau'],
-                filiere=formulaire.cleaned_data['filiere'],
-                annee_etude=formulaire.cleaned_data['annee_etude']
-            )
-            etudiant.save()
+                etudiant = Etudiant.objects.create(
+                    user=utilisateur,
+                    niveau=niveau,
+                    filiere=filiere,
+                    annee_etude=annee_etude
+                )
+                etudiant.save()
 
             messages.success(request, 'Inscription réussie ! Veuillez vous connecter.')
             return redirect('login')
@@ -101,6 +113,8 @@ def etudiant(request):
         formulaire = EtudiantForm()
 
     return render(request, 'etudiant_inscription.html', {'formulaire': formulaire})
+
+
 
 #formulaire d inscription d un enseignat
 
@@ -171,56 +185,58 @@ def personnel(request):
 
 #
 #=============================UPB page=============================
-def upb_page(request):
-    return render(request, "upbapp/home.html")
+""" def login_cfood(request):
+    #universite = Universite.nom
+    if request.method == "POST":
+        #universite = request.POST.get('universite')
+        #username = request.POST['username']
+        #pwd = request.POST['pwd']
+        username = request.POST['username']
+        pwd = request.POST['password']
+        #authentifions l'utilisateur
+        user = authenticate(request, username=username, password=pwd)
+        #vefifions si l utilisateur est dans notre bd
+        if user is not None:
+            #si oui, l authentifier
+            login(request, user)
+            prenom = user.first_name
+            nom = user.last_name
+            nomUser = user.username
+
+            return redirect("upbHome", username=nomUser)
+            #messages.success(request, "Vous etes bien authenfifier!")
+        #sinon
+        else:
+            messages.error(request, "Erreur d'authentification!")
+            return render(request, "login.html")
+    return render(request, "login.html") """
+
+""" def login_cfood(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        pwd = request.POST["password"]
+        user = authenticate(request, username=username, password=pwd)
+        if user is not None:
+            login(request, user)
+            #firstname = user.first_name
+            return redirect("upb_home")  # Pas de paramètre passé
+        else:
+            messages.error(request, "Erreur d'authentification!")
+    return render(request, "login.html") """
 
 
 
-def menu(request):
-    list_categorie = Categorie.objects.all()
-    list_plat = Plat.objects.all()
-    context = {
-        "name": "Menu",
-        "list_categorie": list_categorie,
-        "list_plat": list_plat
-        }
-    return render(request, 'cfoodapp/menu.html', context)
+""" def login_cfood(request):
+    if request.method == 'POST':
+        formulaire = CustomAuthenticationForm(request, data=request.POST)
+        if formulaire.is_valid():
+            user = formulaire.get_user()
+            login(request, user)  # Connecter l'utilisateur
+            return redirect("upbHome")  # Rediriger après connexion réussie
+        else:
+            messages.error(request, "Nom d'utilisateur ou mot de passe incorrect.")
 
-def detail(request, nom_plat):
-    plat = Plat.objects.get(nom=nom_plat)
-    categorie = plat.categorie
-    plat_en_relation = Plat.objects.filter(categorie=categorie)[:5]
-    #context = {"article": article}
-    return render(request, 'cfoodapp/detail.html',
-                  {
-                      "plat": plat,
-                      "per": plat_en_relation,
-                      "name":"Details"
-                    }
-                    )
+    else:
+        formulaire = CustomAuthenticationForm()  # Formulaire vierge pour GET
 
-
-def panier(request):
-    return render(request, 'cfoodapp/panier.html', {"name":"Panier"})
-
-
-
-#fonction de recherche
-def search(request):
-    query = request.GET["article"]
-    liste_article = Plat.objects.filter(nom__icontains=query)
-    return render(request, 'cfoodapp/search.html', {
-        "liste_article":liste_article
-        })
-
-#=============================EndUPB page=============================
-
-
-#UIA page
-def uia_page(request):
-    user = CustomUser.objects.all()
-    user
-    return render(request, "uiaapp/home.html")
-
-
-
+    return render(request, "login.html", {'formulaire': formulaire}) """

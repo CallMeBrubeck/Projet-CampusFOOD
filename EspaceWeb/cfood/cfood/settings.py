@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'iuaapp',
+    'upbapp',
     'cfoodapp',
     'auth_app',
     'django.contrib.admin',
@@ -106,6 +108,17 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
+# Configuration BACKEND
+#AUTH_USER_MODEL = "cfoodapp.CustomUser"
+#AUTHENTIFICATION_BACKENDS = [
+#    "django.contrib.auth.backends.ModelBackend",
+#]
+AUTH_USER_MODEL = "cfoodapp.CustomUser"
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    # Ajouter votre backend personnalisé ici si nécessaire
+]
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -113,6 +126,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)

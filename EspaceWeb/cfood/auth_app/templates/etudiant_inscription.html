@@ -26,24 +26,24 @@
         </div>
     </nav>
     <div class="container">
-        <div class="col-md-12 mt-5 mb-7 p-6">
-            {% for message in messages %}
-            <div class="alert alert-danger text-center">
-                <strong>{{message}}<strong/><br>
-            </div>
-            {% endfor %}
-            <form action="{% url "etudiant_inscription" %}" method="POST">
-                {% csrf_token %}
-                <div class="card">
-                    <div class="card-header text-center"><i class="fas fa-user">Inscription en tant qu'Etudiant</i></div>
-                    {{ formulaire.as_p }}
-                    <div class="card-footer">
-                        <button class="btn-primary btn-block">Valider</button>
-                    </div>
-                </div>
-            </form>
-        </div>   
-    </div>
+      <div class="col-md-12 mt-5 mb-7 p-6">
+          {% for message in messages %}
+          <div class="alert alert-danger text-center">
+              <strong>{{message}}<strong/><br>
+          </div>
+          {% endfor %}
+          <form action="{% url "etudiant_inscription" %}" method="POST">
+              {% csrf_token %}
+              <div class="card">
+                  <div class="card-header text-center"><i class="fas fa-user">Inscription en tant qu'Etudiant</i></div>
+                  {{ formulaire.as_p }}
+                  <div class="card-footer">
+                      <button class="btn-primary btn-block">Valider</button>
+                  </div>
+              </div>
+          </form>
+      </div>   
+  </div>
 </header>
 
 <footer>
@@ -59,7 +59,8 @@
     }
     .card{
       background-color: rgba(240, 248, 255, 0.171);
-      color:#ffffff
+      color:#ffffff;
+      padding-top: 5%;
     }
     .btn-primary{
         /* background-color: chocolate; */
@@ -67,7 +68,7 @@
         color: white;
     }
     .form-control{
-        max-width: 99.5%;
+        max-width: 95.5%;
         padding-left: 5px;
 
     }
@@ -80,5 +81,20 @@
         padding: 75px 0 40px 0;
         text-align: center;
       }
+      #formContent{
+        padding-bottom: 15%;
+        width: 60%;
+        height: auto;
+      }
+      label{
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+      input{
+        margin-right: 10px;
+        margin-left: 10px;
+      }
+
+
 </style>
 {% endblock %}

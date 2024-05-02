@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap");
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+header{
+  height: 100%;
+  width: 100%;
+  background-image: url('{% static "images/banner-images/hero-bg.jpg" %}');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #e7eeea;
+}
+footer{
+  background-color: #222831;
+  color: #ffffff;
+  padding: 75px 0 40px 0;
+  text-align: center;
+}

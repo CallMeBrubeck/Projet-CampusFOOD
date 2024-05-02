@@ -1,5 +1,5 @@
-from django.urls import path
-from auth_app.views import *
+from django.urls import path, include
+from .views import *
 
 urlpatterns = [
     path('',login_cfood, name="login"),
@@ -9,16 +9,7 @@ urlpatterns = [
     path('enseignant_inscription', enseignant, name="enseignant_inscription"),
     #Une fois connecter:
     #=======================UPB_page===================
-    path('upb', upb_page, name="upbHome"),
-    path('plat/<str:nom_plat>',detail, name="detail"),
-    path('panier/', panier, name="panier"),
-    path('menu/', menu, name="menu"),
-    path('article/recherche',search, name="search" ),
+    #path('upb/<str:firstname>/',include("upbapp.urls")),
     #=======================EndUPB_page===================
-
-    
-    ##=======================UIA_page===================
-    path('uia', uia_page, name="uiaHome"),
-
-
+    #=======================UIA_page===================
 ]

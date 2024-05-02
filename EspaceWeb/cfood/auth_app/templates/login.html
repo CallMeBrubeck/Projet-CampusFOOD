@@ -27,10 +27,10 @@
           </div>
         </div>
     </nav>
-    <div class="condainer mt-10">
+    <div class="condainer mt-3">
         <div class="col-md-12 mt-5">
             {% for message in messages %}
-            <div class="alert alert-danger text-center">
+            <div class="alert alert-danger text-center" id="messages">
                 <strong>{{message}}<strong/><br>
             </div>
             {% endfor %}
@@ -39,9 +39,11 @@
                 <div class="card">
                     <div class="card-header text-center"><i class="fas fa-user">Connexion a CampusFOOD</i></div>
                     <div class="card-body">
-                        <input type="text" name="universite" id="" placeholder="UPB | UIA | UFHB " class="form-control mb-2" required>
-                        <input type="text" name="username" id="" placeholder="Nom utilisateur" class="form-control mb-2" required>
-                        <input type="password" name="pwd" id="" placeholder="Mot de passe" class="form-control" required>
+                        <!-- <input type="text" name="universite" id="" placeholder="UPB | UIA | UFHB " class="form-control mb-2" required> -->
+<!--                         <input type="text" name="username" id="" placeholder="Nom utilisateur" class="form-control mb-2" required>
+                        <input type="password" name="password" id="" placeholder="Mot de passe" class="form-control" required> -->
+                        
+                        {{ formulaire.as_p }}
                     </div>
                     <div class="card-footer">
                         <button class="btn-primary btn-block">Se connecter</button>
@@ -67,9 +69,17 @@
         height: 100vh;
         background-size: cover;
     }
+    #messages{
+        max-width: 50.5%;
+        justify-content: center;
+        justify-items: center;
+        text-align: center;
+        align-items: center;
+        margin-left: 25%;
+      }
     .card{
         background-color: rgba(240, 248, 255, 0.171);
-        border: round;
+        border: round #ffffff;
     }
 
     .card-header{
@@ -94,9 +104,13 @@
         max-width: 99.5%;
 
     }
+    label{
+        color: #ffffff;
+    }
     form{
         width: 50%;
-        margin-left: 20%;
+        margin-left: 25%;
+        margin-top: 5%;
     }
     footer{
         background-color: #222831;
@@ -104,6 +118,10 @@
         padding: 75px 0 40px 0;
         text-align: center;
       }
+
+    .errorlist{
+    color: rgb(89, 2, 2);
+    }
 </style>
 {% endblock%}
 
