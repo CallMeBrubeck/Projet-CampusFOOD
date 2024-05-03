@@ -1,5 +1,6 @@
 {% extends "upbapp/base.html" %}
 {% block welcome %}
+{% load static %}
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
     <!-- Container wrapper -->
@@ -96,7 +97,7 @@
   </nav>
   <div id="carouselExampleControls" class="carousel slide panda-slide mt-5 mb-5" data-bs-ride="carousel" style="height: 100vh;">
     <div class="carousel-inner">
-        <div class="carousel-item active " id="carousel_item1">
+<!--         <div class="carousel-item active " id="carousel_item1">
             <div class="row d-flex align-items-center p-5">
                 <div class="col-md-12">
                     <h1 style="font-size: 70px; color: #ffffff;">Bienvenue sur CampusFOOD</h1>
@@ -105,7 +106,11 @@
                 </div>
 
             </div>
-        </div>
+        </div> -->
+        <section class="carousel-item active welcome-section mt-5" style="background-color: #d2691e; text-align: center; padding: 50px;">
+          <h1>Bienvenue à l'Espace Restauration de l'Université Polytechnique de Bingerville</h1>
+          <p>Découvrez nos services de restauration et les avantages que nous offrons à nos clients.</p>
+        </section>
         <div class="carousel-item" id="carousel_item2">
             <div class="row d-flex align-items-center p-5">
                 <div class="col-md-7">
@@ -137,8 +142,380 @@
     </button>
   </div>
 </header>
+
+<!-- <section class="welcome-section" style="background-color: #d2691e; text-align: center; padding: 50px;">
+  <h1>Bienvenue à l'Espace Restauration de l'Université Polytechnique de Bingerville</h1>
+  <p>Découvrez nos services de restauration et les avantages que nous offrons à nos clients.</p>
+</section> -->
+
+<!-- Section de présentation de l'université -->
+<section class="university-section" style="background-color: #f5f5f5; padding: 50px; text-align: center;">
+  <h2>Université Polytechnique de Bingerville</h2>
+  <p>Située à Bingerville, l'UPB offre des formations de qualité avec un campus moderne et dynamique.</p>
+</section>
+
+<!-- Section sur les services du restaurant -->
+<section class="services-section" style="background-color: #e0e0e0; padding: 50px;" id="service">
+  <h2>Services du Restaurant</h2>
+  <div class="services">
+    <div class="service" style="margin: 20px; text-align: center;">
+      <i class="fas fa-utensils" style="font-size: 40px;"></i>
+      <h3>Commandes en ligne</h3>
+      <p>Vous pouvez passer vos commandes en ligne pour plus de commodité.</p>
+    </div>
+    <div class="service" style="margin: 20px; text-align: center;">
+      <i class="fas fa-calendar-alt" style="font-size: 40px;"></i>
+      <h3>Réservations</h3>
+      <p>Réservez votre table à l'avance pour un service rapide.</p>
+    </div>
+    <div class="service" style="margin: 20px; text-align: center;">
+      <i class="fas fa-credit-card" style="font-size: 40px;"></i>
+      <h3>Paiement en ligne</h3>
+      <p>Paiement sécurisé pour une expérience fluide.</p>
+    </div>
+    <div class="service" style="margin: 20px; text-align: center;">
+      <i class="fas fa-truck" style="font-size: 40px;"></i>
+      <h3>Livraison</h3>
+      <p>Livraison aux étudiants proches et au personnel.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Section sur le personnel du restaurant -->
+<section class="staff-section mb-5" style="background-color: #d2691e; padding: 50px;" id="personnel">
+  <h2>Rencontrez notre personnel</h2>
+  <div class="staff">
+    <div class="staff-member" style="margin: 20px; text-align: center;">
+      <img src="{% static 'image/chefcuisinier.jpg' %}" alt="Chef" style="width: 150px; border-radius: 50%;">
+      <h3>Chef Principal</h3>
+      <p>Notre chef principal assure des repas de qualité.</p>
+    </div>
+    <div class="staff-member" style="margin: 20px; text-align: center;">
+      <img src="{% static 'image/manager.jpg' %}" alt="Manager" style="width: 150px; border-radius: 50%;">
+      <h3>Manager</h3>
+      <p>Gestionnaire du restaurant, garant de votre satisfaction.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- Section Témoignages -->
+<section class="testimonials-section" style="background-color: #e0e0e0; padding: 50px;" id="temoignage">
+  <h2>Ce que disent nos clients</h2>
+  <div class="testimonials">
+    <div class="testimonial" style="margin: 20px; text-align: center;">
+      <p>"Le service est rapide et les plats sont délicieux. J'aime commander en ligne, c'est très pratique." - Étudiant</p>
+    </div>
+    <div class="testimonial" style="margin: 20px; text-align: center;">
+      <p>"Le personnel est super sympa et la qualité des repas est excellente." - Professeur</p>
+    </div>
+    <div class="testimonial" style="margin: 20px; text-align: center;">
+      <p>"La possibilité de payer en ligne et de réserver à l'avance me fait gagner du temps." - Personnel de l'université</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- Section Galerie d'Images -->
+<section class="gallery-section" style="background-color: #f5f5f5; padding: 50px;" id="galerie">
+  <h2>Notre Galerie</h2>
+  <div class="gallery">
+    <div class="gallery-item" style="margin: 20px;">
+      <img src="{% static 'image/chefcuisinier.jpg' %}" alt="Restaurant" style="width: 100%; height: auto; border-radius: 10px;">
+    </div>
+    <div class="gallery-item" style="margin: 20px;">
+      <img src="{% static 'image/chefcuisinier.jpg' %}" alt="Plat" style="width: 100%; height: auto; border-radius: 10px;">
+    </div>
+    <div class="gallery-item" style="margin: 20px;">
+      <img src="{% static 'image/chefcuisinier.jpg' %}" alt="Événement" style="width: 100%; height: auto; border-radius: 10px;">
+    </div>
+  </div>
+</section>
+
+
+<!-- Section Liens -->
+<section class="links-section" style="background-color: #d2691e; padding: 50px; text-align: center;">
+  <h2>Explorez nos Services</h2>
+  <div class="links">
+    <a href="{% url 'upbHome' %}" style="margin: 10px; padding: 10px; background-color: white; border-radius: 10px;">Acceuil</a>
+    <a href="{% url 'menu' %}" style="margin: 10px; padding: 10px; background-color: white; border-radius: 10px;">Menu</a>
+    <a href="#service" style="margin: 10px; padding: 10px; background-color: white; border-radius: 10px;">Services</a>
+    <a href="#personnel" style="margin: 10px; padding: 10px; background-color: white; border-radius: 10px;">Personnel</a>
+  </div>
+</section>
+
+
+<style>
+  .welcome-section {
+  color: white;
+}
+
+.university-section,
+.services-section,
+.staff-section {
+  border-top: 1px solid #ccc;
+}
+
+.services {
+  display: flex;
+  justify-content: center;
+}
+
+.service,
+.staff-member {
+  transition: transform 0.3s;
+}
+
+.service:hover,
+.staff-member:hover {
+  transform: scale(1.1);
+}
+
+
+{% comment %} a partir de section temoignage {% endcomment %}
+.testimonials-section {
+  text-align: center;
+}
+
+.testimonial {
+  font-style: italic;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.gallery {
+  display: flex;
+  justify-content: center;
+}
+
+.gallery-item img {
+  transition: transform 0.3s;
+}
+
+.gallery-item img:hover {
+  transform: scale(1.05);
+}
+
+.links-section a {
+  text-decoration: none;
+  color: #d2691e;
+  transition: background-color 0.3s;
+}
+
+.links-section a:hover {
+  background-color: #ccc;
+}
+
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+  const services = document.querySelectorAll(".service");
+  services.forEach((service) => {
+    service.addEventListener("mouseenter", () => {
+      service.style.backgroundColor = "#d2691e";
+      service.style.color = "white";
+    });
+    service.addEventListener("mouseleave", () => {
+      service.style.backgroundColor = "transparent";
+      service.style.color = "#333";
+    });
+  });
+});
+
+
+
+</script>
+
+
 {% endblock  %}
 
-{% block content %}
-{% comment %} Description du restau de upb, ses services {% endcomment %}
-{% endblock  %}
+{% comment %} {% block content %}
+<section class="welcome-section" style="background-color: #d2691e; text-align: center; padding: 50px;">
+  <h1>Bienvenue à l'Espace Restauration de l'Université Polytechnique de Bingerville</h1>
+  <p>Découvrez nos services de restauration et les avantages que nous offrons à nos clients.</p>
+</section>
+
+<!-- Section de présentation de l'université -->
+<section class="university-section" style="background-color: #f5f5f5; padding: 50px; text-align: center;">
+  <h2>Université Polytechnique de Bingerville</h2>
+  <p>Située à Bingerville, l'UPB offre des formations de qualité avec un campus moderne et dynamique.</p>
+</section>
+
+<!-- Section sur les services du restaurant -->
+<section class="services-section" style="background-color: #e0e0e0; padding: 50px;">
+  <h2>Services du Restaurant</h2>
+  <div class="services">
+    <div class="service" style="margin: 20px; text-align: center;">
+      <i class="fas fa-utensils" style="font-size: 40px;"></i>
+      <h3>Commandes en ligne</h3>
+      <p>Vous pouvez passer vos commandes en ligne pour plus de commodité.</p>
+    </div>
+    <div class="service" style="margin: 20px; text-align: center;">
+      <i class="fas fa-calendar-alt" style="font-size: 40px;"></i>
+      <h3>Réservations</h3>
+      <p>Réservez votre table à l'avance pour un service rapide.</p>
+    </div>
+    <div class="service" style="margin: 20px; text-align: center;">
+      <i class="fas fa-credit-card" style="font-size: 40px;"></i>
+      <h3>Paiement en ligne</h3>
+      <p>Paiement sécurisé pour une expérience fluide.</p>
+    </div>
+    <div class="service" style="margin: 20px; text-align: center;">
+      <i class="fas fa-truck" style="font-size: 40px;"></i>
+      <h3>Livraison</h3>
+      <p>Livraison aux étudiants proches et au personnel.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Section sur le personnel du restaurant -->
+<section class="staff-section" style="background-color: #d2691e; padding: 50px;">
+  <h2>Rencontrez notre personnel</h2>
+  <div class="staff">
+    <div class="staff-member" style="margin: 20px; text-align: center;">
+      <img src="{% static 'image/chef.jpg' %}" alt="Chef" style="width: 150px; border-radius: 50%;">
+      <h3>Chef Principal</h3>
+      <p>Notre chef principal assure des repas de qualité.</p>
+    </div>
+    <div class="staff-member" style="margin: 20px; text-align: center;">
+      <img src="{% static 'image/manager.jpg' %}" alt="Manager" style="width: 150px; border-radius: 50%;">
+      <h3>Manager</h3>
+      <p>Gestionnaire du restaurant, garant de votre satisfaction.</p>
+    </div>
+  </div>
+</section>
+
+
+
+<style>
+  .welcome-section {
+  color: white;
+}
+
+.university-section,
+.services-section,
+.staff-section {
+  border-top: 1px solid #ccc;
+}
+
+.services {
+  display: flex;
+  justify-content: center;
+}
+
+.service,
+.staff-member {
+  transition: transform 0.3s;
+}
+
+.service:hover,
+.staff-member:hover {
+  transform: scale(1.1);
+}
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+  const services = document.querySelectorAll(".service");
+  services.forEach((service) => {
+    service.addEventListener("mouseenter", () => {
+      service.style.backgroundColor = "#d2691e";
+      service.style.color = "white";
+    });
+    service.addEventListener("mouseleave", () => {
+      service.style.backgroundColor = "transparent";
+      service.style.color = "#333";
+    });
+  });
+});
+</script>
+{% endblock  %} {% endcomment %}
+
+
+
+{% comment %} test B
+
+
+<section id="presentation">
+  <h2>Présentation de l'UPB</h2>
+  <p>L'UPB est une université d'excellence en Côte d'Ivoire, reconnue pour ses formations de qualité, ses enseignants qualifiés et son environnement dynamique. Située à Bingerville, l'UPB offre un cadre idéal pour l'épanouissement des étudiants et leur préparation à une carrière réussie.</p>
+</section>
+
+<section id="services">
+  <h2>Services du restaurant universitaire</h2>
+  <ul>
+      <li>Commande en ligne</li>
+      <li>Réservation de table</li>
+      <li>Paiement en ligne</li>
+      <li>Service rapide</li>
+      <li>Livraison aux proches</li>
+  </ul>
+</section>
+
+<section id="avantages">
+  <h2>Avantages pour les clients</h2>
+  <ul>
+      <li>Des prix abordables</li>
+      <li>Une grande variété de choix</li>
+      <li>Des produits frais et locaux</li>
+      <li>Un cadre convivial</li>
+  </ul>
+</section>
+
+<section id="personnel">
+  <h2>Présentation du personnel</h2>
+  <p>Le personnel du restaurant universitaire de l'UPB est composé d'une équipe dynamique et professionnelle dédiée à votre satisfaction. Nous sommes là pour vous offrir un service de qualité et vous faire vivre une expérience culinaire agréable.</p>
+</section>
+
+
+
+// Fonction pour afficher un message de bienvenue
+function afficherBienvenue() {
+  var message = "Bienvenue au Restaurant Universitaire UPB !";
+  alert(message);
+}
+
+// Fonction pour changer la couleur de fond d'une section
+function changerCouleurFond(sectionId, couleur) {
+  var section = document.getElementById(sectionId);
+  section.style.backgroundColor = couleur;
+}
+
+// Exécution des fonctions au chargement de la page
+window.onload = function() {
+  afficherBienvenue();
+  changerCouleurFond("presentation", "#e6e6e6");
+  changerCouleurFond("services", "#f6f6f6");
+  changerCouleurFond("avantages", "#e6e6e6");
+  changerCouleurFond("personnel", "#f6f6f6");
+};
+
+
+
+
+h1 {
+  margin: 0;
+}
+
+section {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #chocolate;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+{% endcomment %}

@@ -12,9 +12,6 @@
       <img src="{% static "image/goldcrown-1.png" %}" class="" alt="Headphone Image" >
     </div>
     <!-- creer categorie -->
-    <div class="conntainer">
-
-    </div>
     {% for categorie in list_categorie %}
     <div class="filters-content">
       <div class="row grid">
@@ -49,18 +46,22 @@
                     </h6>
                     <a href="">
                         <span class="btn add-to-cart-btn" data-mdb-ripple-init data-id="{{ plat.id }}" style="margin-right: 10px;">
-                            <i class="fas fa-shopping-cart"></i>
+                            <i class="fas fa-shopping-cart" style="color: #d2691e;"></i>
                         </span>
                     </a>
                   </div>
               </div>
             </div>
           </div>
+          </div>
           {% endif %}
         {% endfor %}
       </div>
+    </div>
     {% endfor %}
+      
   </div>
+  <br>
 </section>
 
 
@@ -143,7 +144,8 @@
         width: 40px;
         height: 40px;
         border-radius: 100%;
-        background: #ffbe33;
+        /* background: #ffbe33; */
+        background: #ffffff;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -153,8 +155,12 @@
         -webkit-box-align: center;
             -ms-flex-align: center;
                 align-items: center;
+        text-decoration: none;
         }
-      
+        .food_section .box .options a :hover{
+          -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+        }
         .food_section .box .options a svg {
         width: 18px;
         height: auto;
@@ -185,6 +191,7 @@
         -webkit-transition: all 0.3s;
         transition: all 0.3s;
         border: none;
+        text-decoration: none;
         }
       
         .food_section .btn-box a:hover {
@@ -207,7 +214,53 @@
     background-color: #000000ad;
     text-align: center;
   }
+  a {
+  text-decoration: none;
+  /*color: white;*/
+}
 
 </style>
-
+<!-- JavaScript à la fin du document -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function addToCart(platId) {
+      const csrfToken = getCSRFToken(); // Obtenir le token CSRF
+      fetch('/ajouter_au_panier/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken, // Utiliser le token CSRF dans les en-têtes
+        },
+        body: JSON.stringify({ plat_id: platId }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Article ajouté au panier', data); // Actions supplémentaires ici
+      })
+      .catch(error => {
+        console.error('Erreur lors de l\'ajout au panier', error);
+      });
+    }
+  
+    function getCSRFToken() {
+      const csrfInput = document.querySelector('input[name="csrfmiddlewaretoken"]');
+      if (csrfInput) {
+        return csrfInput.value; // Retourner le token CSRF si trouvé
+      } else {
+        console.error("Token CSRF introuvable");
+        return ''; // Retourner une valeur par défaut
+      }
+    }
+  
+    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+    addToCartButtons.forEach(button => {
+      button.addEventListener('click', function (event) {
+        event.preventDefault(); // Empêcher la redirection par défaut
+        const platId = this.getAttribute('data-id'); // Récupérer l'ID du plat
+        addToCart(platId); // Appeler la fonction pour ajouter au panier
+      });
+    });
+  });
+</script>
+  
 {% endblock  %}
