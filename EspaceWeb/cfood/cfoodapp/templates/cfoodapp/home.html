@@ -2,7 +2,7 @@
 {% load static %}
 {% block welcome %}
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+  <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary" style="height: 25%;">
     <!-- Container wrapper -->
     <div class="container-fluid">
       <!-- Toggle button -->
@@ -23,56 +23,21 @@
         <!-- Collapsible wrapper -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Navbar brand -->
-          <a class="navbar-brand mt-2 mt-lg-0" href="{% url "home" %}">
+          <a class="navbar-brand mt-2 mt-lg-0" href="{% url "home" %}" style="margin-right: 75%;">
             <small style="color: chocolate; font-weight: bolder; font-size: 50px;">CampusFOOD</small>
           </a>
           <!-- Left links -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="{% url "home" %}">Accueil</a>
+              <a class="nav-link" href="{% url "home" %}" style="font-size: 20px; margin-top: 25%;">Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#menu">Menu</a>
+              <a class="nav-link" href="#menu" style="font-size: 20px; margin-top: 29%;">Menu</a>
             </li>
-<!--             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Catégories
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                {% for categorie in list_categorie %}
-                <a class="dropdown-item category-link" href="#">{{categorie.nom}}</a><hr>
-                {% endfor %}
-              </div>
-            </li> -->
-<!--             <li class="nav-item">
-              <a class="nav-link" href="#">Commandes</a>
-            </li> -->
           </ul>
         </div>
       </div>
       <div class="d-flex align-items-center">
-<!--         <a class="text-reset me-3" href="{% url "panier" %}">
-          <i class="fas fa-shopping-cart"></i>
-        </a> -->
-<!--         <div class="dropdown">
-          <a data-mdb-dropdown-init class="text-reset me-3 dropdown-toggle hidden-arrow" href="#"
-            id="navbarDropdownMenuLink" role="button" aria-expanded="false">
-            <i class="fas fa-bell"></i>
-            <span class="badge rounded-pill badge-notification bg-danger"></span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-            <li>
-              <a class="dropdown-item" href="#">Some news</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Another news</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </li>
-          </ul>
-        </div> -->
         <!-- Avatar -->
         <div class="dropdown">
           <!-- Tres importante, faire que le profile s affiche si la personne est conneter -->
@@ -82,7 +47,7 @@
   </nav>
   <div id="carouselExampleControls" class="carousel slide panda-slide mt-5 mb-5" data-bs-ride="carousel" style="height: 100vh;">
     <div class="carousel-inner">
-        <div class="carousel-item active " id="carousel_item1">
+        <div class="carousel-item active " id="carousel_item1" style="margin-top: 7%;">
             <div class="row d-flex align-items-center p-5">
                 <div class="col-md-12">
                     <h1 style="font-size: 70px; color: #ffffff;">Bienvenue sur CampusFOOD</h1>
@@ -92,7 +57,7 @@
 
             </div>
         </div>
-        <div class="carousel-item" id="carousel_item2">
+        <div class="carousel-item" id="carousel_item2" style="margin-top: 7%;">
             <div class="row d-flex align-items-center p-5">
                 <div class="col-md-7">
                     <h1 style="font-size: 70px; color: #ffffff;">Mon restau du campus en mains</h1>
@@ -101,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <div class="carousel-item" id="carousel_item3">
+        <div class="carousel-item" id="carousel_item3" style="margin-top: 7%;">
             <div class="row d-flex align-items-center p-5">
                 <div class="col-md-12">
                     <h1 style="font-size: 70px; color: #ffffff;">CampusFood, mon gereur de temps entre mes cours</h1>
@@ -126,50 +91,17 @@
 {% endblock  %}
 
 {% block content %}
-<h1 class="text mb-7 mt-5" style="color: #222831; text-align: center; align-items: center; font-weight: lighter; font-size: 40px;"><u>Service rapide</u></h1>
-
-<section class="container overflow-hidden mt-10 categories">
-  <div class="row g-5 mb-7">
-      <div class="col">
-          <div class="p-3 rounded category-bg-watch d-flex align-items-center justify-content-around">
-              <h3 class="text-white">Se rapprocher beaucoup plus de son refectoire universitaire</h3>
-              <img src="{% static "image/cfoodproche.png" %}" alt="watch image"/>
-          </div>
-      </div>
-      <div class="col">
-          <div class="p-3 rounded category-bg-bag d-flex align-items-center justify-content-around">
-              <h3 class="text-white">Un accès facile aux menus et aux informations des restaurants universitaires. </h3>
-              <img src="{% static "image/food.png" %}" alt="bag image"/>
-          </div>
-      </div>
-      <div class="col">
-          <div class="p-3 rounded category-bg-watch d-flex align-items-center justify-content-around">
-              <h3 class="text-white">Un système de commande et de paiement en ligne.</h3>
-              <img src="{% static "image/livraison.png" %}" alt="shoe image"/>
-          </div>
-      </div>
-
-    <div class="col">
-      <div class="p-3 rounded category-bg-bag d-flex align-items-center justify-content-around border rounder">
-          <h3 class="text-white">Une communication directe avec les restaurants universitaires: Envoyez vos commentaires et suggestions directement aux restaurants universitaires via l'application campusCfood.</h3>
-          <img src="{% static "image/assistance.png" %}" alt="shoe image"/>
-      </div>
-  </div>
-  </div>
-</section>
-<div class="container mb-3">
+<div class="container mb-1" style="margin-top: 10%;">
   <img src="{% static "image/goldcrown-1.png" %}" class="img align-items-center justify-content-around " style="margin-left: 38%;" alt="Headphone Image" >
-  <h1 class="text mb-7 mt-5" style="color: #222831; text-align: center; align-items: center; font-weight: lighter; font-size: 40px;">Qui sommes nous?</h1>
+  <h1 class="text mb-3 mt-3" style="color: #222831; text-align: center; align-items: center; font-weight: lighter; font-size: 40px;">Qui sommes nous?</h1>
   <img src="{% static "image/goldcrown-1.png" %}" class="img align-items-center justify-content-around" style="margin-left: 38%;" alt="Headphone Image" >
 </div>
-
 <!-- section presentation -->
-<section class="about_section layout_padding mb-14">
+<section class="about_section layout_padding mb-6">
   <div class="container  ">
-
     <div class="row">
       <div class="col-md-6 ">
-        <div class="img-box">
+        <div class="img-box ">
           <img src="{% static "image/about-img.png" %}" alt="">
         </div>
       </div>
@@ -195,18 +127,57 @@
   </div>
 </section>
 <!-- end section presentation -->
+      <!-- Services -->
+<link rel="stylesheet" href="{% static "css/style.css"%}" />
+<div class="services block block-bg-gradient block-border-bottom" style="color: #000000;">
+  <div class="container">
+    <h2 class="block-title">
+      Our Services
+    </h2>
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <span class="fa-stack fa-5x">
+        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+        <i class="fa fa-group fa-stack-1x fa-inverse"></i> </span>
+        <h4 class="text-weight-strong">
+          User Experience / Information Architecture
+        </h4>             
+        <p>Se rapprocher beaucoup plus de son refectoire universitaire grâce à un système de commande et de paiement en ligne.</p>
+      </div>
+      <div class="col-md-4 text-center">
+        <span class="fa-stack fa-5x">
+        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i> </span>
+        <h4 class="text-weight-strong">
+          User Interface Design / User Interface Theming
+        </h4>
+        <p>Un accès facile aux menus et aux informations des restaurants universitaires.</p>
+      </div>
+      <div class="col-md-4 text-center">
+        <span class="fa-stack fa-5x">
+        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+        <i class="fa fa-cogs fa-stack-1x fa-inverse"></i> </span>
+        <h4 class="text-weight-strong">
+          Code &amp; Development / Implementation Support
+        </h4>
+        <p>Une communication directe avec les restaurants universitaires: Envoyez vos commentaires et suggestions directement aux restaurants universitaires via l'application campusCfood.</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% comment %} end service test {% endcomment %}
+
+
 
 
 <!-- some food proposer -->
 <section class="food_section layout_padding-bottom " id="menu">
   <div class="container">
-    <div class="heading_container heading_center mb-5" style="align-items: center; justify-content: center;">
-      <img src="{% static "image/goldcrown-2.png" %}" class="" alt="Headphone Image" >
-      <h2>
-        Mangez a l'ivoirienne
-      </h2>
-      <img src="{% static "image/goldcrown-1.png" %}" class="" alt="Headphone Image" >
-    </div>
+<div class="container mb-1" style="margin-top: 10%;">
+  <img src="{% static "image/goldcrown-1.png" %}" class="img align-items-center justify-content-around " style="margin-left: 38%;" alt="Headphone Image" >
+  <h1 class="text mb-3 mt-3" style="color: #222831; text-align: center; align-items: center; font-weight: lighter; font-size: 40px;">Mangez à l'ivoirienne</h1>
+  <img src="{% static "image/goldcrown-1.png" %}" class="img align-items-center justify-content-around" style="margin-left: 38%;" alt="Headphone Image" >
+</div>
     <div class="filters-content">
       <div class="row grid">
         <!-- Plat -->
@@ -227,11 +198,7 @@
                   <h6>
                     700.00 FR
                   </h6>
-                  <a href="">
-                    <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
-                      <i class="fas fa-shopping-cart"></i>
-                    </span>
-                  </a>
+                  
                 </div>
               </div>
             </div>
@@ -255,11 +222,7 @@
                   <h6>
                     1000.00 FR
                   </h6>
-                  <a href="">
-                    <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
-                      <i class="fas fa-shopping-cart"></i>
-                    </span>
-                  </a>
+                  
                 </div>
               </div>
             </div>
@@ -283,11 +246,7 @@
                   <h6>
                     1000.00 FR
                   </h6>
-                  <a href="">
-                    <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
-                      <i class="fas fa-shopping-cart"></i>
-                    </span>
-                  </a>
+                  
                 </div>
               </div>
             </div>
@@ -311,11 +270,7 @@
                   <h6>
                     700.00 FR
                   </h6>
-                  <a href="">
-                    <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
-                      <i class="fas fa-shopping-cart"></i>
-                    </span>
-                  </a>
+                  
                 </div>
               </div>
             </div>
@@ -339,11 +294,7 @@
                   <h6>
                     1000.00 FR
                   </h6>
-                  <a href="">
-                    <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
-                      <i class="fas fa-shopping-cart"></i>
-                    </span>
-                  </a>
+                  
                 </div>
               </div>
             </div>
@@ -367,11 +318,7 @@
                   <h6>
                     1000.00 FR
                   </h6>
-                  <a href="">
-                    <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
-                      <i class="fas fa-shopping-cart"></i>
-                    </span>
-                  </a>
+                  
                 </div>
               </div>
             </div>
@@ -395,11 +342,7 @@
                   <h6>
                     1000.00 FR
                   </h6>
-                  <a href="">
-                    <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
-                      <i class="fas fa-shopping-cart"></i>
-                    </span>
-                  </a>
+                  
                 </div>
               </div>
             </div>
@@ -423,11 +366,7 @@
                   <h6>
                     500.00 FR
                   </h6>
-                  <a href="">
-                    <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
-                      <i class="fas fa-shopping-cart"></i>
-                    </span>
-                  </a>
+                  
                 </div>
               </div>
             </div>
@@ -451,11 +390,7 @@
                   <h6>
                     500.00 FR
                   </h6>
-                  <a href="">
-                    <span class="btn  add-to-cart-btn" data-mdb-ripple-init="" data-id="1" style="margin-right: 10px;">
-                      <i class="fas fa-shopping-cart"></i>
-                    </span>
-                  </a>
+                  
                 </div>
               </div>
             </div>

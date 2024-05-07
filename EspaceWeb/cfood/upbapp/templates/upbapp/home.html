@@ -2,130 +2,25 @@
 {% block welcome %}
 {% load static %}
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
-    <!-- Container wrapper -->
-    <div class="container-fluid">
-      <!-- Toggle button -->
-      <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-  
-      <!-- Collapsible wrapper -->
-      <div class="col">
-        <!-- Espace mon restau -->
-        <div class="col md-6" style="color: #222831; font-weight: bolder; font-size: 50px;">Resto de UPB</div>
-        <!-- bar de recherche -->
-        <div class="col md-6" style="justify-items: center;justify-content: center;">
-          <form class="d-flex" role="search" action="{% url "search" %}" method="GET">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="article">
-            <button class="btn btn-outline-success" type="submit">Recherche</button>
-          </form>
-        </div>
-        <!-- Collapsible wrapper -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- Navbar brand -->
-          <a class="navbar-brand mt-2 mt-lg-0" href="{% url "upbHome" %}">
-            <small style="color: chocolate; font-weight: bolder; font-size: 50px;">CampusFOOD</small>
-          </a>
-          <!-- Left links -->
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              {% if user_profile %}
-              <a class="navbar-brand mt-2 mt-lg-0" href="{% url "upbHome" %}">
-                  Accueil
-              </a>
-              {% else %}
-              <a class="navbar-brand mt-2 mt-lg-0" href="{% url "home" %}">
-                  Accueil
-              </a>
-              {% endif %}
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url "menu" %}">Menu</a>
-            </li>
-            {% if user.is_authenticated %}
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Catégories
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                {% for categorie in list_categorie %}
-                <a class="dropdown-item category-link" href="#">{{categorie.nom}}</a><hr>
-                {% endfor %}
-              </div>
-            </li>
-            {% endif %}
-            {% comment %} <li class="nav-item">
-              <a class="nav-link" href="#">Commandes</a>
-            </li> {% endcomment %}
-          </ul>
-        </div>
-      </div>
-      <div class="d-flex align-items-center">
-        <a class="text-reset me-3" href="{% url "panier" %}">
-          <i class="fas fa-shopping-cart"></i>
-        </a>
-        <div class="dropdown">
-          <a data-mdb-dropdown-init class="text-reset me-3 dropdown-toggle hidden-arrow" href="#"
-            id="navbarDropdownMenuLink" role="button" aria-expanded="false">
-            <i class="fas fa-bell"></i>
-            <span class="badge rounded-pill badge-notification bg-danger"></span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-            <li>
-              <a class="dropdown-item" href="#">Some news</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Another news</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </li>
-          </ul>
-        </div>
-        <!-- Avatar -->
-        {% if user.is_authenticated %}
-        <div class="dropdown">
-          <!-- Tres importante, faire que le profile s affiche si la personne est conneter -->
-          <!-- <a class="btn btn-primary" href="{% url "login" %}">Connexion</a> -->
-          <a href="#profile"><i class="fas fa-user"><strong>{{user_profile.username}}</strong></i></a>
-        </div>
-        {% endif %}
-      </div>
-  </nav>
-  <div id="carouselExampleControls" class="carousel slide panda-slide mt-5 mb-5" data-bs-ride="carousel" style="height: 100vh;">
+  <div id="carouselExampleControls" class="carousel slide panda-slide mb-5" data-bs-ride="carousel" style="height: 100vh;">
     <div class="carousel-inner">
-<!--         <div class="carousel-item active " id="carousel_item1">
+        <section class="carousel-item active welcome-section" style="background-color: #f3f3f394; text-align: center; padding: 50px; margin-top: 10%;">
+          <h1 style="font-size: 50px; color: #d2691e; font-weight: bold;">Bienvenue à l'Espace Restauration de l'Université Polytechnique de Bingerville</h1>
+          <h4 style="color: #363433; font-weight: 700;">Découvrez nos services de restauration et les avantages que nous offrons à nos clients.</h4>
+        </section>
+        <div class="carousel-item" id="carousel_item2" style="margin-top: 10%;">
             <div class="row d-flex align-items-center p-5">
                 <div class="col-md-12">
-                    <h1 style="font-size: 70px; color: #ffffff;">Bienvenue sur CampusFOOD</h1>
-                    <p>Votre plateforme de restauration Universitaire.Rejoignez-nous pour découvrir une <br> nouvelle façon de vivre la restauration universitaire, où la technologie et le plaisir de <br> bien manger se rencontrent pour offrir une expérience unique à tous les membres de la communauté universitaire.</p>
-                    <button class="btn btn-buy">En Savoir Plus</button>
-                </div>
-
-            </div>
-        </div> -->
-        <section class="carousel-item active welcome-section mt-5" style="background-color: #d2691e; text-align: center; padding: 50px;">
-          <h1>Bienvenue à l'Espace Restauration de l'Université Polytechnique de Bingerville</h1>
-          <p>Découvrez nos services de restauration et les avantages que nous offrons à nos clients.</p>
-        </section>
-        <div class="carousel-item" id="carousel_item2">
-            <div class="row d-flex align-items-center p-5">
-                <div class="col-md-7">
-                    <h1 style="font-size: 70px; color: #ffffff;">Mon restau du campus en mains</h1>
-                    <p>Plus besoin de sortir votre portefeuille ou de faire la queue pour payer votre repas. Avec campusCfood, vous pouvez commander et payer votre repas en ligne en quelques clics seulement.</p>                    
-                    <button class="btn btn-buy">En Savoir Plus</button>
+                    <h1 style="font-size: 60px; color: #d2691e; font-weight: bold;">Mon restau du campus en mains</h1>
+                    <h4 style="color: #ffffff; font-weight: 700;">Plus besoin de sortir votre portefeuille ou de faire la queue pour payer votre repas. Avec campusCfood, vous pouvez commander et payer votre repas en ligne en quelques clics seulement.</h4>  
                 </div>
             </div>
         </div>
-        <div class="carousel-item" id="carousel_item3">
+        <div class="carousel-item" id="carousel_item3" style="margin-top: 10%;">
             <div class="row d-flex align-items-center p-5">
                 <div class="col-md-12">
-                    <h1 style="font-size: 70px; color: #ffffff;">CampusFood, mon gereur de temps entre mes cours</h1>
-                    <p>Dites adieu aux longues files d'attente et aux menus indéchiffrables ! Avec campusCfood, vous pouvez consulter les menus en ligne, comparer les prix et trouver facilement le restaurant qui correspond à vos envies..</p>
-                    <button class="btn btn-buy">En Savoir Plus</button>
+                    <h1 style="font-size: 60px; color: #d2691e; font-weight: bold;">CampusFood, mon gereur de temps entre mes cours</h1>
+                    <h4 style="color: #ffffff; font-weight: 700;">Dites adieu aux longues files d'attente et aux menus indéchiffrables ! Avec campusCfood, vous pouvez consulter les menus en ligne, comparer les prix et trouver facilement le restaurant qui correspond à vos envies.</h4>  
                 </div>
             </div>
         </div>
@@ -142,18 +37,17 @@
     </button>
   </div>
 </header>
-
-<!-- <section class="welcome-section" style="background-color: #d2691e; text-align: center; padding: 50px;">
-  <h1>Bienvenue à l'Espace Restauration de l'Université Polytechnique de Bingerville</h1>
-  <p>Découvrez nos services de restauration et les avantages que nous offrons à nos clients.</p>
-</section> -->
-
 <!-- Section de présentation de l'université -->
-<section class="university-section" style="background-color: #f5f5f5; padding: 50px; text-align: center;">
-  <h2>Université Polytechnique de Bingerville</h2>
-  <p>Située à Bingerville, l'UPB offre des formations de qualité avec un campus moderne et dynamique.</p>
+<section class="university-section" style="background-color: #f5f5f5; padding: 50px; text-align: center; ">
+      <!--Presentation-->
+  <img src="{% static "image/goldcrown-1.png" %}" class="img align-items-center justify-content-around " alt="Headphone Image" >
+  <h2><span class="text text-danger text-align-center" style="font-weight:700;">Le Restau</span> de l'Université Polytechnique de Bingerville</h2>
+  <img src="{% static "image/goldcrown-2.png" %}" class="img align-items-center justify-content-around"  alt="Headphone Image" >
+  <p style="margin-top: 30px;">Le Restau de l'Université Polytechnique de Bingerville (UPB) est un restaurant universitaire situé 
+    au cœur du campus de l'UPB à Bingerville, en Côte d'Ivoire. Ouvert depuis la création de l'université
+    en 2018. Ce Restau propose une variété de repas abordables et nutritifs aux étudiants, au personnel et aux corps enseignant
+    et aussi un menu varié et délicieux qui met en valeur la riche gastronomie ivoirienne</p>
 </section>
-
 <!-- Section sur les services du restaurant -->
 <section class="services-section" style="background-color: #e0e0e0; padding: 50px;" id="service">
   <h2>Services du Restaurant</h2>
@@ -176,8 +70,26 @@
     <div class="service" style="margin: 20px; text-align: center;">
       <i class="fas fa-truck" style="font-size: 40px;"></i>
       <h3>Livraison</h3>
-      <p>Livraison aux étudiants proches et au personnel.</p>
+      <p>Livraison au corps enseignant et au personnel de l'université.</p>
     </div>
+  </div>
+</section>
+<!-- Horaire du restau -->
+<section>
+  <div class="opening-hours " style="margin-top: 5%;">
+    <h2>
+        <i class="fas fa-clock" style="color: chocolate;"></i> <!-- Icône d'horloge -->
+        Horaires d'ouverture du Restau UPB
+    </h2>
+    <ul>
+        <li><span class="day">Lundi:</span> 08h - 16h30</li>
+        <li><span class="day">Mardi:</span> 08h - 16h30</li>
+        <li><span class="day">Mercredi:</span> 08h - 16h30</li>
+        <li><span class="day">Jeudi:</span> 08h - 16h30</li>
+        <li><span class="day">Vendredi:</span> 08h - 16h30</li>
+        <li><span class="day">Samedi:</span> 08h - 16h30</li>
+        <li><span class="day">Dimanche:</span> Fermé</li>
+    </ul>
   </div>
 </section>
 
@@ -221,13 +133,22 @@
   <h2>Notre Galerie</h2>
   <div class="gallery">
     <div class="gallery-item" style="margin: 20px;">
-      <img src="{% static 'image/chefcuisinier.jpg' %}" alt="Restaurant" style="width: 100%; height: auto; border-radius: 10px;">
+      <img src="{% static 'image/restau/A.jpg' %}" alt="Restaurant" style="width: 100%; height: auto; border-radius: 10px;">
     </div>
     <div class="gallery-item" style="margin: 20px;">
-      <img src="{% static 'image/chefcuisinier.jpg' %}" alt="Plat" style="width: 100%; height: auto; border-radius: 10px;">
+      <img src="{% static 'image/restau/C.jpg' %}" alt="Plat" style="width: 100%; height: auto; border-radius: 10px;">
     </div>
     <div class="gallery-item" style="margin: 20px;">
-      <img src="{% static 'image/chefcuisinier.jpg' %}" alt="Événement" style="width: 100%; height: auto; border-radius: 10px;">
+      <img src="{% static 'image/restau/B.jpg' %}" alt="Événement" style="width: 100%; height: auto; border-radius: 10px;">
+    </div>
+    <div class="gallery-item" style="margin: 20px;">
+      <img src="{% static 'image/restau/B.jpg' %}" alt="Événement" style="width: 100%; height: auto; border-radius: 10px;">
+    </div>
+    <div class="gallery-item" style="margin: 20px;">
+      <img src="{% static 'image/restau/B.jpg' %}" alt="Événement" style="width: 100%; height: auto; border-radius: 10px;">
+    </div>
+    <div class="gallery-item" style="margin: 20px;">
+      <img src="{% static 'image/restau/B.jpg' %}" alt="Événement" style="width: 100%; height: auto; border-radius: 10px;">
     </div>
   </div>
 </section>
@@ -244,68 +165,135 @@
   </div>
 </section>
 
-
 <style>
-  .welcome-section {
-  color: white;
-}
 
-.university-section,
-.services-section,
-.staff-section {
-  border-top: 1px solid #ccc;
-}
+  header {
+      height: 75vh; /* Hauteur du header */
+      width: 100%; /* Largeur du header */
+      margin: 0;
+      background: 
+          linear-gradient(
+              rgba(33, 34, 34, 0.8), /* Couleur de fond avec transparence */
+              rgba(33, 34, 34, 0.8) /* Fin du dégradé avec la même transparence */
+          ), 
+          url('{% static "image/restau/A.jpg" %}'); /* Lien vers l'image de fond */
+      background-size: cover; /* L'image couvre tout le fond */
+      background-repeat: no-repeat; /* Pas de répétition */
+      background-position: center; /* Centrage de l'image */
+  }
 
-.services {
-  display: flex;
-  justify-content: center;
-}
+  
+    .welcome-section {
+    color: white;
+  }
 
-.service,
-.staff-member {
-  transition: transform 0.3s;
-}
+  .university-section,
+  .services-section,
+  .staff-section {
+    border-top: 1px solid #ccc;
+  }
 
-.service:hover,
-.staff-member:hover {
-  transform: scale(1.1);
-}
+  .services {
+    display: flex;
+    justify-content: center;
+  }
+
+  .service,
+  .staff-member {
+    transition: transform 0.3s;
+  }
+
+  .service:hover,
+  .staff-member:hover {
+    transform: scale(1.1);
+  }
 
 
-{% comment %} a partir de section temoignage {% endcomment %}
-.testimonials-section {
-  text-align: center;
-}
+  {% comment %} a partir de section temoignage {% endcomment %}
+  .testimonials-section {
+    text-align: center;
+  }
 
-.testimonial {
-  font-style: italic;
-  border: 1px solid #ccc;
-  padding: 20px;
-  border-radius: 10px;
-}
+  .testimonial {
+    font-style: italic;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+  }
 
-.gallery {
-  display: flex;
-  justify-content: center;
-}
+  .gallery {
+    display: flex;
+    justify-content: center;
+  }
 
-.gallery-item img {
-  transition: transform 0.3s;
-}
+  .gallery-item img {
+    transition: transform 0.3s;
+  }
 
-.gallery-item img:hover {
-  transform: scale(1.05);
-}
+  .gallery-item img:hover {
+    transform: scale(2.01);
+  }
 
-.links-section a {
-  text-decoration: none;
-  color: #d2691e;
-  transition: background-color 0.3s;
-}
+  .links-section a {
+    text-decoration: none;
+    color: #d2691e;
+    transition: background-color 0.3s;
+  }
 
-.links-section a:hover {
-  background-color: #ccc;
-}
+  .links-section a:hover {
+    background-color: #ccc;
+  }
+
+  /* Horaire du restau */
+  /* styles.css */
+  /* styles.css */
+  .opening-hours {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), /* Dégradé blanc transparent */
+                  url('restaurant.jpg') no-repeat center center; /* Image de fond */
+      background-size: cover; /* L'image couvre tout l'arrière-plan */
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .opening-hours h2 {
+      text-align: center;
+      color: #333;
+      font-family: 'Arial', sans-serif;
+      font-size: 24px; /* Taille du texte */
+  }
+
+  .opening-hours .fas.fa-clock {
+      font-size: 30px; /* Taille de l'icône */
+  }
+
+  .opening-hours ul {
+      list-style-type: none;
+      padding: 0;
+  }
+
+  .opening-hours li {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+  }
+
+  .opening-hours .day {
+      font-weight: bold;
+      color: #ff6347; /* Orange vif */
+  }
+
+  /* Effet au survol */
+  .opening-hours li:hover {
+      background: rgba(224, 247, 250, 0.7); /* Couleur de survol avec opacité */
+      cursor: pointer;
+  }
+
+
+  /* end hiraire du restau */
 
 </style>
 
@@ -320,202 +308,29 @@
     service.addEventListener("mouseleave", () => {
       service.style.backgroundColor = "transparent";
       service.style.color = "#333";
+        });
+      });
+    });
+
+
+  /* end hiraire du restau */
+  // scripts.js
+  document.addEventListener('DOMContentLoaded', function() {
+    const listItems = document.querySelectorAll('.opening-hours li');
+
+    listItems.forEach(function(item) {
+        item.addEventListener('mouseover', function() {
+            item.style.transform = 'scale(1.05)'; // Augmente légèrement la taille
+            item.style.transition = 'transform 0.3s ease'; // Transition douce
+        });
+
+        item.addEventListener('mouseout', function() {
+            item.style.transform = 'scale(1)'; // Retourne à la taille normale
+        });
     });
   });
-});
-
 
 
 </script>
-
-
 {% endblock  %}
 
-{% comment %} {% block content %}
-<section class="welcome-section" style="background-color: #d2691e; text-align: center; padding: 50px;">
-  <h1>Bienvenue à l'Espace Restauration de l'Université Polytechnique de Bingerville</h1>
-  <p>Découvrez nos services de restauration et les avantages que nous offrons à nos clients.</p>
-</section>
-
-<!-- Section de présentation de l'université -->
-<section class="university-section" style="background-color: #f5f5f5; padding: 50px; text-align: center;">
-  <h2>Université Polytechnique de Bingerville</h2>
-  <p>Située à Bingerville, l'UPB offre des formations de qualité avec un campus moderne et dynamique.</p>
-</section>
-
-<!-- Section sur les services du restaurant -->
-<section class="services-section" style="background-color: #e0e0e0; padding: 50px;">
-  <h2>Services du Restaurant</h2>
-  <div class="services">
-    <div class="service" style="margin: 20px; text-align: center;">
-      <i class="fas fa-utensils" style="font-size: 40px;"></i>
-      <h3>Commandes en ligne</h3>
-      <p>Vous pouvez passer vos commandes en ligne pour plus de commodité.</p>
-    </div>
-    <div class="service" style="margin: 20px; text-align: center;">
-      <i class="fas fa-calendar-alt" style="font-size: 40px;"></i>
-      <h3>Réservations</h3>
-      <p>Réservez votre table à l'avance pour un service rapide.</p>
-    </div>
-    <div class="service" style="margin: 20px; text-align: center;">
-      <i class="fas fa-credit-card" style="font-size: 40px;"></i>
-      <h3>Paiement en ligne</h3>
-      <p>Paiement sécurisé pour une expérience fluide.</p>
-    </div>
-    <div class="service" style="margin: 20px; text-align: center;">
-      <i class="fas fa-truck" style="font-size: 40px;"></i>
-      <h3>Livraison</h3>
-      <p>Livraison aux étudiants proches et au personnel.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Section sur le personnel du restaurant -->
-<section class="staff-section" style="background-color: #d2691e; padding: 50px;">
-  <h2>Rencontrez notre personnel</h2>
-  <div class="staff">
-    <div class="staff-member" style="margin: 20px; text-align: center;">
-      <img src="{% static 'image/chef.jpg' %}" alt="Chef" style="width: 150px; border-radius: 50%;">
-      <h3>Chef Principal</h3>
-      <p>Notre chef principal assure des repas de qualité.</p>
-    </div>
-    <div class="staff-member" style="margin: 20px; text-align: center;">
-      <img src="{% static 'image/manager.jpg' %}" alt="Manager" style="width: 150px; border-radius: 50%;">
-      <h3>Manager</h3>
-      <p>Gestionnaire du restaurant, garant de votre satisfaction.</p>
-    </div>
-  </div>
-</section>
-
-
-
-<style>
-  .welcome-section {
-  color: white;
-}
-
-.university-section,
-.services-section,
-.staff-section {
-  border-top: 1px solid #ccc;
-}
-
-.services {
-  display: flex;
-  justify-content: center;
-}
-
-.service,
-.staff-member {
-  transition: transform 0.3s;
-}
-
-.service:hover,
-.staff-member:hover {
-  transform: scale(1.1);
-}
-</style>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-  const services = document.querySelectorAll(".service");
-  services.forEach((service) => {
-    service.addEventListener("mouseenter", () => {
-      service.style.backgroundColor = "#d2691e";
-      service.style.color = "white";
-    });
-    service.addEventListener("mouseleave", () => {
-      service.style.backgroundColor = "transparent";
-      service.style.color = "#333";
-    });
-  });
-});
-</script>
-{% endblock  %} {% endcomment %}
-
-
-
-{% comment %} test B
-
-
-<section id="presentation">
-  <h2>Présentation de l'UPB</h2>
-  <p>L'UPB est une université d'excellence en Côte d'Ivoire, reconnue pour ses formations de qualité, ses enseignants qualifiés et son environnement dynamique. Située à Bingerville, l'UPB offre un cadre idéal pour l'épanouissement des étudiants et leur préparation à une carrière réussie.</p>
-</section>
-
-<section id="services">
-  <h2>Services du restaurant universitaire</h2>
-  <ul>
-      <li>Commande en ligne</li>
-      <li>Réservation de table</li>
-      <li>Paiement en ligne</li>
-      <li>Service rapide</li>
-      <li>Livraison aux proches</li>
-  </ul>
-</section>
-
-<section id="avantages">
-  <h2>Avantages pour les clients</h2>
-  <ul>
-      <li>Des prix abordables</li>
-      <li>Une grande variété de choix</li>
-      <li>Des produits frais et locaux</li>
-      <li>Un cadre convivial</li>
-  </ul>
-</section>
-
-<section id="personnel">
-  <h2>Présentation du personnel</h2>
-  <p>Le personnel du restaurant universitaire de l'UPB est composé d'une équipe dynamique et professionnelle dédiée à votre satisfaction. Nous sommes là pour vous offrir un service de qualité et vous faire vivre une expérience culinaire agréable.</p>
-</section>
-
-
-
-// Fonction pour afficher un message de bienvenue
-function afficherBienvenue() {
-  var message = "Bienvenue au Restaurant Universitaire UPB !";
-  alert(message);
-}
-
-// Fonction pour changer la couleur de fond d'une section
-function changerCouleurFond(sectionId, couleur) {
-  var section = document.getElementById(sectionId);
-  section.style.backgroundColor = couleur;
-}
-
-// Exécution des fonctions au chargement de la page
-window.onload = function() {
-  afficherBienvenue();
-  changerCouleurFond("presentation", "#e6e6e6");
-  changerCouleurFond("services", "#f6f6f6");
-  changerCouleurFond("avantages", "#e6e6e6");
-  changerCouleurFond("personnel", "#f6f6f6");
-};
-
-
-
-
-h1 {
-  margin: 0;
-}
-
-section {
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-h2 {
-  color: #chocolate;
-  margin-bottom: 10px;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-li {
-  margin-bottom: 10px;
-}
-{% endcomment %}

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
+import uuid
 
 # Create your models here.
 
@@ -211,3 +212,43 @@ class Paiement(models.Model):
 
     def __str__(self):
         return f"{self.montant} - {self.methode} - {self.date_paiement}"
+
+
+#Panier et Produit du panier
+
+class Panier(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, primary_key=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    completed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.id)
+
+     #focntion de calcule du prix total des article contenu dans le panier
+    @property
+    def total_price(self):
+        #recuperons tous les article dans le panier
+        cartitems = self.cartitems.all()
+        #le prix total est la somme de tout ces articles
+        total = sum([item.price for item in cartitems])
+        return total
+        #fonction qui prend le nombre d article dans le panier
+    @property
+    def num_of_items(self):
+        cartitems = self.cartitems.all()
+        quantity = sum([item.quantity for item in cartitems])
+        return quantity
+
+class PanierItem(models.Model):
+    product = models.ForeignKey(Plat, on_delete=models.CASCADE, related_name='items')
+    cart = models.ForeignKey(Panier, on_delete=models.CASCADE, related_name='cartitems')
+    quantity = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.product.nom
+
+    #fonction pour calculer le prix total selon la quantite de l article
+    @property
+    def price(self):
+        new_price = self.product.prix * self.quantity
+        return new_price

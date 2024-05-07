@@ -6,17 +6,6 @@ from django.contrib import messages
 
 
 # Create your views here.
-""" def home(request):
-    list_categorie = Categorie.objects.all()
-    list_plat = Plat.objects.all()
-    context = {
-        "name": "Acceuil",
-        "list_categorie": list_categorie,
-        "list_plat": list_plat
-        }
-    return render(request, 'cfoodapp/home.html', context) """
-
-
 def home(request):
     return render(request, 'cfoodapp/home.html', {
         "name": "Acceuil"})

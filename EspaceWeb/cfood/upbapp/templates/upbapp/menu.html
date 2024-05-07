@@ -1,16 +1,44 @@
 {% extends "upbapp/base.html" %}
+{% block welcome %}
+{% load static %}
+<header>
+  <div class="container">
+    <div class="heading_container heading_center" style="align-items: center; justify-content: center;">
+      <img src="{% static "image/goldcrown-1.png" %}" class="img mt-5" alt="Headphone Image" >
+      <h2 style="font-size: 100px;">
+        MENU
+      </h2>
+      <img src="{% static "image/goldcrown-2.png" %}" class="" alt="Headphone Image">
+    </div>
+  </div>
+</header>
+
+<style>
+  header {
+    height: 50vh; /* Hauteur du header */
+    width: 100%; /* Largeur du header */
+    margin: 0;
+    background: 
+        linear-gradient(
+            rgba(33, 34, 34, 0.8), /* Couleur de fond avec transparence */
+            rgba(33, 34, 34, 0.8) /* Fin du dégradé avec la même transparence */
+        ), 
+        url('{% static "image/restau/A.jpg" %}'); /* Lien vers l'image de fond */
+    background-size: cover; /* L'image couvre tout le fond */
+    background-repeat: no-repeat; /* Pas de répétition */
+    background-position: center; /* Centrage de l'image */
+    color: #ffffff;
+    font-weight: bolder;
+    text-align: center;
+}
+
+</style>
+{% endblock  %}
 {% block content %} 
 {% load static %}
 <!-- some food proposer -->
 <section class="food_section layout_padding-bottom " id="menu">
   <div class="container">
-    <div class="heading_container heading_center mb-5" style="align-items: center; justify-content: center;">
-      <img src="{% static "image/goldcrown-2.png" %}" class="" alt="Headphone Image" >
-      <h2>
-        Mangez a l'ivoirienne
-      </h2>
-      <img src="{% static "image/goldcrown-1.png" %}" class="" alt="Headphone Image" >
-    </div>
     <!-- creer categorie -->
     {% for categorie in list_categorie %}
     <div class="filters-content">
@@ -44,11 +72,14 @@
                     <h6>
                         Prix: {{ plat.prix }} Francs
                     </h6>
-                    <a href="">
+                    <button class="btn add-to-cart-btn" value="{{plat.id}}" id="button">
+                      Ajouter au panier
+                    </button>
+                    <!-- <a href="">
                         <span class="btn add-to-cart-btn" data-mdb-ripple-init data-id="{{ plat.id }}" style="margin-right: 10px;">
                             <i class="fas fa-shopping-cart" style="color: #d2691e;"></i>
                         </span>
-                    </a>
+                    </a> -->
                   </div>
               </div>
             </div>
@@ -63,8 +94,6 @@
   </div>
   <br>
 </section>
-
-
 
 
 <style>
@@ -156,6 +185,10 @@
             -ms-flex-align: center;
                 align-items: center;
         text-decoration: none;
+        
+        }
+        .food_section a{
+          color: #222831c7;
         }
         .food_section .box .options a :hover{
           -webkit-transform: scale(1.1);
@@ -217,50 +250,7 @@
   a {
   text-decoration: none;
   /*color: white;*/
-}
+  }
 
 </style>
-<!-- JavaScript à la fin du document -->
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    function addToCart(platId) {
-      const csrfToken = getCSRFToken(); // Obtenir le token CSRF
-      fetch('/ajouter_au_panier/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': csrfToken, // Utiliser le token CSRF dans les en-têtes
-        },
-        body: JSON.stringify({ plat_id: platId }),
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Article ajouté au panier', data); // Actions supplémentaires ici
-      })
-      .catch(error => {
-        console.error('Erreur lors de l\'ajout au panier', error);
-      });
-    }
-  
-    function getCSRFToken() {
-      const csrfInput = document.querySelector('input[name="csrfmiddlewaretoken"]');
-      if (csrfInput) {
-        return csrfInput.value; // Retourner le token CSRF si trouvé
-      } else {
-        console.error("Token CSRF introuvable");
-        return ''; // Retourner une valeur par défaut
-      }
-    }
-  
-    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-    addToCartButtons.forEach(button => {
-      button.addEventListener('click', function (event) {
-        event.preventDefault(); // Empêcher la redirection par défaut
-        const platId = this.getAttribute('data-id'); // Récupérer l'ID du plat
-        addToCart(platId); // Appeler la fonction pour ajouter au panier
-      });
-    });
-  });
-</script>
-  
 {% endblock  %}
