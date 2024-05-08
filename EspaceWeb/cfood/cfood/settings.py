@@ -11,6 +11,15 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+#========param pour l e=hebergement sur heroku========
+    #setpA
+import django_heroku
+import dj_database_url
+from decouple import config
+    #step B: Aller daans MIDDELWARE pour ajouter des choses: whitenoise.middleware.WhiteNoiseMiddleware
+    #stepC aller en dessous de  STATICFILES_DIRS pour ajouer:STATICFILES_STORAGE = 'whitenoise.storage.CompresseManifestStaticFilesStorage'
+    #stepD ajouter a la fin: django_heroku.settings(locals())
+#====================end========================
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -52,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'cfood.urls'
@@ -137,6 +147,8 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompresseManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -149,3 +161,6 @@ lorsque une image est uploader"""
 MEDIA_URL = '/media/'
 """ A cause de cette ligne, dans urls.py on va mettre:
  """
+
+
+django_heroku.settings(locals())

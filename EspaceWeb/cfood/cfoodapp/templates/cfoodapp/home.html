@@ -15,7 +15,7 @@
       <div class="row">
         <!-- bar de recherche -->
         <div class="container" style="justify-items: center;justify-content: center;">
-          <form class="d-flex" role="search" action="" method="GET">
+          <form class="d-flex" role="search" action="" method="GET" style="width: 60%;">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="article">
             <button class="btn btn-outline-success" type="submit">Recherche</button>
           </form>
@@ -27,12 +27,21 @@
             <small style="color: chocolate; font-weight: bolder; font-size: 50px;">CampusFOOD</small>
           </a>
           <!-- Left links -->
-          <ul class="navbar-nav mr-auto">
+          <ul class="navbar-nav mr-auto" style="margin-top: 30px;" >
             <li class="nav-item">
-              <a class="nav-link" href="{% url "home" %}" style="font-size: 20px; margin-top: 25%;">Accueil</a>
+              <a class="nav-link" href="{% url "home" %}" style="font-size: 20px;">Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#menu" style="font-size: 20px; margin-top: 29%;">Menu</a>
+              <a class="nav-link" href="#presentation" style="font-size: 20px; ">Presentation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#service" style="font-size: 20px; ">Service</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#menu" style="font-size: 20px; ">Menu</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contat" style="font-size: 20px; ">Contacts</a>
             </li>
           </ul>
         </div>
@@ -97,7 +106,7 @@
   <img src="{% static "image/goldcrown-1.png" %}" class="img align-items-center justify-content-around" style="margin-left: 38%;" alt="Headphone Image" >
 </div>
 <!-- section presentation -->
-<section class="about_section layout_padding mb-6">
+<section class="about_section layout_padding mb-6" id="presentation">
   <div class="container  ">
     <div class="row">
       <div class="col-md-6 ">
@@ -129,7 +138,7 @@
 <!-- end section presentation -->
       <!-- Services -->
 <link rel="stylesheet" href="{% static "css/style.css"%}" />
-<div class="services block block-bg-gradient block-border-bottom" style="color: #000000;">
+<div class="services block block-bg-gradient block-border-bottom" style="color: #000000;" id="service">
   <div class="container">
     <h2 class="block-title">
       Our Services
@@ -600,7 +609,7 @@
     background-size: cover; /* Stretch image to fill container */
     background-position: center;
   }
-  #presentation{
+/*   #presentation{
     margin-bottom: 10px;
     width: 40%; 
     height: 110px; 
@@ -608,10 +617,9 @@
     font-size: 30px;
     text-align: center;
     padding-top: 30px;
-    /* background: rgb(39,39,39); */
     background: linear-gradient(336deg, rgba(39, 39, 39, 0.801) 0%,rgba(55, 47, 37, 0.636) 50%, rgba(35, 15, 1, 0.748) 100%) ;
     border-radius: 10px 40px 10px 100px;
-  }
+  } */
 
 
 

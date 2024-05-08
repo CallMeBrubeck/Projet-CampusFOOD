@@ -25,7 +25,7 @@
             <small style="color: chocolate; font-weight: bolder; font-size: 50px;">CampusFOOD</small>
           </a>
           <!-- Left links -->
-          <ul class="navbar-nav mr-auto">
+          <ul class="navbar-nav mr-auto" style="justify-content: space-between;">
             <li class="nav-item">
               {% if user_profile %}
               <a class="navbar-brand mt-2 mt-lg-0" href="{% url "upbHome" %}">
@@ -51,6 +51,9 @@
                 <a class="dropdown-item category-link" href="#">{{categorie.nom}}</a><hr>
                 {% endfor %}
               </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#footercontact">Nous contactez</a>
             </li>
             {% endif %}
           </ul>
@@ -84,6 +87,7 @@
           <!-- Tres importante, faire que le profile s affiche si la personne est conneter -->
           <!-- <a class="btn btn-primary" href="{% url "login" %}">Connexion</a> -->
           <a href="#profile"><i class="fas fa-user"><strong>{{user_profile.username}}</strong></i></a>
+          <a class="btn btn-danger" href="{% url "logOut" %}">Deconnexion</a>
         </div>
         {% endif %}
       </div>

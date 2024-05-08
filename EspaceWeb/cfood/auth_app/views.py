@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from cfoodapp.forms import *
 from django.contrib.auth.models import User
@@ -181,62 +181,14 @@ def personnel(request):
 
 
 
+def logOut(request):
+    #return render(request, 'app/logout.html')
+    #appelons la fonction logout
+    logout(request)
+    messages.success(request,'Vous ave ete bien deconnecter')
+    return redirect("home")
+
 #LSES PAGE APRES CONNEXION
 
 #
 #=============================UPB page=============================
-""" def login_cfood(request):
-    #universite = Universite.nom
-    if request.method == "POST":
-        #universite = request.POST.get('universite')
-        #username = request.POST['username']
-        #pwd = request.POST['pwd']
-        username = request.POST['username']
-        pwd = request.POST['password']
-        #authentifions l'utilisateur
-        user = authenticate(request, username=username, password=pwd)
-        #vefifions si l utilisateur est dans notre bd
-        if user is not None:
-            #si oui, l authentifier
-            login(request, user)
-            prenom = user.first_name
-            nom = user.last_name
-            nomUser = user.username
-
-            return redirect("upbHome", username=nomUser)
-            #messages.success(request, "Vous etes bien authenfifier!")
-        #sinon
-        else:
-            messages.error(request, "Erreur d'authentification!")
-            return render(request, "login.html")
-    return render(request, "login.html") """
-
-""" def login_cfood(request):
-    if request.method == "POST":
-        username = request.POST["username"]
-        pwd = request.POST["password"]
-        user = authenticate(request, username=username, password=pwd)
-        if user is not None:
-            login(request, user)
-            #firstname = user.first_name
-            return redirect("upb_home")  # Pas de paramètre passé
-        else:
-            messages.error(request, "Erreur d'authentification!")
-    return render(request, "login.html") """
-
-
-
-""" def login_cfood(request):
-    if request.method == 'POST':
-        formulaire = CustomAuthenticationForm(request, data=request.POST)
-        if formulaire.is_valid():
-            user = formulaire.get_user()
-            login(request, user)  # Connecter l'utilisateur
-            return redirect("upbHome")  # Rediriger après connexion réussie
-        else:
-            messages.error(request, "Nom d'utilisateur ou mot de passe incorrect.")
-
-    else:
-        formulaire = CustomAuthenticationForm()  # Formulaire vierge pour GET
-
-    return render(request, "login.html", {'formulaire': formulaire}) """
