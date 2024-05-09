@@ -3,7 +3,7 @@ from .views import *
 
 urlpatterns = [
     path('',login_cfood, name="login"),
-    path('',logOut, name="login"),
+    #path('',logOut, name="logout"),
     path('signin',signin, name="signin"),
     path('etudiant_inscription', etudiant, name="etudiant_inscription"),
     path('personnel_inscription', personnel, name="personnel_inscription"),

@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from cfoodapp.models import *
+from django.contrib.auth import logout
+from django.contrib import messages
+
 #========pour creer le panier======
 import json
 from django.http import JsonResponse
@@ -109,45 +112,13 @@ def search(request):
         "liste_article":liste_article, "list_categorie": list_categorie,"user_profile": user_profile,
         })
 
+
+
+def logOut(request):
+    #return render(request, 'app/logout.html')
+    #appelons la fonction logout
+    logout(request)
+    messages.success(request,'Vous ave ete bien deconnecter')
+    return redirect("home")
+
 #=============================EndUPB page=============================
-
-""" @csrf_exempt
-@require_POST
-def ajouter_au_panier(request):
-    print("Vue 'ajouter_au_panier' appelée")  # Débogage
-    try:
-        data = json.loads(request.body)  # Assurez-vous que le JSON est valide
-    except json.JSONDecodeError:
-        return JsonResponse({"error": "Requête mal formée"}, status=400)  # Gérer l'erreur JSON
-    
-    plat_id = data.get("plat_id")
-    if not plat_id:
-        return JsonResponse({"error": "ID du plat manquant"}, status=400)  # Retourner une erreur si nécessaire
-    
-    plat = get_object_or_404(Plat, id=plat_id)  # Récupérer le plat
-    
-    panier = request.session.get("panier", {})
-    if plat_id in panier:
-        panier[plat_id] += 1
-    else:
-        panier[plat_id] = 1
-
-    request.session["panier"] = panier  # Mettre à jour le panier dans la session
-
-    return JsonResponse({"message": "Article ajouté au panier", "panier": panier})
-
-
-
-    def panier(request):
-    list_categorie = Categorie.objects.all()
-    panier = request.session.get("panier", {})
-    plats = []
-
-    # Récupérer les plats et calculer le prix total pour chaque article
-    for plat_id, quantity in panier.items():
-        plat = get_object_or_404(Plat, id=plat_id)  # Récupérer le plat
-        prix_total = plat.prix * quantity  # Calcul du prix total
-        plats.append({"plat": plat, "quantity": quantity, "prix_total": prix_total})
-
-    return render(request, 'upbapp/panier.html', {"plats": plats, "name": "Panier", "list_categorie": list_categorie})
- """

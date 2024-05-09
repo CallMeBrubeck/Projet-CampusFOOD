@@ -132,5 +132,53 @@
       })
   }
   
+
+  /* Barre coullisant */
+  $(document).ready(function() {
+            // Bascule le volet coulissant lorsqu'on clique sur l'icône
+            $(".toggle-button").click(function() {
+                $(".slide-in-panel").toggleClass("open");  /* Ajoute/retire la classe "open" */
+            });
+        });
 </script>
+
+<!-- <style>
+  /* Volet coulissant qui se déploie de la droite */
+        .slide-in-panel {
+            position: fixed;  /* Positionnement fixe pour le faire glisser */
+            top: 0;
+            right: -50%;  /* Commence hors de la page */
+            width: 50%;  /* Prend la moitié de la page */
+            height: 100%;
+            background-color: white;
+            box-shadow: -5px 0px 15px rgba(0, 0, 0, 0.3);
+            transition: right 0.5s;  /* Transition pour l'effet de glissement */
+            padding: 20px;
+        }
+
+        /* Lorsque le volet est "ouvert", il glisse pour devenir visible */
+        .slide-in-panel.open {
+            right: 0;  /* La position du volet lorsqu'il est ouvert */
+        }
+
+        /* Style de l'icône qui déclenche le volet */
+        .toggle-button {
+            position: absolute;  /* Pour le placer dans le coin supérieur droit */
+            top: 10px;
+            right: 10px;
+            cursor: pointer;  /* Change le curseur à la main */
+        }
+
+        /* Style des éléments du volet coulissant */
+        .slide-in-panel a {
+            text-decoration: none;
+            color: black;
+            padding: 10px 0;
+            display: block;  /* Affichage en bloc pour occuper toute la largeur */
+        }
+
+        .slide-in-panel a:hover {
+            background-color: #f5f5f5;  /* Effet au survol */
+        }
+</style> -->
 </html>

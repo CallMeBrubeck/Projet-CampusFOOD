@@ -10,5 +10,6 @@ urlpatterns = [
     path('panier', cart, name="panier"),
     path('menu', menu, name="menu"),
     path('article/recherche', search, name="search"),
+    path('',logOut, name="logout"),
     #=======================EndUPB_page===================
 ]
