@@ -60,7 +60,7 @@ class Plat(models.Model):
     categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE)
     
     def __str__(self):
-        return f"{self.nom} ({self.categorie.nom})"
+        return f"{self.nom}"
 
     
 
@@ -103,7 +103,7 @@ class Employe(models.Model):
     ])
 
     def __str__(self):
-        return f"{self.nom} {self.prenoms} ({self.type_employe})"
+        return f"{self.nom} {self.prenoms}"
 
 
 
@@ -116,7 +116,7 @@ class Etudiant(models.Model):
     
 
     def __str__(self):
-        return f"Nom utilisateur {self.user.username} - Nom {self.user.first_name} - Niveau {self.niveau}"
+        return f"{self.user.first_name}"
 
 
 
@@ -126,7 +126,7 @@ class PersonnelAdministration(models.Model):
     
 
     def __str__(self):
-        return f"Nom utilisateur {self.user.username} - Nom {self.user.first_name} - Poste {self.poste}"
+        return f"{self.user.first_name}"
     
 
 
@@ -135,7 +135,7 @@ class Enseignant(models.Model):
     matiere = models.CharField(max_length=255)
     #universites = models.ManyToManyField(Universite)#car peut enseigner dans plusieurs universites
     def __str__(self):
-        return f"Nom utilisateur {self.user.username} - Nom {self.user.first_name} - Matière {self.matiere}"
+        return f"{self.user.first_name}"
 
 
 

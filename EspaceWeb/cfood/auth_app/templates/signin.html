@@ -25,28 +25,29 @@
           </div>
         </div>
     </nav>
-    <section>
-        <div class="col-md-12 mt-5">
-            <div class="container">
-            {% for message in messages %}
-            <div class="alert alert-danger text-center" id="messages">
-                <strong>{{message}}<strong/><br>
-            </div>
-            {% endfor %}
-            <form action="{% url "signin" %}" method="POST">
-                {% csrf_token %}
+    
+    <div class="container" id="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="container">
+                {% for message in messages %}
+                    <div class="alert alert-danger text-center" id="messages"><strong>{{message}}<strong/><br></div>
+                {% endfor %}
+                </div>
                 <div class="card">
                     <div class="card-header text-center"><i class="fas fa-user">Inscription a CampusFOOD</i></div>
                     <div class="card-body">
+                        <form action="{% url "signin" %}" method="POST">
+                            {% csrf_token %}
                         <input type="text" class="text text-center" name="type_utilisateur" id="type_utilisateur" placeholder="Etudiant | Enseignant | Personnel d'administration" required style="width: 100%;">
+                        </form>
                     </div>
                     <div class="card-footer">
-                        <button class="btn-primary btn-block">Suivant</button>
+                        <button class="btn btn-primary btn-block">Suivant</button>
                     </div>
                 </div>
-            </form>
-        </div>   
-    </section>
+        </div>
+    </div>   
 </header>
 
 <footer></footer>
@@ -89,38 +90,37 @@
         padding: 75px 0 40px 0;
         text-align: center;
       }
-    .container{
+    #container{
         text-align: center;
         justify-content: center;
         align-content: center;
         align-items: center;
         width: 30%;
-    }
-    section{
-        margin-top: 15%;
+        margin-top: 30vh;
     }
 </style>
 {% endblock %}
 
-{{formulaire.as_p}}
-<div class="container">
-    <div class="col-md-12 mt-5 mb-7">
-        {% for message in messages %}
-        <div class="alert alert-danger text-center">
-            <strong>{{message}}<strong/><br>
-        </div>
-        {% endfor %}
-        <form action="{% url "signin" %}" method="POST">
+
+
+
+<div class="col-md-12 mt-5">
+    <div class="container">
+    {% for message in messages %}
+    <div class="alert alert-danger text-center" id="messages">
+        <strong>{{message}}<strong/><br>
+    </div>
+    {% endfor %}
+    <div class="card">
+        <div class="card-header text-center"><i class="fas fa-user">Inscription a CampusFOOD</i></div>
+        <div class="card-body">
             {% csrf_token %}
-            <div class="card">
-                <div class="card-header text-center"><i class="fas fa-user">Inscription a CampusFOOD</i></div>
-                <div class="card-body">
-                    <input type="text" class="text text-center" name="type_utilisateur" id="type_utilisateur" placeholder="Etudiant / Enseignant / Personnel d'administration" required style="width: 100%;">
-                </div>
-                <div class="card-footer">
-                    <button class="btn-primary btn-block">Suivant</button>
-            </div>
-            </div>
-        </form>
-    </div>   
-</div>
+            <form action="{% url "signin" %}" method="POST">
+            <input type="text" class="text text-center" name="type_utilisateur" id="type_utilisateur" placeholder="Etudiant | Enseignant | Personnel d'administration" required style="width: 100%;">
+            </form>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary btn-block">Suivant</button>
+        </div>
+    </div>
+</div> 

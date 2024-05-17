@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
   <!-- Container wrapper -->
   <div class="container-fluid">
@@ -27,7 +28,7 @@
         <!-- Left links -->
         <ul class="navbar-nav mr-auto" style="justify-content: space-between;">
           <li class="nav-item">
-            {% if user_profile %}
+            {% if user.is_authenticated %}
             <a class="navbar-brand mt-2 mt-lg-0" href="{% url 'upbHome' %}">
                 Accueil
             </a>
@@ -48,9 +49,11 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               {% for categorie in list_categorie %}
-              <a class="dropdown-item category-link" href="#">{{categorie.nom}}</a><hr>
+              <a class="dropdown-item category-link" href="#{{ categorie.id }}">{{ categorie.nom }}</a>
+              <hr>
               {% endfor %}
-            </div>
+          </div>
+          
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#footercontact">Nous contactez</a>
@@ -59,14 +62,15 @@
         </ul>
       </div>
     </div>
+    {% if user.is_authenticated %}
     <div class="d-flex align-items-center">
       <a class="text-reset me-3" href="{% url "panier" %}">
-        <i class="fas fa-shopping-cart" id="num_of_items">{{cart.num_of_items}}</i>
+        <i class="fas fa-shopping-cart" id="num_of_items" style="font-size: 30px; color: rgb(85, 41, 9);"><span class="text" style="color: chocolate; margin-right: 10%; background-color: #ffffff; border-radius: 100%;">{{cart.num_of_items}}</span></i>
       </a>
       <div class="dropdown">
         <a data-mdb-dropdown-init class="text-reset me-3 dropdown-toggle hidden-arrow" href="#"
           id="navbarDropdownMenuLink" role="button" aria-expanded="false">
-          <i class="fas fa-bell"></i>
+          <i class="fas fa-bell" style="font-size: 30px; color: rgb(85, 41, 9);"></i>
           <span class="badge rounded-pill badge-notification bg-danger"></span>
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
@@ -81,82 +85,176 @@
           </li>
         </ul>
       </div>
+      {% endif %}
       <!-- Avatar -->
       {% if user.is_authenticated %}
       <div class="toggle-button">
-        <i class="fas fa-user" style="color: chocolate;font-size: 40px"></i>
-        <strong>{{ user_profile.username }}</strong>
-    </div>
-
+        <div class="profile-circle">
+            {{ user_profile.username|slice:":1"|upper }}  <!-- Première lettre en majuscule -->
+        </div>
+      </div>
+      {% endif %}
     <!-- Volet coulissant -->
     <div class="slide-in-panel">
-        <!-- Première section avec une grande icône utilisateur -->
+      <!-- Section d'en-tête avec titre et bouton de bascule alignés sur la même ligne -->
+      <div class="header-section">
+        <div class="title" style="font-size: 30px; font-weight: bold;">Espace Utilisateur</div>  <!-- Titre -->
         <div class="profile-section">
-            <i class="fas fa-user user-icon"></i>  <!-- Grande icône utilisateur -->
-            <div class="username">{{ user_profile.username }}</div>  <!-- Nom de l'utilisateur -->
+          <i class="fas fa-user user-icon" style="color: chocolate;"></i>  <!-- Grande icône utilisateur -->
+          <div class="username">{{ user_profile.username }}</div>  <!-- Nom de l'utilisateur -->
+        </div>
+      </div>
+      
+
+      <!-- Première section avec grande icône utilisateur -->
+      
+
+      <!-- Deuxième section avec des liens -->
+      <div class="links-section" id="pred">
+        <a href="#profile">Informations Personnelles</a>
+        <a href="#help">De l'aide</a>
+        <a href="#settings">Paramètres</a>
+        <a href="{% url "logout" %}">Déconnexion</a>  <!-- Exemple de lien de déconnexion -->
+
+        <!-- Lien pour revenir à une page spécifique -->
+        <div class="back-button"><a href="{% url 'upbHome'%}">Revenir à la page précédente</a></div>  <!-- Lien de retour -->
+      </div>
+      <!-- Volet secondaire pour les informations personnelles -->
+      <div class="info-panel">
+        <!-- Section d'en-tête avec titre et bouton de bascule alignés sur la même ligne -->
+        <div class="header-section">
+          <div class="title" style="font-size: 30px; font-weight: bold;">Informations Personnelles</div>  <!-- Titre -->
+          <div class="profile-section">
+            <i class="fas fa-user user-icon" style="color: chocolate;"></i>  <!-- Grande icône utilisateur -->
+            <!-- <div class="username">{{ user_profile.username }}  --><!-- Nom de l'utilisateur --> 
+          </div>
         </div>
 
-        <!-- Deuxième section avec des liens et un bouton de retour -->
-        <div class="links-section">
-            <a href="#profile">Profil</a>
-            <a href="#help">De l'aide</a>
-            <a href="#settings">Paramètres</a>
-            <a href="#logout">Déconnexion</a>  <!-- Exemple de déconnexion -->
+      <!-- Champ avec icône de modification -->
+        <div class="container" style="justify-content: center; margin-top: 20vh;">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-body">
 
-            <!-- Bouton pour revenir à la page précédente -->
-            <div class="back-button"><a href="{% url 'upbHome' %}" class="back-link">Retour à la page précédente</a></div>
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr>
+                        <td>Nom Utilisateur: </td>
+                        <td><strong class="text" style="font-size: 20px; color: chocolate;">{{ user_profile.username }}</strong></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Nom: </td>
+                        <td><strong class="text" style="font-size: 20px; color: chocolate;">{{ user_profile.nom }}</strong></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Prenoms: </td>
+                        <td><strong class="text" style="font-size: 20px; color: chocolate;">{{ user_profile.prenom }}</strong></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Email:</td>
+                        <td><strong class="text" style="font-size: 20px; color: chocolate;">{{ user_profile.email }}</strong></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Telephone: </td>
+                        <td><strong class="text" style="font-size: 20px; color: chocolate;">{{ user_profile.numero }}</strong></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Universite: </td>  
+                        <td><strong class="text" style="font-size: 20px; color: chocolate;">{{ user_profile.universite }}</strong></td>
+                        <td></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+                <div class="card-footer">
+                  <a href=""  class="btn btn-danger btn-block mt-2">Modifier mon profil</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="back-button text-danger" ><a href="#pred" style="text-decoration: none;">Revenir à la page précédente</a></div>
         </div>
+
+      </div>
     </div>
-
       <!-- Bouton pour déclencher le volet coulissant -->
-      {% endif %}
     </div>
-  </nav>
+</nav>
+
   <style>
-    /* Style de base de la page */
-    body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            overflow-x: hidden; /* Empêche le débordement horizontal */
+            /* Style de base de la page */
+          body {
+          margin: 0;
+          padding: 0;
+          font-family: Arial, sans-serif;
+          overflow-x: hidden;  /* Évite le débordement horizontal */
+      }
+
+
+      /* Cercle avec fond et texte centré */
+      .profile-circle {
+            width: 50px;  /* Largeur du cercle */
+            height: 50px;  /* Hauteur du cercle */
+            border-radius: 50%;  /* Rend le conteneur circulaire */
+            background-color: chocolate;  /* Couleur de fond */
+            color: white;  /* Couleur du texte */
+            display: flex;  /* Utilisation de Flexbox pour centrer */
+            justify-content: center;  /* Centrer horizontalement */
+            align-items: center;  /* Centrer verticalement */
+            font-size: 24px;  /* Taille du texte */
+            font-weight: bold;  /* Texte en gras */
         }
 
+        .toggle-button {
+            display: flex;  /* Pour positionner les éléments */
+            align-items: center;  /* Alignement vertical */
+            gap: 10px;  /* Espace entre les éléments */
+            cursor: pointer;  /* Pour indiquer que c'est cliquable */
+        }
         /* Volet coulissant qui se déploie de la droite */
+        
         .slide-in-panel {
-            position: fixed;  /* Position fixe pour le volet coulissant */
+            position: fixed;  /* Position fixe */
             top: 0;
             right: -50%;  /* Hors de la page par défaut */
-            width: 50%;  /* Largeur du volet coulissant */
+            width: 50%;  /* Largeur du volet */
             height: 100%;
             background-color: white;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);  /* Ajoute de l'ombre */
-            transition: right 0.5s;  /* Transition pour un effet fluide */
-            z-index: 1000;  /* Z-index élevé pour que le volet soit au-dessus */
+            box-shadow: -5px 0px 15px rgba(0, 0, 0, 0.3);
+            transition: right 0.5s;  /* Transition fluide */
+            z-index: 1000;  /* S'assure que le volet est au-dessus */
             padding: 20px;
-            overflow-y: auto;  /* Permet le défilement vertical à l'intérieur du volet */
+            overflow-y: auto;  /* Permet le défilement vertical */
         }
 
-        /* Lorsque le volet est "ouvert", il glisse pour devenir visible */
+        /* Position du volet lorsqu'il est ouvert */
         .slide-in-panel.open {
             right: 0;  /* Position ouverte */
         }
 
-        /* Bouton pour déclencher le volet */
-        .toggle-button {
-            position: absolute;  /* Positionnement personnalisé */
-            top: 10px;
-            right: 10px;
-            cursor: pointer;  /* Affiche le curseur de clic */
-            z-index: 1001;  /* S'assure que le bouton est visible */
+        /* Conteneur flexbox pour aligner le titre et le bouton de bascule */
+        .header-section {
+            display: flex;  /* Utilisation de Flexbox */
+            justify-content: space-between;  /* Espacement entre les éléments */
+            align-items: center;  /* Aligner les éléments au centre verticalement */
+            padding-bottom: 10px;  /* Espacement sous la section */
+            border-bottom: 1px solid #ddd;  /* Bordure sous la section */
         }
 
-        /* Première section du volet avec une grande icône */
+        /* Première section avec grande icône utilisateur */
         .profile-section {
             text-align: center;  /* Centrer le contenu */
         }
 
         .profile-section .user-icon {
-            font-size: 80px;  /* Taille de l'icône */
+            font-size: 80px;  /* Grande icône utilisateur */
             color: #666;  /* Couleur de l'icône */
         }
 
@@ -165,39 +263,206 @@
             font-weight: bold;  /* Texte en gras */
         }
 
-        /* Deuxième section avec les autres liens */
+        /* Deuxième section avec des liens */
         .links-section {
             padding-top: 20px;  /* Espace entre les sections */
         }
 
         .links-section a {
-            text-decoration: none;  /* Supprime la ligne de texte */
-            color: black;  /* Couleur par défaut */
+            text-decoration: none;  /* Pas de ligne sous le texte */
+            color: black;
             padding: 10px 0;
-            display: block;  /* Chaque lien prend toute la largeur */
+            display: block;  /* Prend toute la largeur */
         }
 
         .links-section a:hover {
-            background-color: #f5f5f5;  /* Effet de survol */
+            background-color: #f5f5f5;  /* Effet au survol */
         }
 
-        /* Bouton pour revenir à la page précédente */
-        .back-button {
+        /* Lien pour revenir à une page spécifique */
+        .back-link {
             margin-top: 20px;  /* Espace supérieur */
             padding: 10px;
             background-color: #f0f0f0;  /* Couleur de fond */
-            text-align: center;  /* Centrer le texte */
-            cursor: pointer;  /* Affiche le curseur de clic */
+            text-align: center;
             border: 1px solid #ccc;  /* Bordure simple */
+            display: block;  /* Prend toute la largeur */
+            text-decoration: none;
+            color: black;
+            cursor: pointer;  /* Affiche le curseur de clic */
+        }
+        /* Bouton pour revenir à la page précédente */
+        .back-button {
+          margin-top: 20%;  /* Espace supérieur */
+          padding: 10px;
+          background-color: #f0f0f0;  /* Couleur de fond */
+          text-align: center;  /* Centrer le texte */
+          cursor: pointer;  /* Affiche le curseur de clic */
+          border: 1px solid #ccc;  /* Bordure simple */
         }
 
         .back-button:hover {
+          background-color: #ddd;  /* Effet au survol */
+        }
+        .back-link:hover {
             background-color: #ddd;  /* Effet au survol */
         }
-    
+
+
+        /* Volet secondaire css */
+        .info-panel {
+    position: fixed;  /* Position fixe pour que le volet reste en place */
+    top: 0;
+    right: -50%;  /* Hors de la page par défaut */
+    width: 50%;  /* Largeur du volet secondaire */
+    height: 100%;  /* Hauteur complète du volet */
+    background-color: white;  /* Couleur de fond */
+    box-shadow: -5px 0px 15px rgba(0, 0, 0, 0.3);  /* Ombre pour donner de la profondeur */
+    transition: right 0.5s;  /* Transition fluide pour l'effet de glissement */
+    z-index: 1001;  /* Pour s'assurer que le volet secondaire est au-dessus du volet principal */
+    padding: 20px;  /* Espacement intérieur */
+    overflow-y: auto;  /* Permet le défilement vertical si nécessaire */
+}
+
+.info-panel.open {
+    right: 0;  /* Position lorsque le volet secondaire est ouvert */
+}
+
+.info-panel h3 {
+    font-size: 24px;  /* Taille du titre */
+    font-weight: bold;  /* Titre en gras */
+}
+
+.info-panel p {
+    font-size: 16px;  /* Taille du texte */
+    color: #333;  /* Couleur du texte */
+}
+
+.info-panel .back-button {
+    margin-top: 20px;  /* Espace supérieur */
+    padding: 10px;
+    background-color: #f0f0f0;  /* Couleur de fond */
+    text-align: center;  /* Centrer le texte */
+    border: 1px solid #ccc;  /* Bordure simple */
+    cursor: pointer;  /* Affiche le curseur de clic */
+}
+
+.info-panel .back-button:hover {
+    background-color: #ddd;  /* Effet au survol */
+
+
+    /* Style des champs avec des icônes de modification */
+  }
+  editable-field {
+          display: flex;  /* Pour positionner le texte et l'icône */
+          align-items: center;  /* Aligner verticalement */
+          justify-content: space-between;  /* Espacement entre le texte et l'icône */
+      }
+
+      /* Icône de modification */
+      .edit-icon {
+          color: #555;  /* Couleur de l'icône */
+          cursor: pointer;  /* Affiche le curseur de clic */
+      }
+
+      .edit-icon:hover {
+          color: #222;  /* Effet au survol */
+      }
   </style>
 
+
 {% comment %} 
+/* Style de base de la page */
+body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        overflow-x: hidden; /* Empêche le débordement horizontal */
+    }
+
+    /* Volet coulissant qui se déploie de la droite */
+    .slide-in-panel {
+        position: fixed;  /* Position fixe pour le volet coulissant */
+        top: 0;
+        right: -50%;  /* Hors de la page par défaut */
+        width: 50%;  /* Largeur du volet coulissant */
+        height: 100%;
+        background-color: white;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);  /* Ajoute de l'ombre */
+        transition: right 0.5s;  /* Transition pour un effet fluide */
+        z-index: 1000;  /* Z-index élevé pour que le volet soit au-dessus */
+        padding: 20px;
+        overflow-y: auto;  /* Permet le défilement vertical à l'intérieur du volet */
+    }
+
+    /* Lorsque le volet est "ouvert", il glisse pour devenir visible */
+    .slide-in-panel.open {
+        right: 0;  /* Position ouverte */
+    }
+
+    /* Bouton pour déclencher le volet */
+    .toggle-button {
+        position: absolute;  /* Positionnement personnalisé */
+        top: 10px;
+        right: 10px;
+        cursor: pointer;  /* Affiche le curseur de clic */
+        z-index: 1001;  /* S'assure que le bouton est visible */
+    }
+
+    /* Section du titre en haut du volet */
+    .title-section {
+        text-align: center;  /* Centrer le texte */
+        font-size: 24px;  /* Taille du titre */
+        font-weight: bold;  /* Texte en gras */
+        padding-bottom: 20px;  /* Espace sous le titre */
+        border-bottom: 1px solid #ddd;  /* Bordure sous le titre */
+    }
+
+
+    /* Première section du volet avec une grande icône */
+    .profile-section {
+        text-align: center;  /* Centrer le contenu */
+    }
+
+    .profile-section .user-icon {
+        font-size: 80px;  /* Taille de l'icône */
+        color: #666;  /* Couleur de l'icône */
+    }
+
+    .profile-section .username {
+        font-size: 24px;  /* Taille du texte */
+        font-weight: bold;  /* Texte en gras */
+    }
+
+    /* Deuxième section avec les autres liens */
+    .links-section {
+        padding-top: 20px;  /* Espace entre les sections */
+    }
+
+    .links-section a {
+        text-decoration: none;  /* Supprime la ligne de texte */
+        color: black;  /* Couleur par défaut */
+        padding: 10px 0;
+        display: block;  /* Chaque lien prend toute la largeur */
+    }
+
+    .links-section a:hover {
+        background-color: #f5f5f5;  /* Effet de survol */
+    }
+
+    /* Bouton pour revenir à la page précédente */
+    .back-button {
+        margin-top: 20px;  /* Espace supérieur */
+        padding: 10px;
+        background-color: #f0f0f0;  /* Couleur de fond */
+        text-align: center;  /* Centrer le texte */
+        cursor: pointer;  /* Affiche le curseur de clic */
+        border: 1px solid #ccc;  /* Bordure simple */
+    }
+
+    .back-button:hover {
+        background-color: #ddd;  /* Effet au survol */
+    }
 /* Volet coulissant qui se déploie de la droite */
 .slide-in-panel {
   position: fixed;  /* Positionnement fixe pour le faire glisser */

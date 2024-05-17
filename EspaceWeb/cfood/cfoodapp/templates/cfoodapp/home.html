@@ -27,7 +27,7 @@
             <small style="color: chocolate; font-weight: bolder; font-size: 50px;">CampusFOOD</small>
           </a>
           <!-- Left links -->
-          <ul class="navbar-nav mr-auto" style="margin-top: 30px;" >
+          <ul class="navbar-nav " style="margin-top: 30px;" >
             <li class="nav-item">
               <a class="nav-link" href="{% url "home" %}" style="font-size: 20px;">Accueil</a>
             </li>
@@ -40,10 +40,7 @@
             <li class="nav-item">
               <a class="nav-link" href="#menu" style="font-size: 20px; ">Menu</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contat" style="font-size: 20px; ">Contacts</a>
-            </li>
-          </ul>
+            
         </div>
       </div>
       <div class="d-flex align-items-center">
@@ -51,6 +48,7 @@
         <div class="dropdown">
           <!-- Tres importante, faire que le profile s affiche si la personne est conneter -->
           <a class="btn btn-primary" href="{% url "login" %}">Connexion</a>
+          <a class="btn btn-secondary" href="{% url 'login-admin' %}">ADMIN</a>
         </div>
       </div>
   </nav>
@@ -63,7 +61,6 @@
                     <p>Votre plateforme de restauration Universitaire.Rejoignez-nous pour découvrir une <br> nouvelle façon de vivre la restauration universitaire, où la technologie et le plaisir de <br> bien manger se rencontrent pour offrir une expérience unique à tous les membres de la communauté universitaire.</p>
                     <button class="btn btn-buy">En Savoir Plus</button>
                 </div>
-
             </div>
         </div>
         <div class="carousel-item" id="carousel_item2" style="margin-top: 7%;">
@@ -566,14 +563,6 @@
     color: #fff;
   }
 
-  /* header{
-  height: 100vh;
-  background-image: url('{% static "images/banner-images/hero-bg.jpg" %}');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-color: #e7eeea;
-  } */
-
 
   .btn-buy {
     background-color: chocolate;
@@ -609,25 +598,7 @@
     background-size: cover; /* Stretch image to fill container */
     background-position: center;
   }
-/*   #presentation{
-    margin-bottom: 10px;
-    width: 40%; 
-    height: 110px; 
-    color: #fff;
-    font-size: 30px;
-    text-align: center;
-    padding-top: 30px;
-    background: linear-gradient(336deg, rgba(39, 39, 39, 0.801) 0%,rgba(55, 47, 37, 0.636) 50%, rgba(35, 15, 1, 0.748) 100%) ;
-    border-radius: 10px 40px 10px 100px;
-  } */
 
-
-
-
-  /* about */
-  .layout_padding {
-  padding: 90px 0;
-  }
 
   .layout_padding2 {
   padding: 75px 0;
@@ -649,10 +620,6 @@
   padding-bottom: 90px;
   }
 
-  /* h1, */
-  /* h2 {
-  font-family: 'Dancing Script', cursive;
-  } */
 
 
   .about_section {

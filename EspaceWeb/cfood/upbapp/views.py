@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from cfoodapp.models import *
 from django.contrib.auth import logout
 from django.contrib import messages
+from cfoodapp.urls import *
 
 #========pour creer le panier======
 import json
@@ -13,7 +15,7 @@ from django.shortcuts import get_object_or_404
 # Create your views here.
 
 #=============================UPB page=============================
-
+@login_required
 def upb_page(request):
     if request.user.is_authenticated:
         #ensuite creer ou obtenir son panier sil en avait deja nom completer(completed=False)
@@ -28,7 +30,7 @@ def upb_page(request):
         "cart":cart,
         })
 
-
+@login_required
 def menu(request):
     if request.user.is_authenticated:
         #ensuite creer ou obtenir son panier sil en avait deja nom completer(completed=False)
@@ -45,9 +47,31 @@ def menu(request):
         }
     return render(request, 'upbapp/menu.html', context)
 
+@login_required
+def categorieView(request, id):
+    if request.user.is_authenticated:
+        #ensuite creer ou obtenir son panier sil en avait deja nom completer(completed=False)
+        cart, created = Panier.objects.get_or_create(user=request.user, completed=False)
+        user_profile = request.session.get('user_profile', {})
+        list_categorie = Categorie.objects.all()
+        list_plat = Plat.objects.all()
+        idcat = list_categorie.pk
+    context = {
+        "name": "Menu",
+        "list_categorie": list_categorie,
+        "user_profile": user_profile,
+        "list_plat": list_plat,
+        "cart":cart,
+        "idcat":idcat
+    }
+    return render(request, "upbapp/menu.html", context)
+
+
+@login_required
 def detail(request, nom_plat):
     user_profile = request.session.get('user_profile', {})
     plat = Plat.objects.get(nom=nom_plat)
+    list_categorie = Categorie.objects.all()
     categorie = plat.categorie
     plat_en_relation = Plat.objects.filter(categorie=categorie)[:5]
     if request.user.is_authenticated:
@@ -60,11 +84,13 @@ def detail(request, nom_plat):
                     "plat": plat,
                     "per": plat_en_relation,
                     "name":"Details", 
-                    "cart":cart
+                    "cart":cart, 
+                    "list_categorie": list_categorie,
                     }
                     )
 
 #============preparation du panier ===============
+@login_required
 def add_to_cart(request):
     data = json.loads(request.body)
     #b-recuperons les id
@@ -84,6 +110,7 @@ def add_to_cart(request):
     return JsonResponse(num_of_item, safe=False)
 
 
+@login_required
 def cart(request):
     cart = None
     cartitems = []
@@ -103,22 +130,23 @@ def cart(request):
 
 
 #fonction de recherche
+@login_required
 def search(request):
     user_profile = request.session.get('user_profile', {})
     list_categorie = Categorie.objects.all()
     query = request.GET["article"]
-    liste_article = Plat.objects.filter(nom__icontains=query)
+    list_plat = Plat.objects.filter(nom__icontains=query)
     return render(request, 'upbapp/search.html', {
-        "liste_article":liste_article, "list_categorie": list_categorie,"user_profile": user_profile,
+        "liste_article":list_plat, "list_categorie": list_categorie,"user_profile": user_profile,
         })
 
 
-
+@login_required
 def logOut(request):
-    #return render(request, 'app/logout.html')
-    #appelons la fonction logout
     logout(request)
-    messages.success(request,'Vous ave ete bien deconnecter')
+    #messages.success(request,'Vous ave ete bien deconnecter')   
     return redirect("home")
-
 #=============================EndUPB page=============================
+
+def admin_page(request):
+    return render(request, "upbapp/admin.html")

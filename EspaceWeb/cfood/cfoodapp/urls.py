@@ -8,6 +8,7 @@ urlpatterns = [
     path('article/recherche',search, name="search" ),
     #authentification app
     path('auth/',include("auth_app.urls")),
+    path('my-admin/',include("admin_app.urls")),
     path('upbapp/', include('upbapp.urls')),
     path('iuaapp/', include('iuaapp.urls')),
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

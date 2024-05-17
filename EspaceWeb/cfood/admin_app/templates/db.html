@@ -1,0 +1,184 @@
+{% extends "partials/base.html" %}
+
+{% block content %}
+        <!-- Content -->
+        <div class="col-lg-9 col-md-8" id="content-wrapper">
+            <div class="dashboard-header">
+                <h1>Bienvenue sur votre Tableau de Bord</h1>
+            </div>
+            <div class="dashboard-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Tableau de bord</h2>
+                            <p>Bienvenue dans la zone d'administration de CampusFood. Utilisez les liens à gauche pour naviguer entre les différentes sections du tableau de bord.</p>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Utilisateurs</h5>
+                                            <p class="card-text">Gérez les utilisateurs de la plateforme.</p>
+                                            <a href="#" class="btn btn-primary" style="background-color: chocolate;">Voir plus</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Plats</h5>
+                                            <p class="card-text">Gérez les plats disponibles.</p>
+                                            <a href="{% url 'my-articles' %}" class="btn btn-primary" style="background-color: chocolate;">Voir plus</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Avis</h5>
+                                            <p class="card-text">Consultez les avis des utilisateurs.</p>
+                                            <a href="#" class="btn btn-primary" style="background-color: chocolate;">Voir plus</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Universités</h5>
+                                            <p class="card-text">Gérez les universités partenaires.</p>
+                                            <a href="#" class="btn btn-primary" style="background-color: chocolate;">Voir plus</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Restaurants</h5>
+                                            <p class="card-text">Gérez les restaurants partenaires.</p>
+                                            <a href="#" class="btn btn-primary" style="background-color: chocolate;">Voir plus</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Content -->
+{% endblock  %}
+{% url 'my-articles' %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        {% if user.is_authenticated %}
+        <div class="col-lg-3 col-md-4" id="sidebar-wrapper">
+            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">Dashboard</div>
+            <div class="list-group list-group-flush my-3">
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-user me-2"></i>Utilisateurs</a>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-utensils me-2"></i>Plats</a>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-comment me-2"></i>Avis</a>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-university me-2"></i>Universités</a>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-store-alt me-2"></i>Restaurants</a>
+                <!-- Add more items as needed -->
+            </div>
+        </div>
+        <!-- /Sidebar -->
+
+        <!-- Content -->
+        <div class="col-lg-9 col-md-8" id="content-wrapper">
+            <div class="dashboard-header">
+                <h1>Bienvenue sur votre Tableau de Bord</h1>
+            </div>
+            <div class="dashboard-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Tableau de bord</h2>
+                            <p>Bienvenue dans la zone d'administration de CampusFood. Utilisez les liens à gauche pour naviguer entre les différentes sections du tableau de bord.</p>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Utilisateurs</h5>
+                                            <p class="card-text">Gérez les utilisateurs de la plateforme.</p>
+                                            <a href="#" class="btn btn-primary">Voir plus</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Plats</h5>
+                                            <p class="card-text">Gérez les plats disponibles.</p>
+                                            <a href="#" class="btn btn-primary">Voir plus</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Avis</h5>
+                                            <p class="card-text">Consultez les avis des utilisateurs.</p>
+                                            <a href="#" class="btn btn-primary">Voir plus</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Universités</h5>
+                                            <p class="card-text">Gérez les universités partenaires.</p>
+                                            <a href="#" class="btn btn-primary">Voir plus</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Restaurants</h5>
+                                            <p class="card-text">Gérez les restaurants partenaires.</p>
+                                            <a href="#" class="btn btn-primary">Voir plus</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Content -->
+        {% endif %}
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+    #sidebar-wrapper {
+        min-height: 100vh;
+        border-right: 1px solid #dee2e6;
+        background-color: #f8f9fa;
+    }
+    #sidebar-wrapper .list-group-item {
+        border: none;
+    }
+    #sidebar-wrapper .list-group-item:hover {
+        background-color: #e9ecef;
+    }
+    #content-wrapper {
+        min-height: 100vh;
+        background-color: #fff;
+    }
+    .dashboard-header {
+        padding: 20px;
+        background: linear-gradient(90deg, rgb(250, 113, 49) 30%, rgb(245, 166, 142) 100%);
+        color: #fff;
+        text-align: center;
+    }
+    .dashboard-content {
+        padding: 20px;
+    }
+</style>

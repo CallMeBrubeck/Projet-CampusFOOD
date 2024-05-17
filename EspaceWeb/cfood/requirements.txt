@@ -1,26 +1,43 @@
-asgiref==3.7.2
+# Django Framework
+Django>=3.2  # Assurez-vous que cette version est stable pour votre projet
+
+# Serveur WSGI
+gunicorn  # Pour exécuter l'application sur Heroku
+
+# Gestion des fichiers statiques
+whitenoise  # Pour servir les fichiers statiques sur Heroku
+
+# Gestion des bases de données
+dj-database-url==2.1.0  # Pour utiliser des bases de données sur Heroku
+psycopg2==2.9.9  # Pour PostgreSQL
+
+# Autres dépendances Django
+asgiref==3.7.2  # Pour le support ASGI
+sqlparse==0.4.4  # Pour la syntaxe SQL dans Django
+
+# Utilitaires Django
+django-extensions==3.2.3  # Extensions pour Django
+django-heroku==0.3.1  # Configuration automatique pour Heroku
+
+# Outils divers
+python-decouple==3.8  # Gestion des variables d'environnement
+pillow==10.2.0  # Manipulation d'images
+
+# Autres dépendances
 construct==2.5.3
 distlib==0.3.8
-dj-database-url==2.1.0
-Django==5.0.3
-django-extensions==3.2.3
-django-haystack==3.2.1
-django-heroku==0.3.1
 filelock==3.14.0
-gunicorn==22.0.0
-haystack==0.42
-packaging==24.0
-pefile==2023.2.7
-pillow==10.2.0
 platformdirs==4.2.1
-psycopg2==2.9.9
-python-decouple==3.8
-python-ptrace==0.9.9
-pytz==2024.1
 setuptools==69.2.0
 six==1.16.0
-sqlparse==0.4.4
 typing_extensions==4.11.0
 tzdata==2024.1
 virtualenv==20.26.1
-whitenoise==6.6.0
+
+# Optionnel (pour des fonctionnalités avancées)
+django-haystack==3.2.1  # Pour la recherche avancée
+django-ptrace==0.9.9  # Utilisé pour l'analyse de code
+pefile==2023.2.7  # Manipulation des fichiers PE (Windows)
+
+# Autres utilitaires
+packaging==24.0  # Outils pour le packaging Python

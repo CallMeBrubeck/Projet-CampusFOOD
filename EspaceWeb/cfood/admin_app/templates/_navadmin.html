@@ -1,0 +1,81 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        data-mdb-collapse-init
+        class="navbar-toggler"
+        type="button"
+        data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Navbar brand -->
+        <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom" ><a href="">CAMPUSFOOD</a></div>
+
+        <!-- Left links -->
+        {% if user.is_authenticated %}
+        {% endif %}
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+  
+      <!-- Right elements -->
+      
+      <div class="d-flex align-items-center">
+        <!-- Avatar -->
+        {% if user.is_authenticated %}
+        <span>{{user.username}}</span>
+        {% endif %}
+        <div class="dropdown">
+          
+          <a
+            data-mdb-dropdown-init
+            class="dropdown-toggle d-flex align-items-center hidden-arrow"
+            href="#"
+            id="navbarDropdownMenuAvatar"
+            role="button"
+            aria-expanded="false"
+          >
+            
+            <img
+              src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+              class="rounded-circle"
+              height="25"
+              alt="Black and White Portrait of a Man"
+              loading="lazy"
+            />
+            <!-- <div class="rounded-circle" height="45" width="45" loading="lazy" style="background-color: chocolate;">
+              <i class="fas fa-user"></i>
+            </div> -->
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+            {% if user.is_authenticated %}
+            <li>
+              <a class="dropdown-item" href="#">Mon profil</a>
+            </li>
+            
+            <li>
+              <a class="dropdown-item" href="#">Paramettre</a>
+            </li>
+            
+            <li>
+              <a class="dropdown-item" href="{% url "logout" %}">Deconnexion</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Right elements -->
+    </div>
+    <!-- Container wrapper -->
+</nav>
+  <!-- Navbar -->

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from cfoodapp.forms import *
@@ -181,12 +182,12 @@ def personnel(request):
 
 
 
-def logOut(request):
+""" def logOut(request):
     #return render(request, 'app/logout.html')
     #appelons la fonction logout
     logout(request)
     messages.success(request,'Vous ave ete bien deconnecter')
-    return redirect("home")
+    return redirect("home") """
 
 #LSES PAGE APRES CONNEXION
 

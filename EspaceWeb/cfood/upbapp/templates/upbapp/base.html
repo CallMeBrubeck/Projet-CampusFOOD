@@ -45,7 +45,9 @@
 
 </head>
 <body>
+  {% if user.is_authenticated %}
   {% include "upbapp/navbar.html" %}
+  {% endif %}
   <!-- Header: navbar -->
   {% block welcome %}{% endblock  %}
 
@@ -140,6 +142,17 @@
                 $(".slide-in-panel").toggleClass("open");  /* Ajoute/retire la classe "open" */
             });
         });
+
+  // Ouvrir le volet secondaire pour "Informations Personnelles"
+  $(".links-section a[href='#profile']").click(function(e) {
+                e.preventDefault();  // Empêche le comportement par défaut
+                $(".info-panel").addClass("open");
+            });
+
+            // Fermer le volet secondaire
+            $(".info-panel .back-button a").click(function() {
+                $(".info-panel").removeClass("open");
+            });
 </script>
 
 <!-- <style>

@@ -15,7 +15,7 @@ from pathlib import Path
     #setpA
 import django_heroku
 import dj_database_url
-from decouple import config
+#from decouple import config
     #step B: Aller daans MIDDELWARE pour ajouter des choses: whitenoise.middleware.WhiteNoiseMiddleware
     #stepC aller en dessous de  STATICFILES_DIRS pour ajouer:STATICFILES_STORAGE = 'whitenoise.storage.CompresseManifestStaticFilesStorage'
     #stepD ajouter a la fin: django_heroku.settings(locals())
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'upbapp',
     'cfoodapp',
     'auth_app',
+    'admin_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -165,3 +166,8 @@ MEDIA_URL = '/media/'
 
 
 django_heroku.settings(locals())
+
+
+
+# login_required
+LOGIN_URL = '/auth_app/'

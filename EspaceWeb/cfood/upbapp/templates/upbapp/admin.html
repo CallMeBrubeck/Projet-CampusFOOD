@@ -1,0 +1,44 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2">
+        <!-- Barre de navigation latérale -->
+        {% block sidebar %}
+          <nav class="navbar navbar-dark bg-dark sidebar">
+            <!-- Contenu de la barre de navigation latérale -->
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'admin:index' %}">Accueil</a>
+              </li>
+              <!-- Ajoutez ici des liens vers d'autres pages d'administration si nécessaire -->
+            </ul>
+          </nav>
+        {% endblock %}
+      </div>
+      <div class="col-md-10">
+        <!-- Contenu principal -->
+        {% block main %}
+          <div class="content">
+            {% block breadcrumbs %}
+              <!-- Fil d'Ariane (breadcrumbs) -->
+              {% if title %}
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'admin:index' %}">Accueil</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+                  </ol>
+                </nav>
+              {% endif %}
+            {% endblock %}
+            <!-- Contenu principal de la page -->
+            {% block content %}
+              {{ block.super }}
+            {% endblock %}
+          </div>
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

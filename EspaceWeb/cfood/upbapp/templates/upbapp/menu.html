@@ -41,9 +41,17 @@
   <div class="container">
     <!-- creer categorie -->
     {% for categorie in list_categorie %}
-    <div class="filters-content">
+    <div class="filters-content" id="{{ categorie.id }}">
       <div class="row grid">
-          <h3>{{categorie.nom}}</h3>
+        <div class="container mt-5">
+          <div class="row">
+            <div class="card-md-12">
+              <div class="card-body">
+                <i class="fas fa-utensils" style="font-size: 30px;"><h3 id="{{ categorie.id }}">{{categorie.nom}}</h3></i>
+              </div>
+            </div>
+          </div>
+        </div>
           {% for plat in list_plat%} 
           {% if categorie == plat.categorie %}
         <!-- Plat -->
@@ -53,37 +61,37 @@
                 <div class="img-box">
                   <!-- image -->
                     {% if plat.image == "http://default"%}
-                      <a href="{%url 'detail' plat.nom%}"><img src="https://via.placeholder.com/220x150" alt="" srcset=""></a>
+                      <a href="{%url "detail" plat.nom%}"><img src="https://via.placeholder.com/220x150" alt="" srcset=""></a>
                     {% else %}
-                    <a href="{%url 'detail' plat.nom%}">
+                    <a href="{%url "detail" plat.nom%}">
                       <img src="{{plat.image.url}}" class="card-img-top" alt="Fissure in Sandstone"/>
                     </a>
                     {% endif %}
                     
                 </div>
-              <div class="detail-box">
-                  <h5>
-                    <a href="{%url 'detail' plat.nom%}">{{plat.nom}}</a>
-                  </h5>
-                  <p>
-                    {{plat.description|truncatewords:5}}
-                  </p>
-                  <div class="options">
-                    <h6>
-                        Prix: {{ plat.prix }} Francs
-                    </h6>
-                    <button class="btn add-to-cart-btn" value="{{plat.id}}" id="button">
-                      Ajouter au panier
-                    </button>
-                    <!-- <a href="">
-                        <span class="btn add-to-cart-btn" data-mdb-ripple-init data-id="{{ plat.id }}" style="margin-right: 10px;">
-                            <i class="fas fa-shopping-cart" style="color: #d2691e;"></i>
-                        </span>
-                    </a> -->
-                  </div>
+                <div class="detail-box">
+                    <h5>
+                      <a href="{%url "detail" plat.nom%}">{{plat.nom}}</a>
+                    </h5>
+                    <p>
+                      {{plat.description|truncatewords:5}}
+                    </p>
+                    <div class="options">
+                      <h6>
+                          Prix: {{ plat.prix }} Francs
+                      </h6>
+                      <button class="btn add-to-cart-btn" value="{{plat.id}}" id="button">
+                        Ajouter au panier
+                      </button>
+                      <!-- <a href="">
+                          <span class="btn add-to-cart-btn" data-mdb-ripple-init data-id="{{ plat.id }}" style="margin-right: 10px;">
+                              <i class="fas fa-shopping-cart" style="color: #d2691e;"></i>
+                          </span>
+                      </a> -->
+                    </div>
+                </div>
               </div>
             </div>
-          </div>
           </div>
           {% endif %}
         {% endfor %}

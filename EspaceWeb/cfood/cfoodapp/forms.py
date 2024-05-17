@@ -143,3 +143,25 @@ class PersonnelAdminForm(UserCreationForm):
             'type_utilisateur', 'username', 'first_name', 'last_name', 'email', 'numero', 
             'universite', 'poste', 'password1', 'password2'
         ]
+
+
+#formulaire d ajout d article
+
+class ArticleForm(forms.ModelForm):
+    class Meta:
+        model = Plat
+        fields = ['nom', 'description', 'prix', 'image', 'categorie']
+        labels = {
+            'nom': 'Nom', 
+            'description': 'Description', 
+            'prix': 'Prix', 
+            'image': 'Image', 
+            'categorie': 'Categorie'
+        }
+        widgets = {
+            'nom': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 10}),
+            'prix': forms.TextInput(attrs={'class': 'form-control'}),
+            'image': forms.ImageField(),
+            'categorie': forms.Select(attrs={'class': 'form-control'}),
+        }

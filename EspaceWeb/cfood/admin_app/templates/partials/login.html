@@ -1,0 +1,46 @@
+{% extends "partials/base.html" %}
+{% block logincontent %}
+<div class="container mt-5">
+    <div class="h1 text-center " >Espace Administration de CAMPUSFOOD</div>
+</div>
+<div class="condainer mt-3" id="container">
+    <div class="row">
+        <div class="col-md-12 mt-5">
+            {% for message in messages %}
+                <div class="alert alert-danger text-center" id="messages">
+                    <strong>{{message}}<strong/><br>
+                </div>
+            {% endfor %}
+            <form action="{% url 'login-admin' %}" method="post">
+                <div class="card">
+                    <div class="card-header text-center"><i class="fas fa-user">Connexion a mon Espace Admin</i></div>
+                    <div class="card-body">
+                        {% csrf_token %}
+                        {{formulaire}}
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary btn-block" style="background-color: chocolate;">Se connecter</button>
+                    </div>
+                </div>
+                <br>
+            </form>
+        </div>
+    </div>   
+</div>
+
+<style>
+    #container{
+        width: 30%;
+        margin-left: 35%;
+    }
+    label{
+        color: chocolate;
+        font-weight: bold;
+    }
+    .h1{
+        color: aliceblue;
+    }
+</style>
+
+
+{% endblock  %}
