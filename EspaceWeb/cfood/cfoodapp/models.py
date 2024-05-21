@@ -19,6 +19,23 @@ class Universite(models.Model):
         return f"{self.nom}"
 
 
+class Employe(models.Model):
+    nom = models.CharField(max_length=255)
+    prenoms = models.CharField(max_length=255)
+    email = models.EmailField()
+    telephone = models.CharField(max_length=255)
+    adresse = models.CharField(max_length=255)
+    date_embauche = models.DateTimeField(auto_now_add=True)
+    salaire = models.DecimalField(max_digits=6, decimal_places=2)
+    type_employe = models.CharField(max_length=255, choices=[
+        ('Guichetier', 'Guichetier'),
+        ('Directeur Restaurant', 'Directeur Restaurant'),
+    ])
+
+    def __str__(self):
+        return f"{self.nom} {self.prenoms}"
+
+
 class Restaurant(models.Model):
     nom = models.CharField(max_length=255)
     adresse = models.CharField(max_length=255)
@@ -26,6 +43,8 @@ class Restaurant(models.Model):
     horaires_ouverture = models.TimeField()
     horaires_fermeture = models.TimeField()
     universite = models.ForeignKey(Universite, on_delete=models.CASCADE)
+    directeur = models.OneToOneField(Employe, on_delete=models.SET_NULL, null=True, blank=True, limit_choices_to={'type_employe': 'Directeur Restaurant'})
+    
 
     def __str__(self):
         return f"Restaurant: {self.nom} de luniversite : ({self.universite.nom})"
@@ -89,23 +108,6 @@ class CustomUser(AbstractUser):
 
 
 
-class Employe(models.Model):
-    nom = models.CharField(max_length=255)
-    prenoms = models.CharField(max_length=255)
-    email = models.EmailField()
-    telephone = models.CharField(max_length=255)
-    adresse = models.CharField(max_length=255)
-    date_embauche = models.DateTimeField(auto_now_add=True)
-    salaire = models.DecimalField(max_digits=6, decimal_places=2)
-    type_employe = models.CharField(max_length=255, choices=[
-        ('Guichetier', 'Guichetier'),
-        ('Directeur Restaurant', 'Directeur Restaurant'),
-    ])
-
-    def __str__(self):
-        return f"{self.nom} {self.prenoms}"
-
-
 
 
 class Etudiant(models.Model):
@@ -116,7 +118,7 @@ class Etudiant(models.Model):
     
 
     def __str__(self):
-        return f"{self.user.first_name}"
+        return f"{self.user.last_name}"
 
 
 
@@ -126,7 +128,7 @@ class PersonnelAdministration(models.Model):
     
 
     def __str__(self):
-        return f"{self.user.first_name}"
+        return f"{self.user.last_name}"
     
 
 
@@ -135,7 +137,7 @@ class Enseignant(models.Model):
     matiere = models.CharField(max_length=255)
     #universites = models.ManyToManyField(Universite)#car peut enseigner dans plusieurs universites
     def __str__(self):
-        return f"{self.user.first_name}"
+        return f"{self.user.last_name}"
 
 
 
@@ -171,18 +173,11 @@ class Facture(models.Model):
 class Avis(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     plat = models.ForeignKey(Plat, on_delete=models.CASCADE, null=True, blank=True)
-    note = models.IntegerField(choices=[
-        (1, "1 étoile"),
-        (2, "2 étoiles"),
-        (3, "3 étoiles"),
-        (4, "4 étoiles"),
-        (5, "5 étoiles"),
-    ])
     commentaire = models.TextField()
-    date_publication = models.DateTimeField(auto_now_add=True)
+    date_poste = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user.first_name} - {self.note} - {self.commentaire}"
+        return f"{self.user.first_name} - {self.commentaire}"
 
 
 

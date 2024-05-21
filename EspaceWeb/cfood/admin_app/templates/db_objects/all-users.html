@@ -1,0 +1,46 @@
+{% extends "partials/base.html" %}
+
+{% block content %}
+<div class="dashboard-content col-lg-9 col-md-8" id="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12"><a href="{% url "ajouter-article" %}" class="btn btn-secondary float-right " style="background-color:  rgb(250, 113, 49); color: white; font-weight: bold;"><i class="fas fa-plus"></i>Ajouter un utilisateur</a></div>
+            <div class="col-md-12">
+                {% if utilisateurs %}
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="h6">Nom Utilisateur</th>
+                                    <th class="h6">Prenoms</th>
+                                    <th class="h6">Telephone</th>
+                                    <th class="h6">email</th>
+                                    <th class="h6">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for utilisateur in utilisateurs %}
+                                <tr>
+                                    <td class="h6"><a href="">{{utilisateur}}</a></td>
+                                    <td class="h6"><a href="">{{utilisateur.first_name}}</a></td>
+                                    <td class="h6"><a href="">{{utilisateur.numero}}</a></td>
+                                    <td class="h6"><a href="">{{utilisateur.email}}</a></td>
+                                    <td>
+                                        <a href="{% url "modifier-article"  utilisateur.id%}" class="btn btn-info btn-sm" style="background-color:  rgb(250, 113, 49);"><i class="fas fa-edit"></i></a>
+                                        <a href="{% url "supprimer-article" utilisateur.id%}" class="btn btn-danger  btn-sm"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                {% endfor %} 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {% else %}
+                <h3>Vous n aver pas d article</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div> 
+{% endblock  %}

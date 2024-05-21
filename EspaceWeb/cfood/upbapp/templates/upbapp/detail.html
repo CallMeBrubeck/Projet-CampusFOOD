@@ -1,7 +1,7 @@
 {% extends "upbapp/base.html" %}
 {% block content %}
 <div class="container mt-5 mb-3">
-    <div class="row">
+    {% comment %} <div class="row">
         <div class="col-md-8" >
             <div class="card" id="detailplat">
                 <h1 class="text text-center mt-1 mb-5">Details du plat</h1>
@@ -13,36 +13,73 @@
                     <section>{{plat.description}}</section>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <h4 class="h2">Les plats en relations</h4 class="mt-2">
-                <div class="row">
-                    {% for plt in per %}
-                    {% if plt.nom != plat.nom %}
-                    <div class="col-md-7 mb-3" >
-                        {% if plat.image != "http://default" %}
-                        <a href="">
-                            <img class="card-img-top" src="{{plt.image.url}}" alt="" srcset="" style="max-width: 180px; ">
-                        </a>
-                        {% else %}
-                        <a href="">
-                            <img src="https://via.placeholder.com/220x150" alt="Card image cap" srcset="" style="max-width: 180px;">
-                        </a>
-                        {% endif %}   
+        </div> {% endcomment %}
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card" id="detailplat">
+                    <h1 class="text text-center mt-1 mb-5">Details du plat</h1>
+                    <div class="card-header">
+                        <img src="{{ plat.image.url }}" alt="" style="max-width: 400px;">
                     </div>
-                    <div class="col-md-5">
-                        <a href="{%url "detail" plat.nom%}" style="text-decoration: none;color: chocolate;"><strong>{{plt.nom}}</strong><br></a>
-                        {{plt.description|truncatewords:8  }}
+                    <div class="card-body">
+                        <h2 style="color: chocolate;"><strong>{{ plat.nom }}</strong></h2>
+                        <section>{{ plat.description }}</section>
                     </div>
-                    <hr>
-                    {% endif %} 
-                    {% endfor %}
-                    
                 </div>
-            
-        </div>
+                <div class="card">
+                    <div class="card_header">
+                        <h3>Commentaires</h3>
+                    </div>
+                    <div class="card-body">
+                        {% for commentaire in commentaires %}
+                        <div class="card mt-2">
+                            <div class="card-body">
+                                <p>{{ commentaire.commentaire }}</p>
+                                <small>Par {{ commentaire.user.username }} le {{ commentaire.date_poste }}</small>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                    </div>
+                    <div class="card-footer">
+                        <h3>Laisser un commentaire</h3>
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h4 class="h2">Les plats en relations</h4 class="mt-2">
+                    <div class="row">
+                        {% for plt in per %}
+                        {% if plt.nom != plat.nom %}
+                        <div class="col-md-7 mb-3" >
+                            {% if plat.image != "http://default" %}
+                            <a href="">
+                                <img class="card-img-top" src="{{plt.image.url}}" alt="" srcset="" style="max-width: 180px; ">
+                            </a>
+                            {% else %}
+                            <a href="">
+                                <img src="https://via.placeholder.com/220x150" alt="Card image cap" srcset="" style="max-width: 180px;">
+                            </a>
+                            {% endif %}   
+                        </div>
+                        <div class="col-md-5">
+                            <a href="{%url "detail" plat.nom%}" style="text-decoration: none;color: chocolate;"><strong>{{plt.nom}}</strong><br></a>
+                            {{plt.description|truncatewords:8  }}
+                        </div>
+                        <hr>
+                        {% endif %} 
+                        {% endfor %}
+                        
+                    </div>
+                
+            </div>
+        </div>     
     </div>
-
 </div>
 
 <style>
@@ -59,3 +96,57 @@
 </style>
 
 {% endblock %}
+
+<div class="col-md-4">
+    <h3>Laisser un commentaire</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+    </form>
+</div>
+
+<!-- Liste des commentaires -->
+<div class="col-md-12 mt-4">
+    <h3>Commentaires</h3>
+    {% for commentaire in commentaires %}
+        <div class="card mt-2">
+            <div class="card-body">
+                <p>{{ commentaire.commentaire }}</p>
+                <small>Par {{ commentaire.user.username }} le {{ commentaire.date_poste }}</small>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="contanier">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card_header">
+                    <h3>Commentaires</h3>
+                </div>
+                <div class="card-body">
+                    {% for commentaire in commentaires %}
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <p>{{ commentaire.commentaire }}</p>
+                            <small>Par {{ commentaire.user.username }} le {{ commentaire.date_poste }}</small>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                </div>
+                <div class="card-footer">
+                    <h3>Laisser un commentaire</h3>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Formulaire de commentaire -->

@@ -30,22 +30,24 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="container">
-                {% for message in messages %}
+                    {% for message in messages %}
                     <div class="alert alert-danger text-center" id="messages"><strong>{{message}}<strong/><br></div>
-                {% endfor %}
+                    {% endfor %}
                 </div>
                 <div class="card">
-                    <div class="card-header text-center"><i class="fas fa-user">Inscription a CampusFOOD</i></div>
-                    <div class="card-body">
-                        <form action="{% url "signin" %}" method="POST">
+                    
+                    <form action="{% url "signin" %}" method="POST">
+                        <div class="card-header text-center"><i class="fas fa-user">Inscription a CampusFOOD</i></div>
+                        <div class="card-body">
                             {% csrf_token %}
-                        <input type="text" class="text text-center" name="type_utilisateur" id="type_utilisateur" placeholder="Etudiant | Enseignant | Personnel d'administration" required style="width: 100%;">
-                        </form>
-                    </div>
-                    <div class="card-footer">
-                        <button class="btn btn-primary btn-block">Suivant</button>
-                    </div>
+                            <input type="text" class="text text-center" name="type_utilisateur" id="type_utilisateur" placeholder="Etudiant | Enseignant | Personnel d'administration" required style="width: 100%;">
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary btn-block" style="background-color: chocolate;">Suivant</button>
+                        </div>
+                    </form>
                 </div>
+            </div>
         </div>
     </div>   
 </header>
@@ -95,7 +97,7 @@
         justify-content: center;
         align-content: center;
         align-items: center;
-        width: 30%;
+        width: 40%;
         margin-top: 30vh;
     }
 </style>

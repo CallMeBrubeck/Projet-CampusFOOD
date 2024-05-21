@@ -17,6 +17,7 @@
 <body>
     {% include "_navadmin.html" %}
     {% block logincontent %}{% endblock  %}
+    {% if user.is_authenticated %}
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
@@ -24,8 +25,34 @@
             <div class="col-lg-3 col-md-4" id="sidebar-wrapper">
                 <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom" >Tableau de Bord</div>
                 <div class="list-group list-group-flush my-3">
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-user me-2"></i>Utilisateurs</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active" style="color: red;"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <i class="fas fa-user me-2"></i><a href="{% url "all-users" %}">Utilisateurs</a>
+                                    </div>
+                                    <div class="card body">
+                                        <a class="list-group-item list-group-item-action bg-transparent second-text fw-bold" href="{% url "all-etudiants" %}">Étudiant</a>
+                                        <a class="list-group-item list-group-item-action bg-transparent second-text fw-bold" href="{% url "all-enseignants" %}">Enseignant</a>
+                                        <a class="list-group-item list-group-item-action bg-transparent second-text fw-bold" href="{% url "all-personnels" %}">Personnel Administratif</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-user me-2"></i>Utilisateurs</a> -->
+                    <!-- <div class="dropdown">
+                        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold dropdown-toggle" id="utilisateursDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user me-2"></i>Utilisateurs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="utilisateursDropdown">
+                            <a class="dropdown-item" href="#">Étudiant</a>
+                            <a class="dropdown-item" href="#">Enseignant</a>
+                            <a class="dropdown-item" href="#">Personnel Administratif</a>
+                        </div>
+                    </div> -->
                     <a href="{% url 'my-articles' %}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-utensils me-2"></i>Plats</a>
                     <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-comment me-2"></i>Avis</a>
                     <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-university me-2"></i>Universités</a>
@@ -41,6 +68,7 @@
             {% endif %}
         </div>
     </div>
+    {% endif %}
 
     <script type="text/javascript" src="{% static 'js/mdb.umd.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -48,7 +76,7 @@
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/script.min.js' %}"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         body {
                 background: linear-gradient(90deg, rgb(44, 44, 47) 5%, rgb(235, 137, 72) 100%);

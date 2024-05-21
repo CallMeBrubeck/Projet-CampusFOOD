@@ -36,16 +36,16 @@
             {% endfor %}
             <form action="{% url "login" %}" method="POST" >
             <div class="card">
-                <div class="card-header text-center"><i class="fas fa-user">Connexion a CampusFOOD</i></div>
+                <div class="card-header text-center" style="color: chocolate; font-size: 20px; font-weight: bold;"><i class="fas fa-user" style="color: #ffffff;"></i>Connexion a CampusFOOD</div>
                 <div class="card-body">
                         {% csrf_token %}
                         {{ formulaire.as_p }}
                     </div>
                     <div class="card-footer">
                         <div class="row">
-                            <button class="btn btn-primary btn-block">Se connecter</button>
+                            <button class="btn btn-primary btn-block" style="background-color: chocolate;">Se connecter</button>
                             <div class="text text-center mt-5">
-                                <p>Vous n'avez pas de compte? <a href="{% url "signin" %}" id="count">Creer un compte</a></p>
+                                <p>Vous n'avez pas de compte? <a href="{% url "signin" %}" id="count" style="color: chocolate;">Creer un compte</a></p>
                             </div>
                         </div>
                     </div>
@@ -101,6 +101,7 @@
         max-width: 99.5%;
 
     }
+    
     label{
         color: #ffffff;
         font-size: 20px;

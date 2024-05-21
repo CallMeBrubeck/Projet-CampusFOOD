@@ -68,26 +68,43 @@ def categorieView(request, id):
 
 
 @login_required
+@login_required
 def detail(request, nom_plat):
     user_profile = request.session.get('user_profile', {})
-    plat = Plat.objects.get(nom=nom_plat)
+    plat = get_object_or_404(Plat, nom=nom_plat)
     list_categorie = Categorie.objects.all()
     categorie = plat.categorie
     plat_en_relation = Plat.objects.filter(categorie=categorie)[:5]
+
+    commentaires = Avis.objects.filter(plat=plat).order_by('-date_poste')
+
+    cart = None
     if request.user.is_authenticated:
-        #ensuite creer ou obtenir son panier sil en avait deja nom completer(completed=False)
         cart, created = Panier.objects.get_or_create(user=request.user, completed=False)
-    #context = {"article": article}
-    return render(request, 'upbapp/detail.html',
-                  {
-                    'user_profile': user_profile,
-                    "plat": plat,
-                    "per": plat_en_relation,
-                    "name":"Details", 
-                    "cart":cart, 
-                    "list_categorie": list_categorie,
-                    }
-                    )
+
+        if request.method == 'POST':
+            form = CommentaireForm(request.POST)
+            if form.is_valid():
+                commentaire = form.save(commit=False)
+                commentaire.user = request.user
+                commentaire.plat = plat
+                commentaire.save()
+                return redirect('detail', nom_plat=plat.nom)
+        else:
+            form = CommentaireForm()
+
+    context = {
+        'user_profile': user_profile,
+        'plat': plat,
+        'per': plat_en_relation,
+        'name': 'Details',
+        'cart': cart,
+        'list_categorie': list_categorie,
+        'commentaires': commentaires,
+        'form': form,
+    }
+
+    return render(request, 'upbapp/detail.html', context)
 
 #============preparation du panier ===============
 @login_required
