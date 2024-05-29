@@ -19,11 +19,6 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Navbar brand -->
         <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom" ><a href="{% url "dashboard" %}">CAMPUSFOOD</a></div>
-
-        <!-- Left links -->
-        {% if user.is_authenticated %}
-        {% endif %}
-        <!-- Left links -->
       </div>
       <!-- Collapsible wrapper -->
   
@@ -52,9 +47,6 @@
               alt="Black and White Portrait of a Man"
               loading="lazy"
             />
-            <!-- <div class="rounded-circle" height="45" width="45" loading="lazy" style="background-color: chocolate;">
-              <i class="fas fa-user"></i>
-            </div> -->
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
             {% if user.is_authenticated %}
@@ -79,3 +71,76 @@
     <!-- Container wrapper -->
 </nav>
   <!-- Navbar -->
+
+<!-- Statistiques -->
+{% if user.is_authenticated %}
+<div class="container mt-3">
+  <div class="row">
+      <div class="col-lg-3 col-md-4">
+          <div class="card text-white bg-primary mb-3">
+              <div class="card-body text-center">
+                  <i class="fas fa-users fa-2x mb-3"></i>
+                  <h5 class="card-title">{{ total_users }} Utilisateurs</h5>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4">
+          <div class="card text-white bg-secondary mb-3">
+              <div class="card-body text-center">
+                  <i class="fas fa-user-graduate fa-2x mb-3"></i>
+                  <h5 class="card-title">{{ total_etudiants }} Étudiants</h5>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4">
+          <div class="card text-white bg-success mb-3">
+              <div class="card-body text-center">
+                  <i class="fas fa-chalkboard-teacher fa-2x mb-3"></i>
+                  <h5 class="card-title">{{ total_enseignants }} Enseignants</h5>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4">
+          <div class="card text-white bg-danger mb-3">
+              <div class="card-body text-center">
+                  <i class="fas fa-user-tie fa-2x mb-3"></i>
+                  <h5 class="card-title">{{ total_personnel }} Personnel Administratif</h5>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4">
+          <div class="card text-white bg-warning mb-3">
+              <div class="card-body text-center">
+                  <i class="fas fa-utensils fa-2x mb-3"></i>
+                  <h5 class="card-title">{{ total_plats }} Plats</h5>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4">
+          <div class="card text-white bg-info mb-3">
+              <div class="card-body text-center">
+                  <i class="fas fa-university fa-2x mb-3"></i>
+                  <h5 class="card-title">{{ total_universites }} Universités</h5>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4">
+          <div class="card text-white bg-dark mb-3">
+              <div class="card-body text-center">
+                  <i class="fas fa-store-alt fa-2x mb-3"></i>
+                  <h5 class="card-title">{{ total_restaurants }} Restaurants</h5>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4">
+          <div class="card text-white bg-primary mb-3">
+              <div class="card-body text-center">
+                  <i class="fas fa-briefcase fa-2x mb-3"></i>
+                  <h5 class="card-title">{{ total_employes }} Employés</h5>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Fin des statistiques -->
+{% endif %}

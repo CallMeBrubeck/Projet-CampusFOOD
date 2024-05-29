@@ -34,7 +34,17 @@ def login_admin(request):
 
 @login_required
 def dashboard(request):
-    return render(request, "db.html")
+    context = {
+        'total_users': CustomUser.objects.count(),
+        'total_etudiants': CustomUser.objects.filter(type_utilisateur='etudiant').count(),
+        'total_enseignants': CustomUser.objects.filter(type_utilisateur='enseignant').count(),
+        'total_personnel': CustomUser.objects.filter(type_utilisateur='personnel_administratif').count(),
+        'total_plats': Plat.objects.count(),
+        'total_universites': Universite.objects.count(),
+        'total_restaurants': Restaurant.objects.count(),
+        'total_employes': Employe.objects.count(),
+    }
+    return render(request, "db.html", context)
 
 
 #fonction pour avoir acces aux article dans notre admin
@@ -63,7 +73,15 @@ def users(request):
         "utilisateurs": list_user,
         "etudiants": list_etudiant,
         "administrations": list_persAdmin,
-        "enseignants": list_enseignant
+        "enseignants": list_enseignant,
+        'total_users': CustomUser.objects.count(),
+        'total_etudiants': CustomUser.objects.filter(type_utilisateur='etudiant').count(),
+        'total_enseignants': CustomUser.objects.filter(type_utilisateur='enseignant').count(),
+        'total_personnel': CustomUser.objects.filter(type_utilisateur='personnel_administratif').count(),
+        'total_plats': Plat.objects.count(),
+        'total_universites': Universite.objects.count(),
+        'total_restaurants': Restaurant.objects.count(),
+        'total_employes': Employe.objects.count(),
     }
     return render(request, "db_objects/all-users.html", context)
 
@@ -80,7 +98,15 @@ def usersEtudiant(request):
         "utilisateurs": list_user,
         "etudiants": list_etudiant,
         "administrations": list_persAdmin,
-        "enseignants": list_enseignant
+        "enseignants": list_enseignant,
+        'total_users': CustomUser.objects.count(),
+        'total_etudiants': CustomUser.objects.filter(type_utilisateur='etudiant').count(),
+        'total_enseignants': CustomUser.objects.filter(type_utilisateur='enseignant').count(),
+        'total_personnel': CustomUser.objects.filter(type_utilisateur='personnel_administratif').count(),
+        'total_plats': Plat.objects.count(),
+        'total_universites': Universite.objects.count(),
+        'total_restaurants': Restaurant.objects.count(),
+        'total_employes': Employe.objects.count(),
     }
     return render(request, "db_objects/db-etudiants.html", context)
 
@@ -97,7 +123,15 @@ def usersPersonnel(request):
         "utilisateurs": list_user,
         "etudiants": list_etudiant,
         "administrations": list_persAdmin,
-        "enseignants": list_enseignant
+        "enseignants": list_enseignant,
+        'total_users': CustomUser.objects.count(),
+        'total_etudiants': CustomUser.objects.filter(type_utilisateur='etudiant').count(),
+        'total_enseignants': CustomUser.objects.filter(type_utilisateur='enseignant').count(),
+        'total_personnel': CustomUser.objects.filter(type_utilisateur='personnel_administratif').count(),
+        'total_plats': Plat.objects.count(),
+        'total_universites': Universite.objects.count(),
+        'total_restaurants': Restaurant.objects.count(),
+        'total_employes': Employe.objects.count(),
     }
     return render(request, "db_objects/db-personnels.html", context)
 
@@ -114,7 +148,15 @@ def usersEnseignant(request):
         "utilisateurs": list_user,
         "etudiants": list_etudiant,
         "administrations": list_persAdmin,
-        "enseignants": list_enseignant
+        "enseignants": list_enseignant,
+        'total_users': CustomUser.objects.count(),
+        'total_etudiants': CustomUser.objects.filter(type_utilisateur='etudiant').count(),
+        'total_enseignants': CustomUser.objects.filter(type_utilisateur='enseignant').count(),
+        'total_personnel': CustomUser.objects.filter(type_utilisateur='personnel_administratif').count(),
+        'total_plats': Plat.objects.count(),
+        'total_universites': Universite.objects.count(),
+        'total_restaurants': Restaurant.objects.count(),
+        'total_employes': Employe.objects.count(),
     }
     return render(request, "db_objects/db-enseignants.html", context)
 
@@ -133,7 +175,15 @@ def allRestao(request):
         "etudiants": list_etudiant,
         "administrations": list_persAdmin,
         "enseignants": list_enseignant,
-        "restaurants": list_resto
+        "restaurants": list_resto,
+        'total_users': CustomUser.objects.count(),
+        'total_etudiants': CustomUser.objects.filter(type_utilisateur='etudiant').count(),
+        'total_enseignants': CustomUser.objects.filter(type_utilisateur='enseignant').count(),
+        'total_personnel': CustomUser.objects.filter(type_utilisateur='personnel_administratif').count(),
+        'total_plats': Plat.objects.count(),
+        'total_universites': Universite.objects.count(),
+        'total_restaurants': Restaurant.objects.count(),
+        'total_employes': Employe.objects.count(),
     }
     return render(request, "db_objects/all-resto.html", context)
 #==============AJOUT D UN ARTICLE VIA L ESPACE ADMIN===========

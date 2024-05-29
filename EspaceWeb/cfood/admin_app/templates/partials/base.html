@@ -42,17 +42,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-user me-2"></i>Utilisateurs</a> -->
-                    <!-- <div class="dropdown">
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold dropdown-toggle" id="utilisateursDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user me-2"></i>Utilisateurs
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="utilisateursDropdown">
-                            <a class="dropdown-item" href="#">Étudiant</a>
-                            <a class="dropdown-item" href="#">Enseignant</a>
-                            <a class="dropdown-item" href="#">Personnel Administratif</a>
-                        </div>
-                    </div> -->
                     <a href="{% url 'my-articles' %}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-utensils me-2"></i>Plats</a>
                     <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-comment me-2"></i>Avis</a>
                     <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-university me-2"></i>Universités</a>
@@ -78,10 +67,7 @@
     <script src="{% static 'js/script.min.js' %}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
-        body {
-                background: linear-gradient(90deg, rgb(44, 44, 47) 5%, rgb(235, 137, 72) 100%);
-                font-family: 'Roboto', sans-serif;
-            }
+    
             #sidebar-wrapper {
                 min-height: 100vh;
                 border-right: 1px solid #dee2e6;

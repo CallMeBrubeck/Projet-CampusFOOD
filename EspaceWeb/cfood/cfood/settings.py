@@ -13,8 +13,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 #========param pour l e=hebergement sur heroku========
     #setpA
-import django_heroku
-import dj_database_url
+#import django_heroku
+#import dj_database_url
 #from decouple import config
     #step B: Aller daans MIDDELWARE pour ajouter des choses: whitenoise.middleware.WhiteNoiseMiddleware
     #stepC aller en dessous de  STATICFILES_DIRS pour ajouer:STATICFILES_STORAGE = 'whitenoise.storage.CompresseManifestStaticFilesStorage'
@@ -35,7 +35,7 @@ SECRET_KEY = 'django-insecure-a!ej%k-ob3^eo#zgk3ae$)na%ug9%(rioh=g9spbj$g1poag-2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cicampusfood.herokuapp.com']
+#ALLOWED_HOSTS = ['cicampusfood.herokuapp.com']
 
 
 
@@ -63,8 +63,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
 
 ROOT_URLCONF = 'cfood.urls'
 
@@ -150,7 +150,7 @@ STATICFILES_DIRS = [
 ]
 
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompresseManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.storage.CompresseManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -165,7 +165,7 @@ MEDIA_URL = '/media/'
  """
 
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
 
 
 
